@@ -11,7 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch01", "Ch01", "{BD9FA2CC-4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch03", "Ch03", "{86E15B8E-0B0C-4146-8380-3E7E909D6380}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch01.HelloWorldConsole", "Src\Ch01\HelloWorldConsole\Ch01.HelloWorldConsole.csproj", "{FEF3B0E3-492F-4FFF-9824-FF077E6CA725}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEF3B0E3-492F-4FFF-9824-FF077E6CA725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF3B0E3-492F-4FFF-9824-FF077E6CA725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF3B0E3-492F-4FFF-9824-FF077E6CA725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF3B0E3-492F-4FFF-9824-FF077E6CA725}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
@@ -19,6 +31,7 @@ Global
 		{498367C8-2BC1-4C34-8950-CD43525C2186} = {DD860377-8AD1-438D-863C-44B6A477DC3B}
 		{BD9FA2CC-467F-4C8E-8718-5265F4C77EFF} = {DD860377-8AD1-438D-863C-44B6A477DC3B}
 		{86E15B8E-0B0C-4146-8380-3E7E909D6380} = {DD860377-8AD1-438D-863C-44B6A477DC3B}
+		{FEF3B0E3-492F-4FFF-9824-FF077E6CA725} = {BD9FA2CC-467F-4C8E-8718-5265F4C77EFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF18ACD-8C06-4FFC-883F-3D88B4E54FD5}

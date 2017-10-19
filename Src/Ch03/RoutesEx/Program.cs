@@ -4,13 +4,13 @@
 //   Dino Esposito
 //   
 //   Ch03 - Bootstrapping ASP.NET MVC 
-//   Routes
+//   RoutesEx
 //
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Ch03.Routes
+namespace Ch03.RoutesEx
 {
     public class Program
     {

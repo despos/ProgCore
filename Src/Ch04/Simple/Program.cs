@@ -3,25 +3,26 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch03 - Bootstrapping ASP.NET MVC 
-//   Routes
+//   Ch04 - ASP.NET MVC Controllers
+//   Simple
 //
 
-using Microsoft.AspNetCore;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Ch03.Routes
+namespace Ch04.Simple
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+            host.Run();
+        }
     }
 }

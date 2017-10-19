@@ -3,38 +3,36 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch03 - Bootstrapping ASP.NET MVC 
-//   Routes
+//   Ch04 - ASP.NET MVC Controllers
+//   Simple
 //
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ch03.Routes
+namespace Ch04.Simple
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            var builder = services.AddMvcCore();
+            builder.AddViews();
+            builder.AddRazorViewEngine();
 
-            // DEMO:
             //services.AddMvc(options =>
             //{
-            //    options.ModelBinderProviders.Add(new SmartDateBinderProvider());
-            //    options.SslPort = 344;
+            //    options.Filters.Add(new CultureAttribute());
             //});
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMvcWithDefaultRoute();
+            app.UseDeveloperExceptionPage();
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync(
-                    "I'd rather say there are no configured routes here.");
+                await context.Response.WriteAsync("Hi everybody!");
             });
         }
     }

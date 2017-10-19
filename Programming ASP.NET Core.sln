@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch01", "Ch01", "{0378BCCB-7D80-459B-A661-ACD682884254}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch01.HelloWorldConsole", "Ch01\HelloWorldConsole\Ch01.HelloWorldConsole.csproj", "{EE3F6451-C606-4EFB-9E69-6099528363DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch02", "Ch02", "{498367C8-2BC1-4C34-8950-CD43525C2186}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE3F6451-C606-4EFB-9E69-6099528363DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3F6451-C606-4EFB-9E69-6099528363DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3F6451-C606-4EFB-9E69-6099528363DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE3F6451-C606-4EFB-9E69-6099528363DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE3F6451-C606-4EFB-9E69-6099528363DF} = {0378BCCB-7D80-459B-A661-ACD682884254}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF18ACD-8C06-4FFC-883F-3D88B4E54FD5}

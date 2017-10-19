@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch02.MiniWeb", "Src\Ch02\Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch03.Routes", "Src\Ch03\Routes\Ch03.Routes.csproj", "{6C4E1B88-F92A-44CB-B087-46211F6DAE5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch01.HelloWorldWeb", "Src\Ch01\HelloWorldWeb\Ch01.HelloWorldWeb.csproj", "{F3A8555E-171B-400D-92CF-C995A5AAAC0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{6C4E1B88-F92A-44CB-B087-46211F6DAE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C4E1B88-F92A-44CB-B087-46211F6DAE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C4E1B88-F92A-44CB-B087-46211F6DAE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A8555E-171B-400D-92CF-C995A5AAAC0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A8555E-171B-400D-92CF-C995A5AAAC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A8555E-171B-400D-92CF-C995A5AAAC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A8555E-171B-400D-92CF-C995A5AAAC0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{6C62050F-5222-47D2-AFCB-1AD922EFDF94} = {498367C8-2BC1-4C34-8950-CD43525C2186}
 		{686BAB77-31D9-476E-AC5B-8D740B6FB169} = {498367C8-2BC1-4C34-8950-CD43525C2186}
 		{6C4E1B88-F92A-44CB-B087-46211F6DAE5C} = {86E15B8E-0B0C-4146-8380-3E7E909D6380}
+		{F3A8555E-171B-400D-92CF-C995A5AAAC0A} = {BD9FA2CC-467F-4C8E-8718-5265F4C77EFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF18ACD-8C06-4FFC-883F-3D88B4E54FD5}

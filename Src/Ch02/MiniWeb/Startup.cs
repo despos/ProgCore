@@ -1,8 +1,9 @@
-﻿//////////////////////////////////////////
+﻿//////////////////////////////////////////////////////////////////
 //
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
+//   Ch02 - The First ASP.NET Core Project 
 //   MiniWeb
 //
 
@@ -16,18 +17,20 @@ using MiniWeb.Persistence;
 using MiniWeb.Persistence.Abstractions;
 using Newtonsoft.Json;
 
-namespace MiniWeb
+namespace Ch02.MiniWeb
 {
     public class Startup
     {
         // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Pass your own instance
             services.AddSingleton<ICountryRepository>(new CountryRepository());
-         //   services.AddSingleton<ICountryRepository, CountryRepository>();
+
+            // Or, in alternative, let the system create one
+            // services.AddSingleton<ICountryRepository, CountryRepository>();
         }
 
-        // Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
             IHostingEnvironment env/*, ICountryRepository country*/, IServiceProvider provider)
         {
@@ -50,6 +53,7 @@ namespace MiniWeb
                 await context.Response.WriteAsync("Invalid call");
             });
 
+            // Try this code to see that without app.Map the same output is served for each URL
             //app.Run(async (context) =>
             //{
             //    var country = provider.GetService<ICountryRepository>();

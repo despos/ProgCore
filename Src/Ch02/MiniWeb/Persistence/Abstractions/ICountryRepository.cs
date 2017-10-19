@@ -1,15 +1,16 @@
-﻿//////////////////////////////////////////
+﻿//////////////////////////////////////////////////////////////////
 //
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
+//   Ch02 - The First ASP.NET Core Project 
 //   MiniWeb
 //
 
 using System.Linq;
-using CoreBook.MiniWeb.Persistence.Model;
+using MiniWeb.Persistence.Model;
 
-namespace MiniWeb.Persistence.Abstractions
+namespace Ch02.MiniWeb.Persistence.Abstractions
 {
     public interface ICountryRepository
     {

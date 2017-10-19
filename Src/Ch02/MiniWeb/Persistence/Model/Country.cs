@@ -1,4 +1,13 @@
-﻿namespace CoreBook.MiniWeb.Persistence.Model
+﻿//////////////////////////////////////////////////////////////////
+//
+//   PROGRAMMING ASP.NET CORE
+//   Dino Esposito
+//   
+//   Ch02 - The First ASP.NET Core Project 
+//   MiniWeb
+//
+
+namespace Ch02.MiniWeb.Persistence.Model
 {
     // Declared STRUCT to avoid memrefs overlapping in LINQ
 

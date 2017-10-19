@@ -1,8 +1,9 @@
-﻿//////////////////////////////////////////
+﻿//////////////////////////////////////////////////////////////////
 //
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
+//   Ch02 - The First ASP.NET Core Project 
 //   MiniWeb
 //
 
@@ -10,8 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CoreBook.MiniWeb.Persistence.Model;
 using MiniWeb.Persistence.Abstractions;
+using MiniWeb.Persistence.Model;
 using Newtonsoft.Json;
 
 namespace MiniWeb.Persistence

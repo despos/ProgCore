@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿//////////////////////////////////////////////////////////////////
+//
+//   PROGRAMMING ASP.NET CORE
+//   Dino Esposito
+//   
+//   Ch02 - The First ASP.NET Core Project 
+//   MiniWeb
+//
+
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
-namespace MiniWeb
+namespace Ch02.MiniWeb
 {
     public class Program
     {

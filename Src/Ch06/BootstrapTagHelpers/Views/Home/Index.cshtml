@@ -1,0 +1,55 @@
+﻿@model Ch06.BootstrapTagHelpers.Models.HomeViewModel
+
+
+<div class="jumbotron">
+    <h1>Welcome here</h1>
+</div>
+
+
+
+<modal id="myModal" autoclose="true">
+    <toggle class="btn btn-primary btn-lg">Launch</toggle>
+    <content>
+        <mheader>Dino Esposito</mheader>
+        <mbody>
+            <h1>Hello from <span style="color:red">Programming ASP.NET Core</span></h1>
+        </mbody>
+        <mfooter></mfooter>
+    </content>
+</modal>
+
+<!-- Optional Container -->
+<div>
+    <!-- Trigger -->
+    <button class="btn ..." data-toggle="modal" data-target="#myModal">
+        ...
+    </button>
+
+    <!-- Popup -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"> ...</div>
+                <div class="modal-body"> ...</div>
+                <div class="modal-footer"> ...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<environment names="Development">
+    <link rel="stylesheet" href="~/css/site1.css" />
+    <link rel="stylesheet" href="~/css/site2.css" />
+</environment>
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+
+
+<img src="~/content/images/app-logo.png"
+     asp-append-version="true" />

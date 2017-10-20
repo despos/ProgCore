@@ -1,0 +1,13 @@
+﻿{
+  "ApplicationTitle" : "Programming ASP.NET Core",
+  "GeneralSettings" : {
+    "CopyrightYears" : [2017, 2018],
+    "Paging" : {
+      "PageSize" : 25,
+      "FreezeHeaders" : true
+    },
+    "Sorting" : {
+      "Enabled" : true
+    }
+  }
+}

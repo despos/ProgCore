@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Room.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\Content\Fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Content\Fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Content\Scripts\bootstrap.min.js" />
+    <None Include="wwwroot\Content\Scripts\jquery.min.js" />
+    <None Include="wwwroot\Content\Scripts\starter-kit.js" />
+    <None Include="wwwroot\Content\Scripts\tether.min.js" />
+    <None Include="wwwroot\Content\Scripts\typeahead.bundle.min.js" />
+    <None Include="wwwroot\Content\Scripts\typeahead.container.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,149 @@
+﻿/*
+    ////////////////////////////////////////////////////////////
+    HTML RESET
+*/
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    padding-top: 120px;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #222;
+    color: #555;
+}
+
+hr {
+    border: solid 1px #555 !important;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+
+label {
+    text-transform: uppercase;
+}
+
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none !important;
+}
+
+
+/**************************************************+*/
+
+thead td {
+    font-weight: bold;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+.nail-client-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.nail-client-bookings {
+    font-size: 1.8em;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.nail-client-bookings-label {
+    font-size: .9em;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+.nail-upcoming-appointment {
+    font-weight: bold;
+    color: #008b8b;
+    font-size: 1.2em;
+}
+
+.nail-color-block {
+    display: inline-block; 
+    vertical-align: middle;
+    margin: 5px;
+    width: 30px; 
+    height: 30px;
+    border: solid 2px #111;
+}
+.nail-photo-block {
+    display: inline-block; 
+    vertical-align: middle;
+    margin: 5px;
+    width: 70px; 
+    height: 70px;
+    border: solid 2px #111;
+}
+
+.btn {
+    text-transform: uppercase;
+    border-radius: 0!important;
+}
+
+.input-group .input-lg {
+    border-radius: 0!important;
+}
+
+/*.input-group .btn {
+    border-radius: 0!important;
+    padding: 14px!important;
+}*/
+
+.nail-treatment-paid {
+    padding: 1px 3px 1px 3px;
+    background: #00cc00;
+    color: #fff;
+}
+
+.nail-treatment-notpaid {
+    padding: 1px 3px 1px 3px;
+    background: #f00;
+    color: #fff;
+}
+
+.nail-treatment-notpaidyet {
+    padding: 1px 3px 1px 3px;
+    background: #aaa;
+    color: #eee;
+}
+
+.nail-picture {
+    float:left; 
+    border: solid 2px beige;
+    width: 80px;
+}
+
+.wordwrap { 
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
+}
+
+#new-client-container .dropdown-menu {
+    border-radius: 0!important;
+    border: solid 2px #111;
+    width: 300px;
+    height: 150px;
+}

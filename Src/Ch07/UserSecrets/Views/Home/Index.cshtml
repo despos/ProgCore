@@ -1,0 +1,17 @@
+﻿@using Ch07.UserSecrets.Common
+@{
+    var secrets = ViewData["config"] as MyAppSecretConfig;
+}
+
+<h1>CONNECTION STRING (protected)</h1>
+<h4>
+    @if (secrets == null)
+    {
+        <text>Can't read</text>
+    }
+    else
+    {
+        @secrets.ConnectionString
+    }
+</h4>
+

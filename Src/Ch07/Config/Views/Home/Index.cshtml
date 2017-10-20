@@ -1,0 +1,7 @@
+﻿@using Microsoft.Extensions.Configuration
+<h1>CONFIGURATION TREE</h1>
+@inject IConfigurationRoot Configuration
+
+
+
+PAGESIZE = @Configuration["GeneralSettings:Paging:PageSize"]

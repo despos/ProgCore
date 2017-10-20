@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@model Ch06.TagHelpers.Models.HomeViewModel
+@inject IHostingEnvironment Host
+    
+
+<h1>@Host.EnvironmentName</h1>
+<form class="form-horizontal" 
+      method="post"
+      action="#"
+      asp-contr1oller="Account" 
+      asp-hello="hello"
+      asp-acti1on="Register">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Sample Form</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="firstname">First Name</label>  
+            <div class="col-md-4">
+                <input type="text" id="firstname" name="firstname" 
+                       class="form-control input-lg" 
+                       placeholder="First name">
+                <span class="help-block">help</span>  
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="lastname">Last Name</label>  
+            <div class="col-md-4">
+                <input type="text" id="lastname" name="lastname"
+                       class="form-control input-lg"
+                       placeholder="Last name">
+                <span class="help-block">help</span>   
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" asp-for="Title"></label>  
+            <div class="col-md-4">
+                <input class="form-control input-lg" asp-for="Title" placeholder="Last name">
+                <span class="help-block">help</span>   
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="registerButton">&nbsp;</label>
+            <div class="col-md-4">
+                <button id="registerButton" class="btn btn-danger">
+                    register
+                </button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+<a href="@Url.Action("room", "home")">ROOM</a>
+
+<environment names="Development">
+    <link rel="stylesheet" href="~/css/site1.css" />
+    <link rel="stylesheet" href="~/css/site2.css" />
+</environment>
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+
+<img src="~/content/images/app-logo.png" 
+     asp-append-version="true" />
+
+

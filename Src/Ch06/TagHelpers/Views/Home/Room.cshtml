@@ -1,0 +1,79 @@
+﻿@using Ch06.TagHelpers.Models
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Options
+@using TagH.Common
+@model Ch06.TagHelpers.Models.RoomViewModel
+@{
+    var email = "dino.esposito@jetbrains.com";
+    var subject = "Talking about ASP.NET Core";
+}
+
+<form asp-ac1tion="@Url.Action("Hello", "Form")">
+    @Html.AntiForgeryToken()
+    <h1>HELLO I'M A FORM</h1>
+</form>
+
+<div class="form-group">
+    @*<label class="col-md-4 control-label" for="hotel_roomtype">Room</label>
+    <div class="col-md-4">
+        <div class="input-group col-xs-12">
+            <select id="hotel_roomtype" name="hotel_roomtype"
+                    class="form-control"
+                    data-display-filter="room"
+                    sk-notspecified-text="Not specified"
+                    sk-notspecified-value="0">
+                @foreach (var room in Model.RoomTypes)
+                {
+                    var selected = room.Equals("DOUBLE")
+                        ? "selected"
+                        : "";
+                    <option value="@room.Substring(0, 1).ToUpper()" @selected>
+                        @room.ToUpper()
+                    </option>
+                }
+            </select>
+
+            <span class="input-group-addon"
+                  data-display-filter-buddy="room"
+                  data-display-options="D,T">
+                <i class="fa fa-users"></i>
+            </span>
+            <input type="text" id="hotel_roommate" name="hotel_roommate"
+                   data-display-filter-buddy="room"
+                   data-display-options="D,T"
+                   class="form-control text-capitalize"
+                   placeholder="Roommate">
+        </div>
+    </div>*@
+</div>
+<hr/>
+
+<div class="clearfix"></div>
+<div class="form-group">
+    <label class="col-md-4 control-label" for="hotel_roomtype">Room</label>
+    <div class="col-md-4">
+        <div class="input-group col-xs-12">
+            <select id="room1" name="room1" 
+                    class="form-control"
+                    asp-for="@Model.CurrentRoomType"
+                    asp-items="@Html.GetEnumSelectList(typeof(RoomCategories))">
+            </select>
+
+            <span class="input-group-addon">
+                <i class="fa fa-users"></i>
+            </span>
+            <input type="text" id="Roommate1" name="Roommate1"
+                   class="form-control text-capitalize"
+                   placeholder="Roommate">
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<hr />
+
+<email to="@email" subject="@subject" class="btn btn-danger">
+    Hello! Today is @DateTime.Today
+</email>
+
+

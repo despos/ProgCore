@@ -1,8 +1,17 @@
-﻿using System.Security.Claims;
+﻿//////////////////////////////////////////////////////////////////
+//
+//   PROGRAMMING ASP.NET CORE
+//   Dino Esposito
+//   
+//   Ch08 - Securing the Application
+//   Authorz
+// 
+
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Authorz.Common
+namespace Ch08.Authorz.Common
 {
     public class InitialsAuthorizationHandler 
         : AuthorizationHandler<InitialsRequirement>

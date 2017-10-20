@@ -1,0 +1,14 @@
+﻿@using System.Data
+@model Ch09.AdoNet.Models.HomeViewModel
+
+<h1>RECORDS</h1>
+<table class="table table-condensed">
+    @foreach (DataRow row in Model.Records.Rows)
+    {
+        <tr>
+            <td>@row["FirstName"]</td>
+            <td>@row["LastName"]</td>
+            <td>@row["Country"]</td>
+        </tr>
+    }
+</table>

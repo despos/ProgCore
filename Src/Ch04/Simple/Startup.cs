@@ -30,6 +30,7 @@ namespace Ch04.Simple
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
+            app.UseMvcWithDefaultRoute();
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hi everybody!");

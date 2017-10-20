@@ -1,6 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿//////////////////////////////////////////////////////////////////
+//
+//   PROGRAMMING ASP.NET CORE
+//   Dino Esposito
+//   
+//   Ch08 - Securing the Application
+//   Authorz
+// 
 
-namespace Authorz.Common
+using Microsoft.AspNetCore.Authorization;
+
+namespace Ch08.Authorz.Common
 {
     public class InitialsRequirement : IAuthorizationRequirement
     {

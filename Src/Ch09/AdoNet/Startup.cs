@@ -3,14 +3,14 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch09 - Securing the Application
+//   Ch09 - Access to Application Data
 //   AdoNet
 // 
 
 using System;
 using System.IO;
 using Ch09.AdoNet.Application;
-using Ch09.AdoNet.Backend.Persistence;
+using Ch09.AdoNet.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +31,7 @@ namespace Ch09.AdoNet
             // Local path to the DB (ignore if using SQL Server)
             var dbPath = Path.Combine(env.ContentRootPath, "App_Data", "ProgCore.mdf");
 
-            YourDatabase.ConnectionString = !env.IsDevelopment()
+            ConnectionStrings.ProgCore = !env.IsDevelopment()
                 ? "production"
                 :  String.Format("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={0};Initial Catalog=progcore;Integrated Security=True", dbPath);
 

@@ -3,14 +3,14 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch09 - Access to Application Data
-//   EfCore
-// 
+//   Ch10 - Designing a Web API
+//   MySecuredApi
+//
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Ch09.EfCore
+namespace Ch10.MySecuredAPI
 {
     public class Program
     {

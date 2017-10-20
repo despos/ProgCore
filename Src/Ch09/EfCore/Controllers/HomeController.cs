@@ -3,14 +3,10 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch09 - Securing the Application
+//   Ch09 - Access to Application Data
 //   EfCore
 // 
 
-using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Ch09.EfCore.Application;
 using Microsoft.AspNetCore.Mvc;
 

@@ -7,12 +7,10 @@
 //   AdoNet
 // 
 
-using System.Data;
-
-namespace Ch09.AdoNet.Models
+namespace Ch09.AdoNet.Common
 {
-    public class HomeViewModel  
+    public class ConnectionStrings  
     {
-        public DataTable Records { get; set; }
+        public static string ProgCore { get; set; }
     }
 }

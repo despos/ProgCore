@@ -3,13 +3,13 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch09 - Securing the Application
+//   Ch09 - Access to Application Data
 //   AdoNet
 // 
 
 using System.Data;
 using System.Data.SqlClient;
-using Ch09.AdoNet.Backend.Persistence;
+using Ch09.AdoNet.Common;
 
 namespace Ch09.AdoNet.Application
 {
@@ -17,7 +17,7 @@ namespace Ch09.AdoNet.Application
     {
         public DataTable GetRecords()
         {
-            var conn = new SqlConnection {ConnectionString = YourDatabase.ConnectionString};
+            var conn = new SqlConnection {ConnectionString = ConnectionStrings.ProgCore };
             var cmd =
                 new SqlCommand("SELECT TOP 20 FirstName, LastName, Country FROM customers", conn)
                 {

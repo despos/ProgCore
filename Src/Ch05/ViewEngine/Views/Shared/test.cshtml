@@ -1,0 +1,18 @@
+﻿<h1>Hi everybody!</h1>
+<p>It's @DateTime.Now.ToString("hh:mm")</p>
+<hr>
+Let me count till ten.
+<ul>
+    @for(var i=1; i<=10; i++)
+    { 
+        <li>@i</li> 
+    }
+</ul>
+
+
+@*
+    Compare this @Html.Raw("<b>Bold text</b>")
+    to the following: @("<b>Bold text</b>")
+    and see how the source code changes.
+*@
+

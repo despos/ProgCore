@@ -1,0 +1,6 @@
+﻿@model YouCore.Server.Models.ViewModelBase
+
+<h1>Error <span>@(Model.StatusCode > 0 ? Model.StatusCode.ToString() : "")</span></h1>
+
+<h4>@(Model.ErrorMessage ?? "Sorry, it's not you!")</h4>
+

@@ -1,0 +1,141 @@
+﻿
+@section adhoc_Css {
+    <link href="~/content/styles/typeahead.min.css" rel="stylesheet" type="text/css" />
+}
+@section adhoc_Scripts_Top {
+    <script src="~/content/scripts/typeahead.bundle.min.js"></script>
+}
+
+<div class="col-xs-12 col-sm-8 col-md-6 col-xs-offset-0 col-sm-offset-2 col-md-offset-3">  
+    <h2>Form Name</h2>
+    <div id="sample-form-message" class="alert alert-info" style="display: none;"></div>
+    <div class="margin-top-md">
+        <form class="form-horizontal" id="sample-form"
+              role="form" method="post"
+              enctype="multipart/form-data"
+              action="@Url.Action("uploadform", "demo")">
+            <div class="form-group has-feedback" id="sample-form-group-email">
+                <div class="col-xs-12">
+                    <input type="text" class="form-control text-lowercase"
+                           id="email" name="email"
+                           required
+                           maxlength="50"
+                           placeholder="Enter Your Email"
+                           data-click-on-enter="#sample-form-submit-button">
+                    <i class="fa fa-envelope form-control-feedback"></i>
+                    <input type="hidden" id="email-id" />
+                </div>
+            </div>
+            <div class="form-group has-feedback" id="sample-form-group-displayname">
+                <div class="col-xs-12">
+                    <input type="text" class="form-control"
+                           id="displayname" name="displayname"
+                           required
+                           placeholder="Enter Your Name"
+                           data-click-on-enter="#sample-form-submit-button">
+                    <i class="fa fa-user form-control-feedback"></i>
+                </div>
+            </div>
+            <div class="form-group has-feedback" id="sample-form-group-gender">
+                <div class="col-xs-12">
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="NA">Not specified</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group has-feedback" id="sample-form-group-country">
+                <div class="col-xs-12">
+                    <input type="text" class="form-control"
+                           id="country" name="country"
+                           placeholder="Country"
+                           value="Italy"
+                           data-click-on-enter="#sample-form-submit-button">
+                    <i class="fa fa-flag form-control-feedback"></i>
+                    <input type="hidden" id="countrycode" name="countrycode" value="ita" />
+                </div>
+            </div>
+            <div class="form-group has-feedback" id="sample-form-group-picture">
+                <div class="col-xs-3" style="width: 130px">
+                    <div class="ybq-file-container"
+                         data-notselected="image not available">
+                        <input type="file" class="form-control"
+                               id="picture" name="picture">
+                        <div id="picture-selected-container">
+                            <img id="picture-preview" class="ybq-file-preview img-responsive" />
+                            <div id="picture-selected" class="text-muted"></div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-xs btn-danger ybq-file-remover">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 30px">
+                <div class="col-xs-offset-2 col-xs-8 col-md-4 col-md-offset-4">
+                    <button type="button" id="sample-form-submit-button"
+                            class="btn btn-primary btn-block">
+                        Submit
+                    </button>
+                    <span id="sample-form-loader"
+                          class="text-danger" style="display: none;">
+                        In Progress
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#sample-form-submit-button").click(function() {
+        if (Ybq.canAcceptValueOf("#sample-form",
+                "email",
+                function (input) { return input.length > 0 && Ybq.validateEmail(input); },
+                "Invalid email") &&
+            Ybq.canAcceptValueOf("#sample-form",
+                "displayname",
+                function(input) { return input.length > 0; },
+                "Wrong display name") &&
+            Ybq.canAcceptValueOf("#sample-form",
+                "countrycode",
+                function(input) { return input.length > 0; },
+                "No country specified",
+                "country")) {
+            Ybq.postForm("#sample-form",
+                function (data) {
+                    var response = JSON.parse(data);
+                    Ybq.toast("#sample-form-message", response.Message, response.Success);
+                });
+        } else {
+            Ybq.clearFormAfterTimeout("#sample-form");
+        }
+    });
+</script>
+
+
+<!--
+INPUT FILE skeleton
+========================
+    
+***picture *** as the name of the file input
+
+<div class="ybq-file-container"
+     data-notselected="image not available">
+    <input type="file" class="form-control"
+           id="picture" name="picture">
+    <div id="picture-selected-container">
+        <img id="picture-preview" class="ybq-file-preview img-responsive" />
+        <div id="picture-selected" class="text-muted"></div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-xs btn-danger ybq-file-remover">
+            <i class="fa fa-close"></i>
+        </button>
+    </div>
+</div>
+-->

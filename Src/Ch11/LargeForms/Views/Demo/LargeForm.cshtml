@@ -1,0 +1,101 @@
+﻿@section adhoc_Css {
+    <link href="~/content/styles/typeahead.min.css" rel="stylesheet" type="text/css" />
+}
+@section adhoc_Scripts_Top {
+    <script src="~/content/scripts/typeahead.bundle.min.js"></script>
+}
+<div class="visible-xs">
+    <h4 class="text-center text-danger">This view requires a larger screen</h4>
+</div>
+
+<div class="hidden-xs col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h2>
+        This is a large form
+        <small id="public-name"></small>
+    </h2>
+    <div id="large-form-message" class="alert alert-info" style="display: none;"></div>
+    <div class="margin-top-md">
+        <form class="form-horizontal" id="large-form"
+              role="form" method="post"
+              action="@Url.Action("saveform", "demo")">
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tabGeneral" role="tab" data-toggle="tab">
+                            General
+                            <i id="large-form-tabGeneral-haserror"
+                               class="fa fa-warning text-danger"
+                               style="display:none"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tabEmails" role="tab" data-toggle="tab">
+                            Email
+                            <i id="large-form-tabEmails-haserror"
+                               class="fa fa-warning text-danger"
+                               style="display:none"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tabPassword" role="tab" data-toggle="tab">
+                            Password
+                            <i id="large-form-tabPassword-haserror"
+                               class="fa fa-warning text-danger"
+                               style="display:none"></i>
+                        </a>
+                    </li>
+                    <button id="large-form-submit-button" type="button"
+                            class="btn btn-danger btn-tabstrip pull-right">
+                        SAVE
+                    </button>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tabGeneral">
+                        @Html.Partial("pv_lgform_general")
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tabEmails">
+                        @Html.Partial("pv_lgform_emails")
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tabPassword">
+                        @Html.Partial("pv_lgform_password")
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#large-form-submit-button").click(function () {
+        var fieldValidators = [
+            { tabId: "tabGeneral", fieldId: "contactname", validator: function (input) { return input.length > 0; } },
+            { tabId: "tabGeneral", fieldId: "address_street", validator: function (input) { return input.length > 0; } },
+            { tabId: "tabEmails", fieldId: "email1", validator: function (input) { return input.length > 0 && Ybq.validateEmail(input); } },
+            { tabId: "tabPassword", fieldId: "password", validator: function (input) { return input.length > 4; } }
+        ];
+
+        if (Ybq.canAcceptFormContent("#large-form", fieldValidators)) {
+            Ybq.postForm("#large-form",
+                function (data) {
+                    // Deserialize the received response
+                    var response = JSON.parse(data);
+
+                    // Update the UI
+                    if (response.success) {
+                        var name = $("#contactname").val();
+                        $("#public-name").html(name);
+                    }
+
+                    // Give feedback about the overall operation
+                    Ybq.toast("#large-form-message", response.message, response.success);
+                });
+        } else {
+            Ybq.clearFormAfterTimeout("#large-form");
+        }
+    });
+</script>
+

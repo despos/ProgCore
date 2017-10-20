@@ -1,0 +1,32 @@
+﻿@using Ch11.SimpleForms.Models
+@model Ch11.SimpleForms.Models.HomeViewModel
+
+<div class="col-xs-12 col-md-8 col-md-offset-2">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>MULTIPLE SUBMIT BUTTONS</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-xs-12" for="input">
+                    Some text
+                </label>  
+                <div class="col-xs-12">
+                    <input class="form-control" 
+                           name="input"
+                           id="input" 
+                           type="text">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <button class="btn btn-danger" name="option" value="add" type="submit">ADD</button>
+                    <button class="btn btn-danger" name="option" value="save" type="submit">SAVE</button>
+                    <button class="btn btn-danger" name="option" value="delete" type="submit">DELETE</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>

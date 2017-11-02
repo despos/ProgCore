@@ -1,0 +1,55 @@
+﻿@model Ch12.DataBinding.Models.ViewModelBase
+
+<script src="@Url.Content("~/content/scripts/knockout.min.js")"></script>
+
+
+<a role="button" class="btn btn-primary" href="@Url.Action("Index", "Home")">
+    View <span style="color:#ffd700">Mustache</span> demo <i class="fa fa-chevron-circle-right"></i>
+</a>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-brand" >List of countries</p> 
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-xs-4" id="listOfCountries">
+        <table class="table table-condensed" data-bind="foreach:countries">
+            <tr>
+                <td data-bind="text:code"></td>
+                <td>
+                    <button class="btn btn-info" data-bind="event:{click:showCapital}">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function CountryViewModel(codes) {
+        this.countries = $.map(codes, function(code) { return new Country(code); });
+    }
+    function Country(code) {
+        this.code = code;
+        this.showCapital = function() {
+            var url = "/home/more/";
+            $.getJSON(url, { id: code })
+                .done(function (response) {
+                    alert(response.Results.Capital.Name);
+                });
+        } 
+    }
+</script>
+<script type="text/javascript">
+    var initUrl = "/home/countries";
+    $.getJSON(initUrl,
+        function (response) {
+            var model = new CountryViewModel(response.countryCodes);
+            ko.applyBindings(model);
+        });
+</script>

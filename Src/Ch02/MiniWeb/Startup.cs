@@ -9,12 +9,12 @@
 
 using System;
 using System.Linq;
+using Ch02.MiniWeb.Persistence.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using MiniWeb.Persistence;
-using MiniWeb.Persistence.Abstractions;
 using Newtonsoft.Json;
 
 namespace Ch02.MiniWeb

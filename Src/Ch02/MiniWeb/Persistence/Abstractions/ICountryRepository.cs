@@ -8,7 +8,7 @@
 //
 
 using System.Linq;
-using MiniWeb.Persistence.Model;
+using Ch02.MiniWeb.Persistence.Model;
 
 namespace Ch02.MiniWeb.Persistence.Abstractions
 {

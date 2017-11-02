@@ -1,0 +1,81 @@
+﻿@using Ch12.DataBinding.Common
+@model Ch12.DataBinding.Models.CountryViewModel
+
+<script src="@Url.Content("~/content/scripts/mustache.min.js")"></script>
+
+<style>
+    .img-effects {
+        box-shadow: 2px 2px 2px #333;
+        border: solid 1px #444;
+    }
+</style>
+
+<a role="button" class="btn btn-primary" href="@Url.Action("Ko", "Home")">
+    View <span style="color:#ffd700">Knockout</span> demo <i class="fa fa-chevron-circle-right"></i>
+</a>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-brand" >List of countries</p> 
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-xs-4" id="listOfCountries">
+        @Html.Partial(U.PartialViews.ListOfCountries)
+    </div>
+    <div class="col-xs-8" id="details">
+
+    </div>
+</div>
+
+<script id="template-geo" type="x-tmpl-mustache">
+    <img class="img-effects"
+         src="http://maps.google.com/maps/api/staticmap?size=300x200&&sensor=false&key=AIzaSyBAyuweuwi3V6IcJB-7kmZRXkTJSRMhYIg&path=weight:3|fillcolor:|{{Results.GeoRectangle.North}},{{Results.GeoRectangle.West}}|{{Results.GeoRectangle.North}},{{Results.GeoRectangle.East}}|{{Results.GeoRectangle.South}},{{Results.GeoRectangle.East}}|{{Results.GeoRectangle.South}},{{Results.GeoRectangle.West}}|{{Results.GeoRectangle.North}},{{Results.GeoRectangle.West}}">
+</script>
+<script id="template-details" type="x-tmpl-mustache">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                @*<img class="img-responsive img-effects" style="float:left"
+    alt="{{Results.Name}}"
+    width="40"
+    src="http://www.geognos.com/api/en/countries/flag/{{Results.CountryCodes.iso2}}.png" />*@
+                <span style="margin-left: 10px;font-weight:600;line-height:28px;font-size:1.3em;">{{Results.Name}}</span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-xs-8">
+                <p>Capital is <strong>{{Results.Capital.Name}}</strong></p>
+                <p>Phone international prefix is <strong>+{{Results.TelPref}}</strong></p>
+            </div>
+            <div class="col-xs-4">
+                <button id="btnGeo" type="button" class="btn btn-info" data-toggle="collapse" data-target="#geo">
+                    More
+                </button>
+                <div id="geo" class="collapse pull-right">
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    var template1 = $('#template-details').html();
+    Mustache.parse(template1);   // optional, speeds up future uses
+    var template2 = $('#template-geo').html();
+    Mustache.parse(template2);   // optional, speeds up future uses
+
+    function i(id) {
+        var url = "/home/more/";
+        $.getJSON(url, { id: id })
+            .done(function (response) {
+                var rendered1 = Mustache.render(template1, response);
+                $("#details").html(rendered1);
+                var rendered2 = Mustache.render(template2, response);
+                $("#geo").html(rendered2);
+            });
+    }
+</script>

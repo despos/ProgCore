@@ -1,0 +1,18 @@
+﻿@model Ch12.DataBinding.Models.CountryViewModel
+
+<table class="table table-condensed">
+    
+    @foreach (var c in Model.CountryCodes)
+    {
+        <tr>
+            <td>@c</td>
+            <td>
+                <button class="btn btn-xs btn-info" 
+                        onclick="i('@c')">
+                    <span class="fa fa-chevron-right"></span>
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+

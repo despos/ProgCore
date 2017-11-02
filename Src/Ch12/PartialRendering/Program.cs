@@ -3,18 +3,14 @@
 //   PROGRAMMING ASP.NET CORE
 //   Dino Esposito
 //   
-//   Ch01 - Why Another (ASP).NET
-//   HelloWorldWeb
+//   Ch12 - Client-side data binding
+//   PartialRendering
 //
 
-using System.Threading.Tasks;
-using Ch01.HelloWorldWeb;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
-namespace HelloWorldWeb
+namespace Ch12.PartialRendering
 {
     public class Program
     {

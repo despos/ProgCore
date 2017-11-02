@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/Content/styles/ybq-core.min.css",
+    "inputFiles": [
+      "wwwroot/Content/styles/ybq-core.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/scripts/site/knockout.min.min.js",
+    "inputFiles": [
+      "wwwroot/Content/scripts/site/knockout.min.js"
+    ]
+  }
+]

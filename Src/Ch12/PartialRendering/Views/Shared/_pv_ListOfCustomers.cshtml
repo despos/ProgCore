@@ -1,0 +1,19 @@
+﻿
+<table class="table table-condensed">
+    
+    @foreach (var c in Model.Customers)
+    {
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Name</td>
+            <td>@c.Address</td>
+            <td>
+                <button class="btn btn-xs btn-danger" 
+                        onclick="d(@c.Id)">
+                    <span class="fa fa-trash"></span>
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+

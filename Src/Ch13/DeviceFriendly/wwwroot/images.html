@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+    <script src="content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="//wurfl.io/wurfl.js?debug=true"></script>
+    <title>OPTIMIZED IMAGES</title>
+</head>
+
+<body onload="update()">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- MENU -->
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row text-center" style="margin-top: 20px; display: none;" id="showQR">
+        <h3>VIEW ON MOBILE</h3>
+        <img alt="" src="content/images/qr-images.jpg" />
+    </div>
+
+    <img id="img1" src="http://try.imgeng.in/http://www.expoware.org/images/tennis1.jpg" />
+
+    <h3 class="text-center">
+        <span>OPTIMIZED FOR DEVICE</span>
+        <span id="msg1" style="color: red"></span>
+    </h3>
+
+    <hr />
+    <h3 class="text-center">
+        <span>ORIGINAL</span>
+        <span id="msg2" style="color: red"></span>
+    </h3>
+    <img id="img2" src="http://www.expoware.org/images/tennis1.jpg" />
+
+
+    <div style="padding: 5px; text-align: center; background: #111; color: #eee;">
+        POWERED BY
+        <b><a style="color: #40e0d0; text-decoration: none;" href="//wurfl.io">WURFL.IO</a></b>
+        &nbsp;&diams;&nbsp;
+        FEATURED BY
+        <b><a style="color: #40e0d0; text-decoration: none;" href="https://www.amazon.com/Programming-ASP-NET-Core-Developer-Reference/dp/150930441X/">Programming ASP.NET Core</a></b>
+    </div>
+    <footer>
+        <div class="text-right">
+            <span>Youbiquitous</span><br />
+            Dino Esposito&nbsp;&nbsp;<i class="fa fa-tag"></i>&nbsp;2017
+        </div>
+    </footer>
+
+    <script>
+        function update() {
+            var isDesktop = !WURFL.is_mobile;
+            if (isDesktop) {
+                $("#showQR").show();
+            }
+
+            var img1 = document.getElementById('img1');
+            var width = img1.clientWidth;
+            var height = img1.clientHeight;
+            document.getElementById('msg1').innerHTML = width.toString() + " x " + height.toString();
+            $("#img1").addClass("img-responsive");
+
+
+            var img2 = document.getElementById('img2');
+            var width = img2.clientWidth;
+            var height = img2.clientHeight;
+            document.getElementById('msg2').innerHTML = width.toString() + " x " + height.toString();
+            $("#img2").addClass("img-responsive");
+        }
+    </script>
+
+</body>
+</html>

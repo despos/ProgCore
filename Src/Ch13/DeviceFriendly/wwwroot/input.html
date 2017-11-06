@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INPUT FIELDS</title>
+    <link href="content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+    <script src="content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="//wurfl.io/wurfl.js?debug=true"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!-- MENU -->
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid">
+    <form class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>SAMPLE INPUT</legend>
+
+            <!-- DATE input-->
+            <div class="form-group">
+                <label class="col-xs-12 col-md-4 col-md-offset-4" for="theDate">Date</label>  
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <input id="theDate" name="theDate" class="form-control" type="date">
+                </div>
+            </div>
+            
+            <!-- EMAIL input-->
+            <div class="form-group">
+                <label class="col-xs-12 col-md-4 col-md-offset-4" for="theEmail">Email</label>
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <input id="theEmail" name="theEmail" class="form-control" type="email">
+                </div>
+            </div>
+            
+            <!-- NUMBER input-->
+            <div class="form-group">
+                <label class="col-xs-12 col-md-4 col-md-offset-4" for="theNumber">Number</label>
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <input id="theNumber" name="theNumber" class="form-control" type="number">
+                </div>
+            </div>
+            
+            <!-- TEL input-->
+            <div class="form-group">
+                <label class="col-xs-12 col-md-4 col-md-offset-4" for="thePhone">Phone</label>
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <input id="thePhone" name="thePhone" class="form-control" type="tel">
+                </div>
+            </div>
+            
+            <!-- COLOR input-->
+            <div class="form-group">
+                <label class="col-xs-12 col-md-4 col-md-offset-4" for="theColor">Favorite Color</label>
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <input id="theColor" name="theColor" class="form-control" type="color">
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+        
+    <div class="row text-center" style="margin-top: 20px; display: none;" id="showQR">
+        <h3>VIEW ON MOBILE</h3>
+        <img alt="" src="content/images/qr-input.jpg" />
+    </div>
+
+    <footer>
+        <div class="text-right">
+            <span>Youbiquitous</span><br />
+            Dino Esposito&nbsp;&nbsp;<i class="fa fa-tag"></i>&nbsp;2017
+        </div>
+    </footer>
+</div>
+    
+<script>
+    var isDesktop = !WURFL.is_mobile;
+    if (isDesktop) {
+        $("#showQR").show();
+    }
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATE PICKING</title>
+    <link href="content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="content/styles/bootstrap-datepicker.min.css" type="text/css" />
+
+    <script src="content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="content/scripts/bootstrap.min.js"></script>
+    <script src="content/scripts/bootstrap-datepicker.min.js"></script>
+    <script src="//wurfl.io/wurfl.js?debug=true"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- MENU -->
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="col-xs-6">
+            REGULAR JS DATE-PICKER<br />
+            <input type="text" class="form-control" date>
+        </div>
+
+        <div class="col-xs-6">
+            DEVICE-SPECIFIC DATE-PICKER<br />
+            <input type="text" class="form-control" id="mdate">
+        </div>
+        
+        <h4 class="text-center text-warning">https://uxsolutions.github.io/bootstrap-datepicker/</h4>
+
+        <div class="clearfix"></div>
+
+        <div class="row text-center" style="margin-top: 20px; display: none;" id="showQR">
+            <h3>VIEW ON MOBILE</h3>
+            <img alt="" src="content/images/qr-datepicking.jpg" />
+        </div>
+
+        <footer>
+            <div class="text-right">
+                <span>Youbiquitous</span><br />
+                Dino Esposito&nbsp;&nbsp;<i class="fa fa-tag"></i>&nbsp;2017
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Blindly uses a datepicker
+        $("input[date]").datepicker({
+            // More
+        });
+
+        // Datepicker or native
+        if (WURFL.form_factor === "Smartphone" ||
+            WURFL.form_factor === "Feature Phone") {
+            $("#mdate").attr("type", "date");
+        } else {
+            $("#mdate").datepicker();
+        }
+    </script>
+    <script>
+        var isDesktop = !WURFL.is_mobile;
+        if (isDesktop) {
+            $("#showQR").show();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVICE DISCOVERY</title>
+    <link href="content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="content/scripts/bootstrap.min.js"></script>
+    <script src="//wurfl.io/wurfl.js?debug=true"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!-- MENU -->
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-3">
+            <img id="icon" class="img-responsive" alt="" onerror="this.src = '/content/images/other.png'"/>
+        </div>
+        <div class="col-xs-9">
+            <h1 id="factor" class="text-primary bold"></h1>
+            <h3 id="name"></h3>
+            <small id="mobile"></small>
+        </div>
+    </div>
+    <div class="row text-center" style="margin-top: 20px; display: none;" id="showQR">
+        <h3>VIEW ON MOBILE</h3>
+        <img alt="" src="content/images/qr-device.jpg"/>
+    </div>
+
+    <footer>
+        <div class="text-right">
+            <span>Youbiquitous</span><br/>
+            Dino Esposito&nbsp;&nbsp;<i class="fa fa-tag"></i>&nbsp;2017
+        </div>
+    </footer>
+</div>
+    
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function () {
+        var formFactor = WURFL.form_factor;
+        $("#factor").html(formFactor);
+        $("#name").html(WURFL.complete_device_name);
+        $("#icon").attr("src", "/content/images/" + formFactor + ".png");
+        $("#mobile").html(WURFL.is_mobile ? "Not a desktop browser" : "Desktop browser");
+    });
+</script>
+    
+<script>
+    var isDesktop = !WURFL.is_mobile;
+    if (isDesktop) {
+        $("#showQR").show();
+    }
+</script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,206 @@
+﻿/*
+///////////////////////////////////////////////////////////////////
+//
+// Youbiquitous YBQ : app starter 
+// Copyright (c) Youbiquitous srls 2017
+//
+// Author: Dino Esposito (http://youbiquitous.net)
+//
+*/
+
+/*
+////////////////////////////////////////////////////////////
+HTML RESET
+*/
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    padding-top: 70px;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #222;
+    color: #555;
+}
+hr {
+    border: solid 1px #555 !important;
+}
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+a:hover, a:visited, a:active {
+    text-decoration: none !important;
+}
+img {
+    vertical-align: middle;
+}
+input:focus, textarea:focus {
+    background-color: #f5f5d4;
+}
+
+
+/*
+////////////////////////////////////////////////////////////
+COMMON
+*/
+.noshow {
+    display: none !important;
+}
+.bordered {
+    border: solid 2px #333;
+    padding: 4px;
+}
+.bold {
+    font-weight: 700;
+}
+.normal {
+    font-weight: 400;
+}
+.normal-italic {
+    font-weight: 400;
+    font-style: italic;
+}
+.margin-top-xs {
+    margin-top: 10px;
+}
+.margin-top-md {
+    margin-top: 30px;
+}
+.margin-top-lg {
+     margin-top: 50px;
+}
+.margin-bottom-xs {
+    margin-bottom: 10px;
+}
+.margin-bottom-md {
+    margin-bottom: 30px;
+}
+.margin-bottom-lg {
+    margin-bottom: 50px;
+}
+.spaced {
+    margin: 5px;
+    padding: 10px;
+}
+.padded-xs {
+    padding: 3px;
+}
+.padded-md {
+    padding: 8px;
+}
+.padded-lg {
+    padding: 15px;
+}
+.opaque-min {
+    opacity: .8;
+}
+.opaque-max {
+    opacity: .5;
+}
+.hand {
+    cursor: pointer;
+}
+.block {
+    display: block;
+}
+
+/*
+////////////////////////////////////////////////////////////
+BOOTSTRAP CUSTOMIZATION
+*/
+
+.alert-autoclose {
+    opacity: 0.95;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.badge-primary {
+    background: #2af !important;
+    color: #fff!important;
+}
+
+.btn {
+    border-radius: 0!important;
+    text-transform: uppercase;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn-left {
+    text-align: left !important;
+}
+
+.btn-spaced {
+    min-width: 120px;
+}
+
+.btn-tabstrip {
+    font-size: 1.3em!important;
+    min-width: 120px;
+}
+
+ul li[role=presentation] {
+    font-size: 1.3em;
+}
+
+.tab-pane li.active a {
+    border-top-color: transparent!important;
+}
+
+.nav-tabs {
+    border-bottom: solid 1px #111!important;
+}
+
+.nav-tabs li.active a,
+.nav-tabs li.active a:hover {
+    border-radius: 0!important;
+    font-weight: bold;
+    border: solid 2px #111!important;
+    border-bottom-color: transparent!important;
+}
+
+div[role=tabpanel] {
+    margin-top: 30px;
+}
+
+/*
+////////////////////////////////////////////////////////////
+INPUT FILE
+*/
+
+.ybq-file-container {
+    border: solid 1px #bbb; 
+    text-align: center; 
+    cursor: pointer;
+    padding: 4px;
+}
+.ybq-file-remover {
+    display: none;
+    margin-top: 3px;
+}
+.ybq-file-preview {
+    display: none;
+}

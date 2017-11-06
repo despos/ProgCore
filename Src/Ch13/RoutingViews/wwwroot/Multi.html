@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVICE DISCOVERY</title>
+    <link href="content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="content/scripts/bootstrap.min.js"></script>
+    <script src="//wurfl.io/wurfl.js?debug=true"></script>
+    
+    <script type="text/javascript">
+        var formFactor = WURFL.form_factor;
+        var agent = WURFL.complete_device_name;
+        window.addEventListener("DOMContentLoaded", function () {
+            $("#title").html(formFactor + "<br>" + agent);
+        });
+    </script>
+    <script type="text/javascript">
+        var url = "/screen/default";
+        $(document).ready(function () {
+            switch (formFactor) {
+            case "Smartphone":
+                    url = "/screen/smartphone";
+                break;
+            case "Tablet":
+                    url = "/screen/tablet";
+                break;
+            }
+            $.ajax({
+                url: url,
+                cache: false,
+                dataType: "html",
+                success: function(data) {
+                    $("#body").html(data);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- MENU -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="text-center text-warning">
+            <div id="title"></div>
+        </div>
+        <div id="body">
+            <div class="text-center">
+                <span>LOADING ...</span>
+            </div>
+        </div>
+
+        <footer>
+            <div class="text-right">
+                <span>Youbiquitous</span><br />
+                Dino Esposito&nbsp;&nbsp;<i class="fa fa-tag"></i>&nbsp;2017
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -6,7 +6,7 @@
 //   Ch15 - Deploying an ASP.NET Core Application
 //   SimplePage
 //
-
+ 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,0 +1,78 @@
+﻿
+@*<script src="//wurfl.io/wurfl.js"></script>*@
+<table id="uxdebug-container" style="width:100%; background: #333; color: #eee8aa" onclick="__hideMe()">
+    <tr>
+        <td style="max-width:50px;padding:8px;opacity:.7">
+            UX-D
+        </td>
+        <td>
+            <span id="uxdebug-bspoint"></span>
+        </td>
+        <td>
+            <span id="uxdebug-wh"></span>
+        </td>
+        <td>
+            <span id="uxdebug-formfactor"></span>
+        </td>
+        <td>
+            <span id="uxdebug-device"></span>
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    var __uxDebugContainerHeight = parseInt($("#uxdebug-container").height());
+    __adjustBodyPaddingTop(true);
+    __updateSize();
+    __updateDevice();
+    $(window).resize(function() {
+        __updateSize();
+    });
+
+    function __currentBootstrapScreenClass() {
+        var screen = "LG";
+        var width = $(window).width();
+        if (width <= 768)
+            screen = "XS";
+        else if (width <= 992)
+            screen = "SM";
+        else if (width <= 1200)
+            screen = "MD";
+        return screen;
+    }
+
+    function __updateSize() {
+        var info = __currentBootstrapScreenClass();
+        $('#uxdebug-wh').text($(window).width() + "px");
+        $('#uxdebug-bspoint').text(info);
+    }
+
+    function __updateDevice() {
+        var dev1 = "Unknown";
+        var dev2 = "UA N/A";
+        try {
+            dev1 = WURFL.form_factor;
+            dev2 = WURFL.complete_device_name;
+        } catch (err) {
+            
+        }
+        $('#uxdebug-formfactor').text(dev1);
+        $('#uxdebug-device').html("<small>" + dev2 + "</small>");
+    }
+
+    function __hideMe() {
+        $(window).resize(null);
+        $("#uxdebug-container").hide();
+        __adjustBodyPaddingTop(false);
+    }
+
+    function __adjustBodyPaddingTop(shouldInitialize) {
+        if (shouldInitialize) {
+            var paddingTop = parseInt($("body").css("padding-top")) + __uxDebugContainerHeight;
+            $("body").css("padding-top", paddingTop);
+        } else {
+            var paddingTop = parseInt($("body").css("padding-top"));
+            $("body").css("padding-top", paddingTop - __uxDebugContainerHeight);
+        }
+    }
+</script>

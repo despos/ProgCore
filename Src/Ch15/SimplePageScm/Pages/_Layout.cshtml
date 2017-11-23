@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming ASP.NET Core</title>
+    <link href="~/content/styles/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/styles/site/ybqapp-site.min.css" rel="stylesheet" type="text/css" />
+
+    @RenderSection("adhoc_Css", required: false)
+
+    <script src="~/content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/content/scripts/bootstrap.min.js"></script>
+    <script src="//wurfl.io/wurfl.js"></script>
+    <script src="~/content/scripts/site/ybq-core.min.js?v=1"></script>
+    @RenderSection("adhoc_Scripts_Top", required: false)
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    @Html.Partial("pv_UxDebug")
+
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+            <a asp-page="cover" class="navbar-brand">
+                Cover
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!-- MENU -->
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid">
+    @RenderBody()
+
+    <footer>
+        <div class="text-right">
+            <span>Youbiquitous</span><br/>
+            Dino Esposito&nbsp;&nbsp;<i class="fa fa-tag"></i>&nbsp;2017
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript" src="~/content/scripts/site/ybq-coreinit.min.js"></script>
+@RenderSection("adhoc_Scripts_Bottom", required: false)
+</body>
+
+</html>

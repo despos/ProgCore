@@ -7,6 +7,7 @@
 //   JustViews
 //
 
+using System;
 using Ch05.JustViews.Models;
 
 namespace Ch05.JustViews.Application
@@ -15,7 +16,12 @@ namespace Ch05.JustViews.Application
     {
         public HomeViewModel GetHomeViewModel()
         {
-            return new HomeViewModel("Page title");
+            var model = new HomeViewModel("Page title")
+            {
+                Current = DateTime.Today
+            };
+            model.Today = model.Current.ToString("dddd, <b>d MMM</b> yyyy");
+            return model;
         }
     }
 }

@@ -17,16 +17,17 @@ namespace Ch10.SampleApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            var builder = services.AddMvcCore();
+            builder.AddJsonFormatters();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.Map("/api/file", DownloadFile);
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
-            app.Map("/api/file", DownloadFile);
         }
 
         private static void DownloadFile(IApplicationBuilder app)

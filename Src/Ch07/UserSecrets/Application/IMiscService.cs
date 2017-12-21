@@ -9,7 +9,8 @@
 
 namespace Ch07.UserSecrets.Application
 {
-    public class MiscService : IMiscService
+    public interface IMiscService
     {
+        
     }
 }

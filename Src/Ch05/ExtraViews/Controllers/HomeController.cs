@@ -24,6 +24,8 @@ namespace Ch05.JustViews.Controllers
         public IActionResult Index()
         {
             var model = _homeService.GetHomeViewModel();
+            ViewData["Color"] = "orange";
+            ViewBag.Color = "cyan";
             return View(model);
         }
     }

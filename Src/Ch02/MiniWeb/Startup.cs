@@ -9,30 +9,31 @@
 
 using System;
 using System.Linq;
+using Ch02.MiniWeb.Persistence;
 using Ch02.MiniWeb.Persistence.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using MiniWeb.Persistence;
 using Newtonsoft.Json;
 
 namespace Ch02.MiniWeb
 {
     public class Startup
     {
-        // Use this method to add services to the container.
+        // Use this method to add services to the ASP.NET system container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Pass your own instance
             services.AddSingleton<ICountryRepository>(new CountryRepository());
 
             // Or, in alternative, let the system create one
-            // services.AddSingleton<ICountryRepository, CountryRepository>();
+            //services.AddSingleton<ICountryRepository, CountryRepository>();
         }
 
         public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env/*, ICountryRepository country*/, IServiceProvider provider)
+            IHostingEnvironment env/*, ICountryRepository country*/, 
+            IServiceProvider provider)
         {
             app.Map("/country", countryApp =>
             {

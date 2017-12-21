@@ -14,7 +14,7 @@ namespace Ch04.AttrRouting.Controllers
     [Route("goto")]
     public class TourController : Controller
     {
-        [Route("/[controller]/[action]")]
+        [Route("[controller]/[action]")]
         [ActionName("ny")]
         public IActionResult NewYork()
         {
@@ -22,13 +22,13 @@ namespace Ch04.AttrRouting.Controllers
             return Ok(action);
         }
 
+        [NonAction]
         public IActionResult Chicago()
         {
             var action = RouteData.Values["action"].ToString();
             return Ok(action);
         }
 
-        //[NonAction]
         public IActionResult Orlando()
         {
             var action = RouteData.Values["action"].ToString();

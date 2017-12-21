@@ -22,10 +22,10 @@ namespace Ch10.MyClientApp
 
             // Discover endpoints from metadata
             var disco = DiscoveryClient.GetAsync("http://localhost:6000").Result;
-            var tokenClient = new TokenClient(disco.TokenEndpoint,
-                "public-account", "public-account-secret");
             //var tokenClient = new TokenClient(disco.TokenEndpoint,
-            //    "internal-account", "internal-account-secret");
+            //    "public-account", "public-account-secret");
+            var tokenClient = new TokenClient(disco.TokenEndpoint,
+                "internal-account", "internal-account-secret");
 
             // RO is one of the SCOPE on the API resource 
             var tokenResponse = tokenClient

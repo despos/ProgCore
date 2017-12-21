@@ -1,0 +1,35 @@
+﻿<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top: 30px">
+
+    <form class="form-horizontal" method="post" action="@Url.Action("date", "binding")">
+        <fieldset>
+            <legend>Enter a date</legend>
+
+            <!-- DD -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email1">DAY</label>
+                <div class="col-md-4">
+                    <input name="day" id="day" class="form-control input-md" type="text">
+                </div>
+            </div>
+
+            <!-- EMAIL 2 -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email2">MONTH</label>
+                <div class="col-md-4">
+                    <input name="month" id="month" class="form-control input-md" type="text">
+                </div>
+            </div>
+
+            <!-- EMAIL 3 -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email3">YEAR</label>
+                <div class="col-md-4">
+                    <input name="year" id="year" class="form-control input-md" type="text">
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg">SAVE</button>
+        </fieldset>
+    </form>
+
+</div>

@@ -10,7 +10,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ch03.Routes.Implementation
+namespace Ch03.RoutesEx.Implementation
 {
     public class DateController : Controller 
     {

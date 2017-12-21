@@ -7,15 +7,16 @@
 //   EfCore
 // 
 
+using Ch09.EfCore.Backend.Persistence.DomainServices;
 using Ch09.EfCore.Models;
 
 namespace Ch09.EfCore.Application
 {
     public class HomeService
     {
-        private readonly SomeRepository _repo;
+        private readonly RecordRepository _repo;
 
-        public HomeService(SomeRepository repo)
+        public HomeService(RecordRepository repo)
         {
             _repo = repo;
         }

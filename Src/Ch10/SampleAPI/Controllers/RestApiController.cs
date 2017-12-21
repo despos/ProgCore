@@ -19,7 +19,6 @@ namespace Ch10.SampleApi.Controllers
         [HttpPost]
         public CreatedResult AddNews(News news)
         {
-            
             // Do something here to store the news
             var newsId = SaveNewsInSomeWay(news);
 

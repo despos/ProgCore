@@ -7,6 +7,8 @@
 //   JustViews
 //
 
+using System;
+
 namespace Ch05.JustViews.Models
 {
     public class HomeViewModel : ViewModelBase
@@ -15,5 +17,8 @@ namespace Ch05.JustViews.Models
         {
             
         }
+
+        public string Today { get; set; }
+        public DateTime Current { get; set; }
     }
 }

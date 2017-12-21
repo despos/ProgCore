@@ -9,7 +9,7 @@
 
 using System.Collections.Generic;
 using Ch07.Config.Application;
-using Config.Application;
+using Ch07.Config.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,18 +40,20 @@ namespace Ch07.Config
 
             // Save the configuration root object to a startup member for further references
             Configuration = dom;
+            var x0 = Configuration.GetValue<string>("ApplicationTitle");
             var x1 = Configuration.GetValue<int>("Timezone");
             var x2 = Configuration.GetValue<int>("GeneralSettings:Paging:PageSize");
             var x3 = Configuration.GetSection("GeneralSettings").GetValue<int>("Paging:PageSize");
             var x4 = Configuration["GeneralSettings:Paging:PageSize"];
             var tz = x1;
-            Configuration.Reload();
+            //Configuration.Reload();
             var x5 = Configuration["GeneralSettings:Paging:PageSize"];
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddOptions();
 
             // Place your logic here to decide how to resolve ICustomerService.
             services.AddTransient<IRandomCustomerService>(provider =>
@@ -61,6 +63,7 @@ namespace Ch07.Config
             });
 
             services.AddSingleton(Configuration);
+            services.Configure<GeneralSettings>(Configuration.GetSection("GeneralSettings"));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

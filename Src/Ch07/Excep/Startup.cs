@@ -28,12 +28,12 @@ namespace Ch07.Except
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+                app.UseStatusCodePagesWithReExecute("/App/Error/{0}");
             }
             else
             {
                 app.UseExceptionHandler("/App/Error");
-                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+                app.UseStatusCodePagesWithReExecute("/App/Error/{0}");
             }
 
             // Add logging providers

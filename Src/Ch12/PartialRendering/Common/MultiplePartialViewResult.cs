@@ -35,7 +35,7 @@ namespace Ch12.PartialRendering.Common
                 PartialViewResults.Add(r);
         }
 
-        public override Task ExecuteResultAsync(ActionContext context)
+        public override async Task ExecuteResultAsync(ActionContext context)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
@@ -55,14 +55,13 @@ namespace Ch12.PartialRendering.Common
                     pv.TempData,
                     writer, 
                     new HtmlHelperOptions());
-                view.RenderAsync(viewContext).GetAwaiter().GetResult();
+                await view.RenderAsync(viewContext);
 
                 if (index < total - 1)
-                    writer.WriteAsync(ChunkSeparator);
+                    await writer.WriteAsync(ChunkSeparator);
             }
             
-            context.HttpContext.Response.WriteAsync(writer.ToString());
-            return Task.CompletedTask;
+            await context.HttpContext.Response.WriteAsync(writer.ToString());
         }
     }
 }

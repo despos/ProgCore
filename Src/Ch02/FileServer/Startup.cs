@@ -35,7 +35,7 @@ namespace Ch02.FileServer
 
                 // second pass here
             });
-
+            
             // Enable serving files from the configured web root folder (i.e., WWWROOT)
             app.UseDefaultFiles();
             app.UseStaticFiles();

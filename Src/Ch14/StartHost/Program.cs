@@ -8,6 +8,7 @@
 //
 
 using System;
+using System.Text;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

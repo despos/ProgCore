@@ -40,10 +40,25 @@ namespace Ch04.Simple.AllControllers
 
             base.OnActionExecuted(filterContext);
         }
-
+        
         public IActionResult Index()
         {
-            return Ok("Just processed Filter.Index");
+            var output = Content("Just processed Filter.Index");
+            return output;
+        }
+
+        public IActionResult Google()
+        {
+            return Redirect("http://www.google.com");
+        }
+
+        public IActionResult GoRepeat()
+        {
+            var result = RedirectToAction(
+                "repeat",
+                "binding",
+                new {text = "Dino", number = 4});
+            return result;
         }
     }
 }

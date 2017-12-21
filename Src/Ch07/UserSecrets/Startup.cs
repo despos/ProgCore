@@ -7,6 +7,7 @@
 //   UserSecrets
 // 
 
+using Ch07.UserSecrets.Application;
 using Ch07.UserSecrets.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,9 +28,7 @@ namespace Ch07.UserSecrets
             if (env.IsDevelopment())
                 builder.AddUserSecrets<MyAppSecretConfig>();
             if (env.IsProduction())
-            {
                 builder.AddEnvironmentVariables();
-            }
 
             var dom = builder.Build();
 
@@ -42,6 +41,7 @@ namespace Ch07.UserSecrets
             services.AddOptions();
             //services.Configure<MyAppSecretConfig>(options => Configuration.Bind(options));
             services.Configure<MyAppSecretConfig>(Configuration);
+            services.AddSingleton<IMiscService>();
             services.AddMvc();
         }
 

@@ -1,14 +1,14 @@
-﻿@using Ch06.TagHelpers.Models
+﻿
+@using Ch06.TagHelpers.Models
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Options
-@using TagH.Common
 @model Ch06.TagHelpers.Models.RoomViewModel
 @{
     var email = "dino.esposito@jetbrains.com";
     var subject = "Talking about ASP.NET Core";
 }
 
-<form asp-ac1tion="@Url.Action("Hello", "Form")">
+<form asp-action="@Url.Action("Hello", "Form")">
     @Html.AntiForgeryToken()
     <h1>HELLO I'M A FORM</h1>
 </form>
@@ -75,5 +75,9 @@
 <email to="@email" subject="@subject" class="btn btn-danger">
     Hello! Today is @DateTime.Today
 </email>
+
+
+
+
 
 

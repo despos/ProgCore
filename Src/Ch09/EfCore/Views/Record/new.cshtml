@@ -1,0 +1,35 @@
+﻿@model Ch09.EfCore.Models.RecordViewModel
+
+<h1>NEW RECORD</h1>
+
+<form class="form-horizontal" method="post">
+    <fieldset>
+        <!-- FIRST -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="firstname">First name</label>  
+            <div class="col-md-8">
+                <input type="text" class="form-control" 
+                       id="firstname"
+                       name="firstname" 
+                       value="@Model.Customer.FirstName"
+                       placeholder="First name">
+                <span class="help-block">help</span>  
+            </div>
+        </div>
+
+        <!-- LAST -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="lastname">Last name</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control"
+                       id="lastname"
+                       name="lastname"
+                       value="@Model.Customer.LastName"
+                       placeholder="Last name">
+                <span class="help-block">help</span>
+            </div>
+        </div>
+        
+        <button class="btn btn-lg btn-danger">SAVE</button>
+    </fieldset>
+</form>

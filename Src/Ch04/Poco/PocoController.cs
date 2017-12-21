@@ -23,10 +23,11 @@ namespace Ch04.Poco
 
         public IActionResult Today()
         {
-            return new ContentResult()
+            var obj = new ContentResult 
             {
                 Content = DateTime.Now.ToString("ddd, d MMM")
             };
+            return obj;
         }
 
         public IActionResult Html()

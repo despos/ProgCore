@@ -1,2 +1,16 @@
-﻿
+﻿@model Ch05.JustViews.Models.HomeViewModel
+
+@{
+    var random = DateTime.Now.Second % 2 > 0 ? "blue" : "yellow";
+    var week = Model.Current.ToString("dddd, ");
+    var day = Model.Current.ToString("d MMM ");
+    var year = Model.Current.ToString("yyyy");
+}
 <h1>Home.Index</h1>
+
+<h3>@Html.Raw(Model.Today)</h3>
+<h3>@week <b style="color:red">@day</b> <span style="color:@random">@year</span></h3>
+
+<hr />
+<h3>@ViewData["Colr"]</h3>
+<h3>@ViewBag.Colr</h3>

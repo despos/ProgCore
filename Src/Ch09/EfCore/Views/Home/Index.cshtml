@@ -1,6 +1,6 @@
 ﻿@model Ch09.EfCore.Models.HomeViewModel
 
-<h1>RECORDS</h1>
+<h1>RECORDS <a href="@Url.Action("new", "record")" class="btn btn-danger">ADD</a></h1>
 <table class="table table-condensed">
     @foreach (var customer in Model.Records)
     {

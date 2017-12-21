@@ -13,11 +13,9 @@ using System.IO;
 using System.Linq;
 using Ch02.MiniWeb.Persistence.Abstractions;
 using Ch02.MiniWeb.Persistence.Model;
-using MiniWeb.Persistence.Abstractions;
-using MiniWeb.Persistence.Model;
 using Newtonsoft.Json;
 
-namespace MiniWeb.Persistence
+namespace Ch02.MiniWeb.Persistence
 {
     public class CountryRepository : ICountryRepository
     {

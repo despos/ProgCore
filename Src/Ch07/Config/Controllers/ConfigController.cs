@@ -7,22 +7,23 @@
 //   Config
 //  
 
+using Ch07.Config.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Ch07.Config.Controllers
 {
-    public class HomeController : Controller
+    public class ConfigController : Controller
     {
-        private readonly IConfigurationRoot _config;
+        private readonly GeneralSettings _settings;
 
-        public HomeController(IConfigurationRoot config)
+        public ConfigController(IOptionsSnapshot<GeneralSettings> settings)
         {
-            _config = config;
+            _settings = settings.Value;
         }
         public IActionResult Index()
         {
-            ViewData["PageSize"] = _config.GetValue<int>("GeneralSettings:Paging:PageSize");
+            ViewData["PageSize"] = _settings.Paging.PageSize;
             return View();
         }
     }

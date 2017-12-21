@@ -10,7 +10,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ch03.Routes.Implementation
+namespace Ch03.RoutesEx.Implementation
 {
     public class HomeController : Controller
     {
@@ -31,7 +31,7 @@ namespace Ch03.Routes.Implementation
             int number, 
             [FromQuery] int code, 
             string headeracceptlanguage, 
-            [FromHeader(Name ="Accept-Language")] string language)
+            [FromHeader] string language)
         {
             var lang = Request.Headers["Accept-Language"];
             return new ContentResult { Content = container.Number.ToString() };

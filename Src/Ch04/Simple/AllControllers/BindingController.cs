@@ -7,6 +7,7 @@
 //   Simple
 //
 
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Ch04.Simple.Models;
@@ -17,8 +18,7 @@ namespace Ch04.Simple.AllControllers
     public class BindingController : Controller
     {
         [Route("moveto/{city}")]
-        public IActionResult Visit(
-            [FromQuery] string city)
+        public IActionResult Visit([FromQuery] string city)
         {
             return Ok(city);
         }
@@ -43,8 +43,28 @@ namespace Ch04.Simple.AllControllers
             return Ok(builder.ToString());
         }
 
-        public IActionResult Email(
-            [Bind(Prefix="email")] IList<string> emails)
+        public IActionResult Accept(
+            [FromHeader(Name="Accept-Language")] string language)
+        {
+            return Ok(language);
+        }
+
+        [HttpGet]
+        [ActionName("email")]
+        public IActionResult EmailGet(IList<string> emails)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("email")]
+        public IActionResult EmailPost(
+             [Bind(Prefix="email")] IList<string> emails)
+        {
+            return View();
+        }
+
+        public IActionResult Date(DateTime date, int day, int month, int year=2017)
         {
             return View();
         }

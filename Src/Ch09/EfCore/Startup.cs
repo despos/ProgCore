@@ -11,6 +11,7 @@ using System;
 using System.IO;
 using Ch09.EfCore.Application;
 using Ch09.EfCore.Backend.Persistence;
+using Ch09.EfCore.Backend.Persistence.DomainServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +23,9 @@ namespace Ch09.EfCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<HomeService>();
-            services.AddTransient<SomeRepository>();
+            services.AddSingleton<HomeService>();
+            services.AddSingleton<RecordService>();
+            services.AddSingleton<RecordRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

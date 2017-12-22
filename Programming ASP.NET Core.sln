@@ -109,6 +109,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch15.SimplePage", "Src\Ch15
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch15.SimplePageScm", "Src\Ch15\SimplePageScm\Ch15.SimplePageScm.csproj", "{622A8860-AC6C-413B-A439-5142075AFEC1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch14.Response", "Src\Ch14\Response\Ch14.Response.csproj", "{E16171BA-9266-41BB-BFED-E529CDD7F211}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -263,6 +265,10 @@ Global
 		{622A8860-AC6C-413B-A439-5142075AFEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622A8860-AC6C-413B-A439-5142075AFEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{622A8860-AC6C-413B-A439-5142075AFEC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16171BA-9266-41BB-BFED-E529CDD7F211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16171BA-9266-41BB-BFED-E529CDD7F211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16171BA-9266-41BB-BFED-E529CDD7F211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16171BA-9266-41BB-BFED-E529CDD7F211}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -320,6 +326,7 @@ Global
 		{E4C42979-FA46-4438-802C-8085DDD05BA9} = {DD860377-8AD1-438D-863C-44B6A477DC3B}
 		{F804B777-7509-410E-918E-6528E7068085} = {E4C42979-FA46-4438-802C-8085DDD05BA9}
 		{622A8860-AC6C-413B-A439-5142075AFEC1} = {E4C42979-FA46-4438-802C-8085DDD05BA9}
+		{E16171BA-9266-41BB-BFED-E529CDD7F211} = {120D884B-EF54-42BD-B516-2303850D8E22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF18ACD-8C06-4FFC-883F-3D88B4E54FD5}

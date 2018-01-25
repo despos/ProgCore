@@ -1,0 +1,38 @@
+﻿
+@model SignalR1.Models.CustomersViewModel
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-brand" >List of customers</p> 
+        </div>
+        <ul class="nav navbar-nav" style="margin-left: 20px">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Operating on behalf of <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu" id="onBehalfMenu">
+                    @Html.Partial("pv_OnBehalfOfCustomers")
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-md-6" id="listOfCustomers">
+        @Html.Partial("pv_ListOfCustomers")
+    </div>
+</div>
+
+<script type="text/javascript">
+    function d(id) {
+        var url = "/home/d/";
+        $.post(url, { id: id })
+            .done(function (response) {
+                var chunks = Ybq.processMultipleAjaxResponse(response);
+                $("#listOfCustomers").html(chunks[0]);
+                $("#onBehalfMenu").html(chunks[1]);
+        });
+    }
+</script>

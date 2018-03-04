@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////////////////////////
 //
 //   PROGRAMMING ASP.NET CORE
-//   Dino Esposito 
+//   Dino Esposito  
 //   
 //   EXTRAS 
 //   SignalR - 1

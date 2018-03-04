@@ -1,0 +1,80 @@
+﻿@model Bs4.Models.ViewModelBase
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@Model.Title</title>
+    <link href="~/content/styles/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @RenderSection("adhoc_Css", required: false)
+    
+    <script src="~/content/scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/content/scripts/bootstrap.bundle.min.js"></script>
+    <script src="//wurfl.io/wurfl.js"></script>
+    <script src="~/content/scripts/site/ybq-core.min.js?v=1"></script>
+    @RenderSection("adhoc_Scripts_Top", required: false)
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dropdownNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="dropdownNavbar">
+        @*<a class="navbar-brand" href="#">
+            Hidden brand
+        </a>*@
+        <div class="media">
+            <img class="align-self-center mr-3 img-fluid rounded-circle"
+                 style="width: 80px"
+                 src="~/content/images/dino-ps-sm.jpg" alt="Me">
+            <div class="media-body align-self-center">
+                <div style="line-height: 12px" class="navbar-text text-center">
+                    MY BRAND<br/>my face
+                </div>
+            </div>
+        </div>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link ml-5" style="font-size: 1.4rem" href="@Url.Action("index", "home")">
+                    <i class="fa fa-home align-middle"></i>
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span class="align-middle">Link #1</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span class="align-middle">Link #2</span>
+                </a>
+            </li>
+        </ul>
+        @*<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>*@        
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    @RenderBody()
+    <nav class="fixed-bottom navbar-dark bg-dark">
+        <footer class="p-1 w-100 navbar-text text-right">
+            <div class="mr-4">Youbiquitous<br/>Dino Esposito<i class="ml-2 mr-2 fa fa-tag text-light"></i>2018
+            </div>
+        </footer>
+        @Html.Partial("pv_UxDebug")
+    </nav>
+</div>
+
+<script type="text/javascript" src="~/content/scripts/site/ybq-coreinit.min.js"></script>
+@RenderSection("adhoc_Scripts_Bottom", required: false)
+</body>
+</html>
+
+

@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-//[assembly: UserSecretsId("this-is-mine-8084c8e7-0000-0000-b266-b33f42dd88c0")]
+//-("this-is-mine-8084c8e7-0000-0000-b266-b33f42dd88c0")]
 namespace Ch07.UserSecrets
 {
     public class Startup

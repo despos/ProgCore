@@ -55,7 +55,8 @@ namespace Ch07.Config
             services.AddMvc();
             services.AddOptions();
 
-            // Place your logic here to decide how to resolve ICustomerService.
+            // Place your logic here to decide how to resolve ICustomerService
+            //services.AddTransient<IRandomCustomerService, RandomCustomerService>();
             services.AddTransient<IRandomCustomerService>(provider =>
             {
                 if (true)

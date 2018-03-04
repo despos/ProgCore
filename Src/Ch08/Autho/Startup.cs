@@ -45,12 +45,12 @@ namespace Ch08.Autho
                     options.ConsumerKey = "5XXqhC026jyD8QwKHRhbNFaWB";
                     options.ConsumerSecret = "1t8YNcjUAciR145zVG6JElVT215zonXXQlPwSiIz4cLXc69juC";
                 })
-                //.AddGoogle(options =>
-                //{
-                //    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                //    options.ClientId = "498793679986-om97un6t1gukkmd62amd3r58qa8499ha.apps.googleusercontent.com";
-                //    options.ClientSecret = "UmA0KTBtGLpJRHd0I6B5LFCH";
-                //})
+                .AddGoogle(options =>
+                {
+                    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.ClientId = "498793679986-om97un6t1gukkmd62amd3r58qa8499ha.apps.googleusercontent.com";
+                    options.ClientSecret = "UmA0KTBtGLpJRHd0I6B5LFCH";
+                })
                 .AddCookie("TEMP"); // required!
         }
 

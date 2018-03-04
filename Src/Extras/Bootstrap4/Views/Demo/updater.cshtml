@@ -1,0 +1,63 @@
+﻿
+@model SignalR1.Models.CustomersViewModel
+
+@section adhoc_Scripts_Top {
+    <script src="~/content/scripts/signalr-client-1.0.0-alpha2-final.min.js"></script>
+}
+
+<h1 class="text-center">
+    UI Updater
+</h1>
+<hr/>
+<div id="msg"></div>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-brand">List of customers</p> 
+        </div>
+        
+        
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-md-6" id="listOfCustomers">
+        @Html.Partial("pv_ListOfCustomers")
+    </div>
+</div>
+
+<script type="text/javascript">
+    function d(id) {
+        var url = "/demo/d/";
+        $.post(url, { id: id })
+         .done(function (response) {
+        });
+    }
+</script>
+
+<script>
+    // SignalR bootstrap
+
+    var updaterConnection;
+    openConnection();
+
+    function openConnection() {
+        $("#msg").html("Preparing...");
+        updaterConnection = new signalR.HubConnection("/updaterDemo");
+        updaterConnection
+            .start()
+            .then(() => {
+                $("#msg").html("Connection established");
+            })
+            .catch(() => {
+                alert("Error while establishing connection");
+            });
+    }
+</script>
+
+<script>
+    updaterConnection.on("refreshUI", () => {
+        $("#listOfCustomers").load("/demo/list");
+    });
+</script>

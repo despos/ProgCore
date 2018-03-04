@@ -48,7 +48,7 @@
         updaterConnection
             .start()
             .then(() => {
-                $("#msg").html("Connection established");
+                $("#msg").html("Connection established: " + updaterConnection.connection.connectionId);
             })
             .catch(() => {
                 alert("Error while establishing connection");

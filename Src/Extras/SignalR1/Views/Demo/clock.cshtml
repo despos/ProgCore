@@ -1,0 +1,45 @@
+﻿
+@model SignalR1.Models.ViewModelBase
+
+@section adhoc_Scripts_Top {
+    <script src="~/content/scripts/signalr-client-1.0.0-alpha2-final.min.js"></script>
+}
+
+<h1 class="text-center">
+    CURRENT TIME
+</h1>
+<hr/>
+<div id="msg"></div>
+
+
+<div>
+    <h1 id="time">HAZ</h1>
+</div>
+
+
+<script>
+    // SignalR bootstrap
+
+    var clockConnection;
+    openConnection();
+
+    function openConnection() {
+        $("#msg").html("Preparing...");
+        clockConnection = new signalR.HubConnection("/clockDemo");
+        clockConnection
+            .start()
+            .then(() => {
+                $("#msg").html("Connection established: " + clockConnection.connection.connectionId);
+                $.get("/clock/tick");
+            })
+            .catch(() => {
+                alert("Error while establishing connection");
+            });
+    }
+</script>
+
+<script>
+    clockConnection.on("tickUI", (currentTime) => {
+        $("#time").html(currentTime);
+    });
+</script>

@@ -20,7 +20,9 @@ namespace SignalR1.Controllers
         private readonly CustomerRepository _repository;
         private readonly IHubContext<UpdaterHub> _updaterHubContext;
 
-        public DemoController(CustomerRepository repository, IHubContext<UpdaterHub> hubContext)
+        public DemoController(
+            CustomerRepository repository, 
+            IHubContext<UpdaterHub> hubContext)
         {
             _repository = repository;
             _updaterHubContext = hubContext;
@@ -30,6 +32,12 @@ namespace SignalR1.Controllers
         {
             var customers = _repository.FindAll();
             var model = new CustomersViewModel(customers) {Title = "UPDATER"};
+            return View(model);
+        }
+
+        public IActionResult Clock()
+        {
+            var model = ViewModelBase.Default("SMART CLOCK");
             return View(model);
         }
 

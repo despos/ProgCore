@@ -1,7 +1,10 @@
 ﻿@using Microsoft.Extensions.Configuration
 <h1>CONFIGURATION TREE</h1>
+@model Ch07.Config.Models.ViewModelBase
 @inject IConfigurationRoot Configuration
 
-
+@{
+    var time = DateTime.Now;
+}
 
 PAGESIZE = @Configuration["GeneralSettings:Paging:PageSize"]

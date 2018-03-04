@@ -1,4 +1,6 @@
-﻿@section adhoc_Scripts_Top {
+﻿
+
+@section adhoc_Scripts_Top {
     <script src="~/content/scripts/signalr-client-1.0.0-alpha2-final.min.js"></script>
 }
 
@@ -62,6 +64,7 @@
             .start()
             .then(() => {
                 progressConnectionId = progressConnection.connection.connectionId;
+                alert(progressConnection.connection.transport.name);
                 $("#connId").html(progressConnectionId);
                 $("#startButton").removeAttr("disabled");
                 $("#dropConnectionButton").removeAttr("disabled");

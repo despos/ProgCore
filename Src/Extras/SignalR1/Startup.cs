@@ -24,6 +24,7 @@ namespace SignalR1
         {
             services.AddMvc();
             services.AddSingleton<CustomerRepository>();
+            services.AddSingleton<ClockService>();
 
             // SignalR
             services.AddSignalR();
@@ -39,6 +40,7 @@ namespace SignalR1
             {
                 routes.MapHub<UpdaterHub>("updaterDemo");
                 routes.MapHub<ProgressHub>("progressDemo");
+                routes.MapHub<ClockHub>("clockDemo");
             });
 
             app.UseMvcWithDefaultRoute();

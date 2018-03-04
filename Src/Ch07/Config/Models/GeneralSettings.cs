@@ -21,6 +21,7 @@ namespace Ch07.Config.Models
 
         public IList<int> CopyrightYears { get; set; }
         public PagingSettings Paging { get; set; }
+        public int Timezone { get; set; }
     }
 
     public class PagingSettings

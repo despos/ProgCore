@@ -52,7 +52,7 @@ namespace SignalR1.Controllers
         public IActionResult DeleteCustomer(int id)
         {
             _repository.Delete(id);
-            _updaterHubContext.Clients.All.InvokeAsync("refreshUI");
+            _updaterHubContext.Clients.All.SendAsync("refreshUI");
             return Ok();
         }
 

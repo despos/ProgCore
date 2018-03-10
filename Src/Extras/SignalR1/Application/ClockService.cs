@@ -24,7 +24,7 @@ namespace SignalR1.Application
         public void Tick()  // Start|Stop
         {
             var time = DateTime.UtcNow.ToString("HH:mm:ss tt zz");
-            _clockHubContext.Clients.All.InvokeAsync("tickUI", time);
+            _clockHubContext.Clients.All.SendAsync("tickUI", time);
         }
     }
 }

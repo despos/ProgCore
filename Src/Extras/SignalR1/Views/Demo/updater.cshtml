@@ -2,22 +2,22 @@
 @model SignalR1.Models.CustomersViewModel
 
 @section adhoc_Scripts_Top {
-    <script src="~/content/scripts/signalr-client-1.0.0-alpha2-final.min.js"></script>
+    <script src="~/content/scripts/signalr.min.js"></script>
 }
 
 <h1 class="text-center">
     UI Updater
 </h1>
-<hr/>
+<hr />
 <div id="msg"></div>
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <p class="navbar-brand">List of customers</p> 
+            <p class="navbar-brand">List of customers</p>
         </div>
-        
-        
+
+
     </div>
 </nav>
 
@@ -31,8 +31,8 @@
     function d(id) {
         var url = "/demo/d/";
         $.post(url, { id: id })
-         .done(function (response) {
-        });
+            .done(function (response) {
+            });
     }
 </script>
 

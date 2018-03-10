@@ -38,9 +38,9 @@ namespace SignalR1
             // SignalR
             app.UseSignalR(routes =>
             {
-                routes.MapHub<UpdaterHub>("updaterDemo");
-                routes.MapHub<ProgressHub>("progressDemo");
-                routes.MapHub<ClockHub>("clockDemo");
+                routes.MapHub<UpdaterHub>("/updaterDemo");
+                routes.MapHub<ProgressHub>("/progressDemo");
+                routes.MapHub<ClockHub>("/clockDemo");
             });
 
             app.UseMvcWithDefaultRoute();

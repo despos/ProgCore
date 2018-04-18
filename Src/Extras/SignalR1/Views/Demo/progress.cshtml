@@ -2,7 +2,7 @@
 
 
 @section adhoc_Scripts_Top {
-    <script src="~/content/scripts/signalr.min.js"></script>
+    <script src="~/content/scripts/signalr.js"></script>
     @*<script src="~/content/scripts/signalr-clientES5-1.0.0-alpha2-final.min.js"></script>*@
 }
 
@@ -17,6 +17,7 @@
             id="dropConnectionButton"
             onclick="dropConnection()">
         Drop connection
+        <span class="badge" id="count">0</span>
     </button>
 </h1>
 <hr/>
@@ -61,12 +62,12 @@
 <script>
     // Helper functions added for test purposes
     function openConnection() {
-        progressConnection = new signalR.HubConnection("progressDemo");
+        progressConnection = new signalR.HubConnection("/progressDemo");
         progressConnection
             .start()
             .then(() => {
                 progressConnectionId = progressConnection.connection.connectionId;
-                alert(progressConnection.connection.transport.name);
+ //               alert(progressConnection.connection.transport.name);
                 $("#connId").html(progressConnectionId);
                 $("#startButton").removeAttr("disabled");
                 $("#dropConnectionButton").removeAttr("disabled");
@@ -99,6 +100,10 @@
     // Automatically establish a connection upon loading. You can decide to do 
     // that also on demand. It's up to you, in the end.
     openConnection();
+
+    progressConnection.on("updateCount", (num) => {
+        $("#count").html(num);
+    });
 
     progressConnection.on("initProgressBar", () => {
         setProgress(0);

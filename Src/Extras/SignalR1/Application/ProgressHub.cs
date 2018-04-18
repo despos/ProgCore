@@ -7,12 +7,31 @@
 //   SignalR - 1
 //
 
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
 namespace SignalR1.Application
 {
     public class ProgressHub : Hub
     {
+        private static int Count = 0;
+        public override Task OnConnectedAsync()
+        {
+            Count++;
+            base.OnConnectedAsync();
+            Clients.All.SendAsync("updateCount", Count);
+            return Task.CompletedTask;
+        }
+
+        public override Task OnDisconnectedAsync(Exception exception)
+        {
+            Count--;
+            base.OnDisconnectedAsync(exception);
+            Clients.All.SendAsync("updateCount", Count);
+            return Task.CompletedTask;
+        }
+
         //public void NotifyStart()
         //{
         //    //var hubContext = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();

@@ -1,5 +1,4 @@
-﻿
-@model SignalR1.Models.ViewModelBase
+﻿@model SignalR1.Models.ViewModelBase
 
 @section adhoc_Scripts_Top {
     <script src="~/content/scripts/signalr.min.js"></script>
@@ -13,14 +12,17 @@
 
 
 <div>
-    <h1 id="time">HAZ</h1>
+    <h1 id="time">???</h1>
+    <button class="btn btn-danger" id="btnStart" style="display:none" onclick="restartClock()">START</button>
+    <button class="btn btn-danger" id="btnStop" style="display:none" onclick="stopClock()">STOP</button>
 </div>
-
 
 <script>
     // SignalR bootstrap
 
     var clockConnection;
+    var subscription;
+    var subject;
     openConnection();
 
     function openConnection() {
@@ -30,16 +32,67 @@
             .start()
             .then(() => {
                 $("#msg").html("Connection established: " + clockConnection.connection.connectionId);
-                $.get("/clock/tick");
+                clockConnection.invoke("start");
             })
             .catch(() => {
                 alert("Error while establishing connection");
             });
     }
+
+    function startClock() {
+        subject = clockConnection.stream("Tick");
+        subscription = subject.subscribe({
+            close: false,
+            next: onClockUpdated,
+            err: function(err){
+                console.log(err);
+            },
+            complete: function(){
+                $("#msg").html("CONNECTION CLOSED");
+            }
+        });
+    }
+
+    function restartClock() {
+        openConnection();
+    }
+
+    function stopClock() {
+        clockConnection.invoke("stop");
+        subscription.unsubscribe();
+        subject.close();
+        //clockConnection.stream("Tick").subscribe({
+        //    close: false,
+        //    next: onClockUpdated,
+        //    err: function (err) {
+        //        console.log(err);
+        //    },
+        //    complete: function () {
+        //        // do something
+        //    }
+        //});
+    }
+
+    function onClockUpdated(currentTime) {
+        $("#time").html(currentTime);
+    }
 </script>
 
 <script>
-    clockConnection.on("tickUI", (currentTime) => {
-        $("#time").html(currentTime);
+    clockConnection.on("clockStarted", () => {
+        $("#btnStop").show();
+        $("#btnStart").hide();
+        startClock();
     });
+
+    clockConnection.on("clockStopped", () => {
+        $("#btnStop").hide();
+        $("#btnStart").show();
+    });
+
+    //clockConnection.on("clockStarted", (currentTime) => {
+    //    $("#time").html(currentTime);
+    //});
 </script>
+
+

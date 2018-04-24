@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch02", "Ch02", "{498367C8-2BC1-4C34-8950-CD43525C2186}"
 EndProject
@@ -113,7 +113,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ch14.Response", "Src\Ch14\R
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extras", "Extras", "{0DC6C867-FBE1-46D1-AF81-CD53EE46AA5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR1", "Src\Extras\SignalR1\SignalR1.csproj", "{869C5A12-1046-4394-9830-5358C0F8B6AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR1", "Src\Extras\SignalR1\SignalR1.csproj", "{869C5A12-1046-4394-9830-5358C0F8B6AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A174F269-D072-4465-88B8-486360084F16}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

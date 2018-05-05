@@ -65,19 +65,11 @@ namespace SignalFriend.Controllers
             _friendHubContext.Clients.User(friend).SendAsync("added", currentUser);
 
             return new EmptyResult();
-            //return PartialView("pv_ListOfFriends",
-            //    BackendService.GetUserModel(User.Identity.Name));
         }
 
         [HttpGet]
         public IActionResult List()
         {
-            //if (string.IsNullOrWhiteSpace(friend))
-            //    return RedirectToAction("index", "friend");
-
-            //var currentUser = User.Identity.Name;
-            //UserRepository.AddFriend(currentUser, friend);
-
             return PartialView("pv_ListOfFriends",
                 BackendService.GetUserModel(User.Identity.Name));
         }

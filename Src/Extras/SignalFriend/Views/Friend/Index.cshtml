@@ -1,11 +1,6 @@
 ﻿@model SignalFriend.Models.IndexViewModel
 
-@section adhoc_Scripts_Top {
-    <script src="~/content/scripts/signalr.min.js"></script>
-}
-
-<h1>YOUR FRIENDS</h1>
-
+<h2>MY FRIENDS</h2>
 
 <form class="form-horizontal" id="add-form" method="post"
       action="@Url.Action("add", "friend")">
@@ -56,12 +51,4 @@
     friendConnection.on("refreshUI", () => {
         $("#friends-container").load("/friend/list");
     });
-
-    //friendConnection.on("addFriend", () => {
-    //    $("#friends-container").css("border", "solid 3px #f00");
-    //    window.setTimeout(function () {
-    //        $("#friends-container").css("border", "");
-    //    },
-    //        2000);
-    //});
 </script>

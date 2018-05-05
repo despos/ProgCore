@@ -17,7 +17,7 @@ namespace SignalFriend.Controllers
         // ACTIONS
         public IActionResult Index()
         {
-            var model = new IndexViewModel("");
+            var model = new IndexViewModel("") {CurrentUser = HttpContext.User.Identity.Name};
             return View(model);
         }
     }

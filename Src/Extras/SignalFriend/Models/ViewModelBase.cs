@@ -16,10 +16,12 @@ namespace SignalFriend.Models
             Title = title;
             ErrorMessage = "";
             StatusCode = 0;
+            CurrentUser = "";
         }
 
         public string Title { get; set; }
         public string ErrorMessage { get; set; }
         public int StatusCode { get; set; }
+        public string CurrentUser { get; set; }
     }
 }

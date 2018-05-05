@@ -7,10 +7,7 @@
 //   SignalR group notifications
 //  
 
-using System.Collections.Generic;
-using System.Linq;
 using SignalFriend.Backend;
-using SignalFriend.Backend.Model;
 using SignalFriend.Models;
 
 namespace SignalFriend.Application
@@ -20,7 +17,11 @@ namespace SignalFriend.Application
         public static IndexViewModel GetUserModel(string currentUser)
         {
             var users = UserRepository.FriendsOf(currentUser);
-            var model = new IndexViewModel("") {Friends = users};
+            var model = new IndexViewModel("")
+            {
+                Friends = users,
+                CurrentUser = currentUser
+            };
             return model;
         }
     }

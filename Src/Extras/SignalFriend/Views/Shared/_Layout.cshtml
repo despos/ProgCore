@@ -2,6 +2,9 @@
 
 <!DOCTYPE html>
 
+@{
+    var heading = Model.CurrentUser.Length > 0 ? Model.CurrentUser : "HOME";
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,8 +16,9 @@
     <script src="~/Content/Scripts/tether.min.js"></script>
     <script src="~/Content/Scripts/bootstrap.min.js"></script>
     <script src="~/Content/Scripts/ybq-core.min.js"></script>
-    @RenderSection("adhoc_Scripts_Top", required: false) 
-    <title>@Model.Title</title>   
+    <script src="~/content/scripts/signalr.min.js"></script>
+    @RenderSection("adhoc_Scripts_Top", required: false)
+    <title>@Model.Title</title>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,7 +31,7 @@
             </button>
             <a href="@Url.Action("index", "home")" class="navbar-brand">
                 <i class="fa fa-home"></i>
-                HOME
+                <span class="text-uppercase">@heading</span>
             </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -75,16 +79,20 @@
 
     friendConnection.on("added", (user) => {
         $("#notifications").html("ADDED by <b>" + user + "</b>");
+        $("#friends-container").load("/friend/list").css("background", "#ffa");;
         window.setTimeout(function() {
                 $("#notifications").html("NOTIFICATIONS");
+                $("#friends-container").css("background", "");
             },
             10000);
     });
 
     friendConnection.on("removed", (user) => {
         $("#notifications").html("REMOVED by <b>" + user + "</b>");
+        $("#friends-container").load("/friend/list").css("background", "#ffa");
         window.setTimeout(function() {
                 $("#notifications").html("NOTIFICATIONS");
+                $("#friends-container").css("background", "");
             },
             10000);
     });

@@ -1,0 +1,42 @@
+﻿@model SignalFriend.Models.IndexViewModel
+
+<table class="table table-responsive" id="list-of-friends-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>From</th>
+        <th>Age</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var f in Model.Friends)
+    {
+        <tr>
+            <td>@f.UserName</td>
+            <td>@f.City</td>
+            <td>@f.Age</td>
+            <td>
+                <button data-id="@f.UserName" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $("#list-of-friends-table button").click(function() {
+        var id = $(this).data("id");
+        Ybq.post("/friend/remove",
+            {id: id},
+            function(data) {
+                //$("#friends-container").html(data);
+
+                // These changes are better performed via SignalR 
+                // to ensure they're reflected through all connections 
+                // the user may possibly have
+            });
+    });
+</script>

@@ -1,0 +1,105 @@
+﻿@model SignalFriend.Models.ViewModelBase
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/Content/Styles/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/Styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Styles/Site/site.css" />
+    <script src="~/Content/Scripts/jquery.min.js"></script>
+    <script src="~/Content/Scripts/tether.min.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Scripts/ybq-core.min.js"></script>
+    @RenderSection("adhoc_Scripts_Top", required: false) 
+    <title>@Model.Title</title>   
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("index", "home")" class="navbar-brand">
+                <i class="fa fa-home"></i>
+                HOME
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <span class="text-info">@User.Identity.Name</span>
+                            @*<span class="text-info">@(User.IsInRole("Admin") ?" -ADMIN" :"")</span>*@
+                        <div>
+                            <a href="@Url.Action("logout", "account")">LOGOUT</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("login", "account")">LOGIN</a>    
+                    }
+                </li>
+                <li>
+                    <span class="text-muted" id="msg"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+<script>
+    // SignalR bootstrap
+
+    var friendConnection;
+    openConnection();
+
+    function openConnection() {
+        $("#msg").html("Preparing...");
+        friendConnection = new signalR.HubConnection("/friendDemo");
+        friendConnection
+            .start()
+            .then(() => {
+                $("#msg").html("Connection established: " + friendConnection.connection.connectionId);
+            })
+            .catch(() => {
+                alert("Error while establishing connection");
+            });
+    }
+
+    friendConnection.on("added", (user) => {
+        $("#notifications").html("ADDED by <b>" + user + "</b>");
+        window.setTimeout(function() {
+                $("#notifications").html("NOTIFICATIONS");
+            },
+            10000);
+    });
+
+    friendConnection.on("removed", (user) => {
+        $("#notifications").html("REMOVED by <b>" + user + "</b>");
+        window.setTimeout(function() {
+                $("#notifications").html("NOTIFICATIONS");
+            },
+            10000);
+    });
+</script>
+
+<div class="container">
+    <div class="alert alert-info" id="notifications">NOTIFICATIONS</div>
+    @RenderBody()
+
+    <footer>
+        <p>&copy; 2018 - Dino Esposito</p>
+    </footer>
+</div>
+    
+
+</body>
+</html>
+

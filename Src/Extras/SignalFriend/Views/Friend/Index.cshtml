@@ -1,0 +1,67 @@
+﻿@model SignalFriend.Models.IndexViewModel
+
+@section adhoc_Scripts_Top {
+    <script src="~/content/scripts/signalr.min.js"></script>
+}
+
+<h1>YOUR FRIENDS</h1>
+
+
+<form class="form-horizontal" id="add-form" method="post"
+      action="@Url.Action("add", "friend")">
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="control-label" for="friend">New friend</label><br />
+            <div class="input-group">
+                <input type="text" name="friend" id="friend"
+                       class="form-control" placeholder="Type friend name ...">
+                <span class="input-group-btn">
+                    <button id="add-form-submit-button"
+                            class="btn btn-danger" type="button">
+                        SAVE
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<div id="friends-container">
+    @Html.Partial("pv_ListOfFriends", Model)
+</div>
+
+
+<script type="text/javascript">
+    $("#add-form-submit-button").click(function () {
+        if ($("#friend").val().length > 0) {
+            Ybq.postForm("#add-form",
+                function (data) {
+                    //$("#friends-container").html(data);
+
+                    // These changes are better performed via SignalR 
+                    // to ensure they're reflected through all connections 
+                    // the user may possibly have
+                });
+        } else {
+            Ybq.clearFormAfterTimeout("#large-form");
+        }
+    });
+</script>
+
+
+
+<script>
+    friendConnection.on("refreshUI", () => {
+        $("#friends-container").load("/friend/list");
+    });
+
+    //friendConnection.on("addFriend", () => {
+    //    $("#friends-container").css("border", "solid 3px #f00");
+    //    window.setTimeout(function () {
+    //        $("#friends-container").css("border", "");
+    //    },
+    //        2000);
+    //});
+</script>

@@ -1,0 +1,44 @@
+﻿/*
+    ////////////////////////////////////////////////////////////
+    HTML RESET
+*/
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    padding-top: 120px;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #222;
+    color: #555;
+}
+
+hr {
+    border: solid 1px #555 !important;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none !important;
+}

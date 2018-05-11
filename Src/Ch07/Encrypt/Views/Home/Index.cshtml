@@ -1,0 +1,24 @@
+﻿@model Ch07.Encrypt.Controllers.IndexViewModel
+
+<h2>CUSTOMER</h2>
+<hr/>
+<table>
+    <tr>
+        <td>NAME</td>
+        <td>@Model.TheCustomer.Name</td>
+    </tr>
+    <tr>
+        <td>CITY</td>
+        <td>@Model.TheCustomer.City</td>
+    </tr>
+    <tr>
+        <td>COUNTRY</td>
+        <td>@Model.TheCustomer.Country</td>
+    </tr>
+    <tr>
+        <td>TIMESTAMP</td>
+        <td>@Model.TheCustomer.LastUpdate</td>
+    </tr>
+</table>
+<hr />
+<a href="home/save">UPDATE</a>

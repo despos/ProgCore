@@ -18,5 +18,10 @@ namespace Bs4.Controllers
         {
             return View(ViewModelBase.Default("MEDIA"));
         }
+
+        public IActionResult Modal()
+        {
+            return View(ViewModelBase.Default("MODAL DIALOGS"));
+        }
     }
 }

@@ -1,0 +1,80 @@
+﻿
+<h1 class="mt-5 text-center" id="title">
+    <p style="margin-top: 100px">MODAL dialogs</p>
+</h1>
+
+
+<div class="container">
+    
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" 
+            data-toggle="modal" 
+            data-target="#modalDialog"
+            data-backdrop="static">
+        Open diversion flow
+    </button>
+    <hr />
+    <div data-toggle="modal" data-target="#modalDialog" data-backdrop="false">
+        Touch me to open the modal window
+    </div>
+    <hr />
+    <button type="button" class="btn btn-primary" 
+            id="ytLauncher"
+            data-toggle="modal" 
+            data-target="#ytModal"
+            data-backdrop="static">
+        YouTube modal
+    </button>
+
+    <div class="modal" id="modalDialog" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="bg-success">BEFORE CONTENT</div>
+            <div class="modal-content">
+                <div class="bg-success">BEFORE HEADER</div>
+                <div class="modal-header">
+                    <h5 class="modal-title">What are we doing here</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="bg-success">BEFORE BODY</div>
+                <div class="modal-body">
+                    <p>Content of the modal window</p>
+                </div>
+                <div class="bg-success">BEFORE FOOTER</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Done</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <hr/>
+
+    <div id="ytModal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">All for a block in the chain</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <iframe height="315" width="560" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $('#ytModal').on("show.bs.modal",
+        function(e) {
+            var src = "https://www.youtube.com/embed/uaYfD6_xX30";
+            $("#ytModal iframe").attr("src", src);
+        });    
+</script>

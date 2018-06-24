@@ -7,12 +7,11 @@
 //   Except
 // 
 
-using System.Net;
 using Ch07.Except.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ch07.Except.Controllers
+namespace HandleError.Controllers
 {
     public class AppController : Controller
     {

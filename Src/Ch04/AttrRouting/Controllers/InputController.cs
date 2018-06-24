@@ -19,11 +19,11 @@ namespace Ch04.AttrRouting.Controllers
             return Ok(data);
         }
 
-        public IActionResult Go()
+        public IActionResult Go([FromQuery]string city, int days)
         {
             // Capture data in a manual way from the URL template
-            var city = RouteData.Values["city"];
-            var days = RouteData.Values["days"];
+            //var city = RouteData.Values["city"];
+            //var days = RouteData.Values["days"];
             return Ok(string.Format("In {0} for {1} days", city, days));
         }
     }

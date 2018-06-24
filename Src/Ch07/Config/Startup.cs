@@ -53,7 +53,6 @@ namespace Ch07.Config
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddOptions();
 
             // Place your logic here to decide how to resolve ICustomerService
             //services.AddTransient<IRandomCustomerService, RandomCustomerService>();
@@ -64,7 +63,9 @@ namespace Ch07.Config
             });
 
             services.AddSingleton(Configuration);
-            services.Configure<GeneralSettings>(Configuration.GetSection("GeneralSettings"));
+
+            services.AddOptions();
+            services.Configure<GeneralSettings>(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

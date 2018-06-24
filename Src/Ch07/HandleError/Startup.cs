@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Ch07.Except
+namespace HandleError
 {
     public class Startup
     {
@@ -21,8 +21,8 @@ namespace Ch07.Except
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, 
-            IHostingEnvironment env, 
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
             ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())

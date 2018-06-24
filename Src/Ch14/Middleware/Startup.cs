@@ -64,7 +64,7 @@ namespace Ch14.Middleware
             });
 
             // MOBILE
-            // app.UseMiddleware<MobileDetectionMiddleware>();
+            //app.UseMiddleware<MobileDetectionMiddleware>();
             app.UseMobileDetection();
 
             app.Run(async (context) =>

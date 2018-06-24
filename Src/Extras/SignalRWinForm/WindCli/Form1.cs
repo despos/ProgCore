@@ -17,8 +17,7 @@ namespace WindCli
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            var test = Booking.Factory.New(1, 1, new DateTime(2018, 1, 1), DateTime.Now);
-           
+          
 
             _connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:60000/progressdemo")

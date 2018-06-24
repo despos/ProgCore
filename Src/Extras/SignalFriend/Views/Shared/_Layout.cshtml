@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 @{
-    var heading = Model.CurrentUser.Length > 0 ? Model.CurrentUser : "HOME";
+    var heading = Model.CurrentUser != null && Model.CurrentUser.Length >0 ? Model.CurrentUser : "HOME";
 }
 <html>
 <head>

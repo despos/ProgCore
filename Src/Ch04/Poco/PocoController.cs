@@ -43,9 +43,14 @@ namespace Ch04.Poco
         public IActionResult Index(
             [FromServices] IModelMetadataProvider provider)
         {
-            var viewdata = new ViewDataDictionary<MyClass>(provider, new ModelStateDictionary());
+            var viewdata = new ViewDataDictionary<MyClass>(
+                provider, new ModelStateDictionary());
             viewdata.Model = new MyClass() { Title = "Hi there!" };
-            return new ViewResult() { ViewData = viewdata, ViewName = "index" };
+            return new ViewResult()
+            {
+                ViewData = viewdata,
+                ViewName = "index"
+            };
         }
 
         public IActionResult Simple()

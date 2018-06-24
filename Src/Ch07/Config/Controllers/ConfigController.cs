@@ -17,11 +17,11 @@ namespace Ch07.Config.Controllers
     {
         private readonly GeneralSettings _settings;
 
-        public ConfigController(IOptionsSnapshot<GeneralSettings> settings)
+        public ConfigController(IOptions<GeneralSettings> settings)
         {
             _settings = settings.Value;
         }
-        public IActionResult Index()
+        public IActionResult Index(int n)
         {
             ViewData["PageSize"] = _settings.Paging.PageSize;
             return View();

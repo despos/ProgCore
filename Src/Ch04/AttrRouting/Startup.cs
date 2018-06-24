@@ -18,8 +18,8 @@ namespace Ch04.AttrRouting
         public void ConfigureServices(IServiceCollection services)
         {
             var builder = services.AddMvcCore();
-            builder.AddViews();
-            builder.AddRazorViewEngine();
+            //builder.AddViews();
+            //builder.AddRazorViewEngine();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

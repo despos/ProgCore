@@ -32,6 +32,12 @@ namespace SignalR1.Application
             return Task.CompletedTask;
         }
 
+        //public void Lengthy()
+        //{
+        //    // logic
+        //    Clients.Client(Context.ConnectionId).SendAsync("initProgressBar");
+        //}
+
         //public void NotifyStart()
         //{
         //    //var hubContext = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();

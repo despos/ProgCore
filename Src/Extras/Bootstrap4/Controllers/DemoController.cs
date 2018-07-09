@@ -23,5 +23,10 @@ namespace Bs4.Controllers
         {
             return View(ViewModelBase.Default("MODAL DIALOGS"));
         }
+
+        public IActionResult Card()
+        {
+            return View(ViewModelBase.Default("CARDS"));
+        }
     }
 }

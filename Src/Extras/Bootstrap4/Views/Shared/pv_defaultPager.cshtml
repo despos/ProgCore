@@ -1,0 +1,40 @@
+﻿@model Bs4.Common.SegmentedListPager<Bs4.Backend.Country>
+
+
+
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link bg-warning" onclick="@(Model.ActionRef)(1)">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
+    </li>
+    @if (Model.Page.HasPreviousPage)
+    {
+        <li class="page-item">
+            <a class="page-link" onclick="@(Model.ActionRef)(@Model.Page.IndexOfPreviousPageOfLinks)">
+                <i class="fa fa-chevron-left"></i>
+            </a>
+        </li>
+    }
+    @for (var i = Model.Page.FirstIndex; i <= Model.Page.LastIndex; i++)
+    {
+        var active = (i == Model.Page.CurrentIndex ? "active" : "");
+        <li class="page-item @active">
+            <a class="page-link" onclick="@(Model.ActionRef)(@i)">@i</a>
+        </li>
+    }
+    @if (Model.Page.HasNextPage)
+    {
+        <li class="page-item">
+            <a class="page-link" onclick="@(Model.ActionRef)(@Model.Page.IndexOfNextPageOfLinks)">
+                <i class="fa fa-chevron-right"></i>
+            </a>
+        </li>
+    }
+    <li class="page-item">
+        <a class="page-link bg-warning" onclick="@(Model.ActionRef)(@Model.Page.PageCount)">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+    </li>
+</ul>
+ 

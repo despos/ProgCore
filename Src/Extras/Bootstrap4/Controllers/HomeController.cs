@@ -9,9 +9,8 @@
 
 using Bs4.Models;
 using Microsoft.AspNetCore.Mvc;
-using SignalR1.Models;
 
-namespace SignalR1.Controllers
+namespace Bs4.Controllers
 {
     public class HomeController : Controller
     {

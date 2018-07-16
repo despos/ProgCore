@@ -7,6 +7,7 @@
 //   BS4
 //
 
+using Bs4.Backend;
 using Bs4.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,11 @@ namespace Bs4.Controllers
         public IActionResult Card()
         {
             return View(ViewModelBase.Default("CARDS"));
+        }
+
+        public IActionResult DataTable()
+        {
+            return View(ViewModelBase.Default("TABLE"));
         }
     }
 }

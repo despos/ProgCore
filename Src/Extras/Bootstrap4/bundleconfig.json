@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/Content/styles/datatables.bootstrap4.min.css",
+    "inputFiles": [
+      "wwwroot/Content/styles/datatables.bootstrap4.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/styles/datatables.min.css",
+    "inputFiles": [
+      "wwwroot/Content/styles/datatables.css"
+    ]
+  }
+]

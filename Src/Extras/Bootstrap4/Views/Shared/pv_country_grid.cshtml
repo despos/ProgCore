@@ -1,0 +1,68 @@
+﻿@using Bs4.Common
+@using Bs4.Backend
+@model SegmentedList<Country>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <p class="badge badge-danger">
+            @Model.Total countries
+        </p>
+        <img id="loader" class="pull-right" style="display:none"
+             src="@Url.Content("~/content/images/loading.gif")" />
+
+
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th width="40%">Name</th>
+                <th width="30%">Capital</th>
+                <th>Continent</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var country in Model.Items)
+            {
+                <tr data-id="@country.CountryCode">
+                    <td>@country.CountryName</td>
+                    <td>@country.Capital</td>
+                    <td data-noselect="true">
+                        <div class="dropdown">
+                            <button type="button"
+                                    class="btn btn-info dropdown-toggle"
+                                    style="width: 180px"
+                                    data-toggle="dropdown">
+                                @country.ContinentName
+                                <i class="fa fa-chevron-down pull-right"></i>
+                            </button>
+                            <div class="dropdown-menu"
+                                 style="padding: 10px; border: solid 3px rgb(38, 154, 188); margin-top: -1px; border-radius: 0; width: 100%;">
+                                @country.AreaFormatted() kmq <hr/>
+                                @country.CurrencyCode <hr/>
+                                @country.PopulationFormatted() people
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+            @for (var i = 0; i < Model.FillerRows; i++)
+            {
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+            }
+            </tbody>
+            <tfoot>
+            <tr>
+                <th width="40%">Name</th>
+                <th width="30%">Capital</th>
+                <th>Continent</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>    
+</div>
+
+<div class="row justify-content-center">
+      @Html.Partial("pv_defaultPager", new SegmentedListPager<Country>(Model, "_page"))
+</div>

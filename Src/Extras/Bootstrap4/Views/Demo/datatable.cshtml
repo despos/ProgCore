@@ -1,0 +1,108 @@
+﻿
+@model Bs4.Models.ViewModelBase
+
+@section adhoc_Css {
+    
+}
+
+@section adhoc_Scripts_Top {
+    
+}
+
+<h1 class="mt-5 text-center" id="title">
+    <p style="margin-top: 100px">PAGING</p>
+</h1>
+
+
+
+<div class="container">
+    <div id="list-of-countries">
+        <!-- dynamically populated upon page loading -->
+    </div>
+
+</div>
+
+<div style="margin-bottom: 30px"></div>
+
+
+<script>
+    var PaginatorSettings = function () {
+        var that = {};
+        that.pagingUrl = '';
+        that.pageIndex = 1;
+        that.gridSelector = '';
+        that.loaderSelector = '';
+        that.updateHash = false;
+        that.useAjaxCache = false;
+        that.localStorageId = '';
+        that.gridInitializer = function () { };
+        return that;
+    }
+
+    var PaginatorContainer = function (options) {
+        var settings = new PaginatorSettings();
+        jQuery.extend(settings, options);
+        // Initializer
+        this.go = function (index) {
+            if (typeof index === "undefined") {
+                var lastIndexInLocalStorage = window.localStorage[settings.localStorageId];
+                if (typeof lastIndexInLocalStorage === "undefined") {
+                    index = 1;
+                } else {
+                    index = parseInt(lastIndexInLocalStorage);
+                }
+            }  
+
+            // Turn on the loader GIF
+            $(settings.loaderSelector).show();
+
+            // Prepare the URL to get the HTML for the current page
+            // Assumes p=? 
+            var actualUrl = settings.pagingUrl + "?p=" + index;
+            $.ajax({ url: actualUrl, cache: settings.useAjaxCache })
+                .done(function (response) {
+                    // Turn off the loader GIF
+                    $(settings.loaderSelector).hide();
+                    // Change the current window hash
+                    if (settings.updateHash)
+                        window.location.hash = index;
+                    // Save current page to local-storage 
+                    if (settings.localStorageId.length > 0)
+                        window.localStorage[settings.localStorageId] = index;
+                    // Refresh the view
+                    $(settings.gridSelector).html(response);
+                    // Initialize the grid
+                    settings.gridInitializer();
+                });
+        }
+    };
+</script>
+
+<script>
+    function setup() {
+        $(".table-hover").css("cursor", "pointer");
+        $(".table-hover td").click(function () {
+            var isClickable = $(this).data("noselect");
+            if (isClickable === true)
+                return;
+            var id = $(this).parent().data("id");
+            //alert("Selected country is: " + id);
+            window.location.href = "http://www.google.com";
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function _page(index) {     
+        new PaginatorContainer({
+            pagingUrl: "/country/list",
+            gridSelector: '#list-of-countries',
+            loaderSelector: '#loader',
+            localStorageId: 'list-of-countries',
+            updateHash: true,
+            gridInitializer: setup
+        }).go(index);
+    }
+
+    _page();    // last used or first
+</script>

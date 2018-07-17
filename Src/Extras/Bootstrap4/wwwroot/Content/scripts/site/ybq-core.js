@@ -61,6 +61,10 @@ Ybq.configureCommonElements = function () {
         $(this).attr("onkeyup",
             "Ybq.clickOnEnter(event, '" + $(this).data("click-on-enter") + "')");
     });
+    $("ul.nav-tabs li a").click(function () {
+        var ul = $(this).parents("ul.nav-tabs").attr("id");
+        window.sessionStorage[ul] = $(this).attr("href");
+    });
 
     // INPUT TYPE=FILE
     $("div.ybq-file-container").each(function () {
@@ -348,6 +352,15 @@ Ybq.Internal.tabErrorOn = function(formSelector, name, status) {
     }
 }
 
+/// <summary>
+/// Restores last clicked tab once back. Works along with some script in "configureCommonElements"
+/// </summary>
+Ybq.restoreTab = function (tabId) {
+    var href = window.sessionStorage[tabId];
+    if (typeof href === "undefined")
+        return;
+    $("#" + tabId + " a[href='" + href + "']").click();
+};
 
 
 // **************************************************************************************************//

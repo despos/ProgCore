@@ -1,4 +1,4 @@
-﻿@model Bs4.Common.SegmentedListPager<Bs4.Backend.Country>
+﻿@model Bs4.Common.SlicedListHelper
 
 @{
     var bkgnd = Model.Page.HasFilter ? "bg-danger text-light" : "bg-secondary text-light";
@@ -6,10 +6,9 @@
 
 <div class="input-group">
     <div class="input-group-prepend ">
-        <span class="input-group-text @bkgnd">
-            
+        <span class="input-group-text @bkgnd">     
             <div class="dropdown">
-                <button class="btn btn-sm btn-secondary" type="button" data-toggle="dropdown">
+                <button class="btn btn-sm @bkgnd" type="button" data-toggle="dropdown">
                     FILTER BY
                 </button>
                 <div class="dropdown-menu p-4 bg-warning">
@@ -17,17 +16,15 @@
                     Use commas to <b>OR</b>R  search strings
                 </div>
             </div>
-        </span>
-        
+        </span>        
     </div>
 
-    <input type="text" id="filter-text"
-           class="form-control font-weight-bold"
+    <input type="text" class="form-control font-weight-bold"
            value="@Model.Page.CurrentFilter">
 
     <div class="input-group-prepend">
         <button type="button" class="btn btn-dark"
-                onclick="@(Model.ActionRef)(1, $('#filter-text').val())">
+                onclick="@(Model.ActionRef)(1, __findFilter(this))">
             <i class="fa fa-filter"></i>
         </button>
         @if (Model.Page.HasFilter)
@@ -40,3 +37,9 @@
     </div>
 </div>
 
+<script>
+    function __findFilter(el) {
+        var input = $(el).parents('div.input-group').find('input.form-control');
+        return input.val();
+    }
+</script>

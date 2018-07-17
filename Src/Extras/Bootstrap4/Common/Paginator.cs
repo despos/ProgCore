@@ -46,7 +46,8 @@ namespace Bs4.Common
                 CurrentFilter,
                 pageIndex,
                 PageSize,
-                actualData.Count);
+                actualData.Count,
+                MaxPageLinks);
         }
 
         /// <summary>
@@ -93,13 +94,14 @@ namespace Bs4.Common
 
                 // A comma indicates OR and gets priority
                 HasFilter = true;
+                var localCurrentFilter = CurrentFilter.ToLower();
                 if (CurrentFilter.Contains(","))
-                    FilterTokens = CurrentFilter.Split(',');
+                    FilterTokens = localCurrentFilter.Split(',');
                 else
                 {
                     // Splits on spaces considering quoted strings with spaces as items
                     var regex = new Regex(@"((""((?<token>.*?)(?<!\\)"")|(?<token>[\w]+))(\s)*)", RegexOptions.None);
-                    FilterTokens = (from Match m in regex.Matches(CurrentFilter)
+                    FilterTokens = (from Match m in regex.Matches(localCurrentFilter)
                         where m.Groups["token"].Success
                         select m.Groups["token"].Value).ToArray();
 
@@ -119,15 +121,30 @@ namespace Bs4.Common
     #region INTERNALS
     public class SlicedList<T>  
     {
-        public SlicedList(IList<T> list, string filter, int index, int size, int total, int links = 5)
+        public SlicedList(IList<T> list, string filter, int index, int size, int total, int links)
         {
             Items = list;
+            Properties = new SlicedListParams(filter, index, size, total, links, size-list.Count);
+        }
+
+        /// <summary>
+        /// Data items in the current segment
+        /// </summary>
+        public IList<T> Items { get; }
+        
+        public SlicedListParams Properties { get; }
+    }
+
+    public class SlicedListParams
+    {
+        public SlicedListParams(string filter, int index, int size, int total, int links, int fillerRows)
+        {
             CurrentFilter = filter;
             HasFilter = !string.IsNullOrWhiteSpace(CurrentFilter);
 
             Size = size;
             Total = total;
-            PageCount = (int) Math.Ceiling(total / (double)size);
+            PageCount = (int)Math.Ceiling(total / (double)size);
             MaxPageLinks = links;
             CurrentIndex = index;
             if (CurrentIndex > PageCount)
@@ -148,14 +165,9 @@ namespace Bs4.Common
             if (FirstIndex < 1)
                 FirstIndex = 1;
 
-            FillerRows = Size - list.Count;
+            FillerRows = fillerRows;
         }
 
-        /// <summary>
-        /// Data items in the current segment
-        /// </summary>
-        public IList<T> Items { get; }
-        
         /// <summary>
         /// Index of the current segment displayed
         /// </summary>
@@ -227,15 +239,15 @@ namespace Bs4.Common
         public bool HasFilter { get; }
     }
 
-    public class SegmentedListPager<T>
+    public class SlicedListHelper 
     {
-        public SegmentedListPager(SlicedList<T> items, string action)
+        public SlicedListHelper(SlicedListParams props, string action)
         {
-            Page = items;
+            Page = props;
             ActionRef = action;
         }
 
-        public SlicedList<T> Page { get; }
+        public SlicedListParams Page { get; }
         public string ActionRef { get; }
      }
 

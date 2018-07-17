@@ -441,66 +441,6 @@ var TypeAheadContainer = function (options) {
 // **************************************************************************************************//
 
 
-// **************************************************************************************************//
-
-/// <summary>
-/// WRAPPER for pagination operations
-/// </summary>
-var PaginatorSettings = function () {
-    var that = {};
-    that.pagingUrl = '';
-    that.pageIndex = 1;
-    that.gridSelector = '';
-    that.loaderSelector = '';
-    that.updateHash = false;
-    that.useAjaxCache = false;
-    that.sessionStorageId = '';
-    that.gridInitializer = function () { };
-    return that;
-}
-
-var PaginatorContainer = function (options) {
-    var settings = new PaginatorSettings();
-    jQuery.extend(settings, options);
-    // Initializer
-    this.go = function (index, filter) {
-        if (typeof index === "undefined") {
-            var lastIndexInLocalStorage = window.sessionStorage[settings.sessionStorageId];
-            if (typeof lastIndexInLocalStorage === "undefined") {
-                index = 1;
-            } else {
-                index = parseInt(lastIndexInLocalStorage);
-            }
-        }
-
-        // Turn on the loader GIF
-        $(settings.loaderSelector).show();
-
-        // Prepare the URL to get the HTML for the current page
-        // Assumes p=? 
-        var actualUrl = settings.pagingUrl + "?p=" + index;
-        if (typeof filter !== "undefined") {
-            actualUrl += "&q=" + filter;
-        }
-        $.ajax({ url: actualUrl, cache: settings.useAjaxCache })
-            .done(function (response) {
-                // Turn off the loader GIF
-                $(settings.loaderSelector).hide();
-                // Change the current window hash
-                if (settings.updateHash)
-                    window.location.hash = index;
-                // Save current page to local-storage 
-                if (settings.sessionStorageId.length > 0)
-                    window.sessionStorage[settings.sessionStorageId] = index;
-                // Refresh the view
-                $(settings.gridSelector).html(response);
-                // Initialize the grid
-                settings.gridInitializer();
-            });
-    }
-};
-
-// **************************************************************************************************//
 
 /// <summary>
 /// Ensures all Bootstrap dropdown match size of the screen
@@ -551,3 +491,71 @@ Ybq.printPopup = function (url, target, config) {
     window.open(Ybq.fromServer(url), target, config);
 }
 
+
+// **************************************************************************************************//
+
+/// <summary>
+/// WRAPPER for pagination operations
+/// </summary>
+var PaginatorSettings = function () {
+    var that = {};
+    that.pagingUrl = "";
+    that.pageIndex = 1;
+    that.gridSelector = "";
+    that.loaderSelector = "";
+    that.updateHash = false;
+    that.useAjaxCache = false;
+    that.sessionStorageId = "";
+    that.gridInitializer = function () { };
+    return that;
+}
+
+var PaginatorContainer = function (options) {
+    var settings = new PaginatorSettings();
+    jQuery.extend(settings, options);
+    // Initializer
+    this.go = function (index, filter) {
+        if (typeof index === "undefined") {
+            var lastIndexInLocalStorage = window.sessionStorage[settings.sessionStorageId];
+            if (typeof lastIndexInLocalStorage === "undefined") {
+                index = 1;
+            } else {
+                index = parseInt(lastIndexInLocalStorage);
+            }
+        }
+        if (typeof filter === "undefined") {
+            var lastFilterInLocalStorage = window.sessionStorage[settings.sessionStorageId + "-filter"];
+            if (typeof lastFilterInLocalStorage === "undefined") {
+                filter = "";
+            } else {
+                filter = lastFilterInLocalStorage;
+            }
+        }
+
+        // Turn on the loader GIF
+        $(settings.loaderSelector).show();
+
+        // Prepare the URL to get the HTML for the current page
+        // Assumes p=?&q=? 
+        var actualUrl = settings.pagingUrl + "?p=" + index + "&q=" + filter;
+        $.ajax({ url: actualUrl, cache: settings.useAjaxCache })
+            .done(function (response) {
+                // Turn off the loader GIF
+                $(settings.loaderSelector).hide();
+                // Change the current window hash
+                if (settings.updateHash)
+                    window.location.hash = index;
+                // Save current page to local-storage 
+                if (settings.sessionStorageId.length > 0) {
+                    window.sessionStorage[settings.sessionStorageId] = index;
+                    window.sessionStorage[settings.sessionStorageId + "-filter"] = filter;
+                }
+                // Refresh the view
+                $(settings.gridSelector).html(response);
+                // Initialize the grid
+                settings.gridInitializer();
+            });
+    }
+};
+
+// **************************************************************************************************//

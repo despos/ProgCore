@@ -1,6 +1,6 @@
 ﻿@using Bs4.Common
 @using Bs4.Backend
-@model SegmentedList<Country>
+@model SlicedList<Country>
 
 
 <div class="row">
@@ -12,8 +12,14 @@
              src="@Url.Content("~/content/images/loading.gif")" />
 
 
-        <table class="table table-condensed table-hover">
+        <table class="table table-condensed table-hover border">
             <thead>
+
+            <tr style="background: #ddd">
+                <th colspan="3">
+                    @Html.Partial("pv_defaultFilter", new SegmentedListPager<Country>(Model, "_page"))
+                </th>
+            </tr>
             <tr>
                 <th width="40%">Name</th>
                 <th width="30%">Capital</th>
@@ -53,16 +59,15 @@
             }
             </tbody>
             <tfoot>
-            <tr>
-                <th width="40%">Name</th>
-                <th width="30%">Capital</th>
-                <th>Continent</th>
+            <tr >
+                <th colspan="3">
+                    <div class="row justify-content-center">
+                        @Html.Partial("pv_defaultPager", new SegmentedListPager<Country>(Model, "_page"))
+                    </div>
+                </th>
             </tr>
             </tfoot>
         </table>
     </div>    
 </div>
-
-<div class="row justify-content-center">
-      @Html.Partial("pv_defaultPager", new SegmentedListPager<Country>(Model, "_page"))
-</div>
+ 

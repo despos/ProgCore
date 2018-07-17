@@ -1,0 +1,42 @@
+﻿@model Bs4.Common.SegmentedListPager<Bs4.Backend.Country>
+
+@{
+    var bkgnd = Model.Page.HasFilter ? "bg-danger text-light" : "bg-secondary text-light";
+}
+
+<div class="input-group">
+    <div class="input-group-prepend ">
+        <span class="input-group-text @bkgnd">
+            
+            <div class="dropdown">
+                <button class="btn btn-sm btn-secondary" type="button" data-toggle="dropdown">
+                    FILTER BY
+                </button>
+                <div class="dropdown-menu p-4 bg-warning">
+                    Use spaces to <b>AND</b> search strings<br/>
+                    Use commas to <b>OR</b>R  search strings
+                </div>
+            </div>
+        </span>
+        
+    </div>
+
+    <input type="text" id="filter-text"
+           class="form-control font-weight-bold"
+           value="@Model.Page.CurrentFilter">
+
+    <div class="input-group-prepend">
+        <button type="button" class="btn btn-dark"
+                onclick="@(Model.ActionRef)(1, $('#filter-text').val())">
+            <i class="fa fa-filter"></i>
+        </button>
+        @if (Model.Page.HasFilter)
+        {
+            <button type="button" class="btn btn-danger"
+                    onclick="@(Model.ActionRef)(1, '')">
+                <i class="fa fa-close"></i>
+            </button>
+        }
+    </div>
+</div>
+

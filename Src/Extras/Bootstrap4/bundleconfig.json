@@ -10,5 +10,11 @@
     "inputFiles": [
       "wwwroot/Content/styles/datatables.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/scripts/site/ybq-core.min.js",
+    "inputFiles": [
+      "wwwroot/Content/scripts/site/ybq-core.js"
+    ]
   }
 ]

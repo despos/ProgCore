@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.0.0" />
+    <PackageReference Include="Expoware.Youbiquitous.Core" Version="1.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
   </ItemGroup>
 
@@ -22,6 +23,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Demo\card.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\pv_defaultFilter.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

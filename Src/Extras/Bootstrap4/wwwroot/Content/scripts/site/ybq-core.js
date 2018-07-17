@@ -1,9 +1,10 @@
 ﻿///////////////////////////////////////////////////////////////////
 //
 // Youbiquitous YBQ : app starter 
-// Copyright (c) Youbiquitous srls 2017
+// Copyright (c) Youbiquitous srls 2018
 //
 // Author: Dino Esposito (http://youbiquitous.net)
+// LAST UPDATE: July 2018
 //
 
 String.prototype.capitalize = function () {
@@ -439,8 +440,71 @@ var TypeAheadContainer = function (options) {
 
 // **************************************************************************************************//
 
+
+// **************************************************************************************************//
+
+/// <summary>
+/// WRAPPER for pagination operations
+/// </summary>
+var PaginatorSettings = function () {
+    var that = {};
+    that.pagingUrl = '';
+    that.pageIndex = 1;
+    that.gridSelector = '';
+    that.loaderSelector = '';
+    that.updateHash = false;
+    that.useAjaxCache = false;
+    that.sessionStorageId = '';
+    that.gridInitializer = function () { };
+    return that;
+}
+
+var PaginatorContainer = function (options) {
+    var settings = new PaginatorSettings();
+    jQuery.extend(settings, options);
+    // Initializer
+    this.go = function (index, filter) {
+        if (typeof index === "undefined") {
+            var lastIndexInLocalStorage = window.sessionStorage[settings.sessionStorageId];
+            if (typeof lastIndexInLocalStorage === "undefined") {
+                index = 1;
+            } else {
+                index = parseInt(lastIndexInLocalStorage);
+            }
+        }
+
+        // Turn on the loader GIF
+        $(settings.loaderSelector).show();
+
+        // Prepare the URL to get the HTML for the current page
+        // Assumes p=? 
+        var actualUrl = settings.pagingUrl + "?p=" + index;
+        if (typeof filter !== "undefined") {
+            actualUrl += "&q=" + filter;
+        }
+        $.ajax({ url: actualUrl, cache: settings.useAjaxCache })
+            .done(function (response) {
+                // Turn off the loader GIF
+                $(settings.loaderSelector).hide();
+                // Change the current window hash
+                if (settings.updateHash)
+                    window.location.hash = index;
+                // Save current page to local-storage 
+                if (settings.sessionStorageId.length > 0)
+                    window.sessionStorage[settings.sessionStorageId] = index;
+                // Refresh the view
+                $(settings.gridSelector).html(response);
+                // Initialize the grid
+                settings.gridInitializer();
+            });
+    }
+};
+
+// **************************************************************************************************//
+
 /// <summary>
 /// Ensures all Bootstrap dropdown match size of the screen
+/// OBSOLETE/UNNECESSARY IN BOOTSTRAP 4
 /// </summary>
 Ybq.fixDropdowns = function () {
     $(document).on("shown.bs.dropdown", ".dropdown", function () {

@@ -17,13 +17,10 @@ namespace Bs4.Controllers
         
 
         public ActionResult List(
-            [Bind(Prefix = "p")] int pageIndex = 1)
+            [Bind(Prefix = "p")] int pageIndex = 1,
+            [Bind(Prefix = "q")] string filter = "")
         {
-            var model = _countryService.GetSegment(pageIndex);
-
-            //var result = new MultipleActionResult(
-            //    PartialView("pv_country_grid", model),
-            //    PartialView("pv_country_grid_pager", model));
+            var model = _countryService.GetSliceOf(pageIndex, filter);
             var result = PartialView("pv_country_grid", model);
             return result;
         }

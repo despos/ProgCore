@@ -8,10 +8,11 @@
 //
 
 
+using System.Collections.Generic;
 using System.Linq;
-using CountryFinder05.Server.Backend.Model;
 using CountryFinder05.Server.Backend.Persistence;
 using CountryFinder05.Server.Common;
+using CountryFinder05.Shared.Model;
 
 namespace CountryFinder05.Server.Application
 {
@@ -25,6 +26,21 @@ namespace CountryFinder05.Server.Application
             country.Population = country.Population.ToIntFormat();
             country.AreaInSqKm = country.AreaInSqKm.ToIntFormat();
             return country;
+        }
+
+        public IList<Country> GetCountryListViewModel(string filter = "")
+        {
+            var all = new CountryRepository().All();
+            var list = (from country in all
+                let match = string.Format("{0} {1} {2} {3}",
+                        country.CountryCode,
+                        country.CountryName,
+                        country.ContinentName,
+                        country.CurrencyCode)
+                    .ToLower()
+                where match.Contains(filter.ToLower())
+                select country);
+            return list.ToList();
         }
 
         //public Country GetCountryViewModelForEdit(string code)

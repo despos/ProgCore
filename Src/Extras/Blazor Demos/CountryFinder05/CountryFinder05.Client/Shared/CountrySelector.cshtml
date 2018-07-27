@@ -1,6 +1,7 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@using CountryFinder05.Shared.Model
 @using Microsoft.AspNetCore.Blazor.Components
 @using Microsoft.JSInterop
+@inject HttpClient HttpExecutor
 
 <style>
     .country-selector label {
@@ -8,37 +9,30 @@
     }
 </style>
 
+@inject HttpClient MyHttp
+
 <div class="country-selector">
     <div class="form-group">
         <label for="@InputId()">@Label</label>
-        <div class="input-group input-group-lg">
-            <input type="text" class="form-control" id="@InputId()" bind="@SelectedCountry"
-                   placeholder="@Placeholder" />
-            <input type="text" id="@BuddyId()" onchange="@figa" bind="@Selected" />
-            <div class="input-group-prepend">
-                <button class="btn btn-lg btn-secondary" type="button" onclick="@GetCountryInfo">
+        <div class="row">
+            <div class="col-lg-10">
+                <input type="text" id="@InputId()" class="form-control" 
+                       bind="@SelectedCountry" 
+                       placeholder="@Placeholder" />
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-secondary" type="button" onclick="@GetCountryInfo">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
         </div>
-
-        <small class="form-text text-muted">@Tip</small>
+        <div class="text-muted">@Tip</div>
     </div>
 </div>
 
 @functions
 {
-    private string _selected = "figa";
-    public string Selected
-    {
-        get { return _selected; }
-        set
-        {
-            _selected = value; StateHasChanged();
-        }
-    }
-
-    public string SelectedCountry;
+    private string SelectedCountry;
 
     [Parameter]
     string UniqueId { get; set; } = "country-selector";
@@ -55,33 +49,31 @@
     [Parameter]
     string Placeholder { get; set; } = "Country";
 
+    [Parameter]
+    Action<IList<Country>> OnSelectionMade { get; set; }
+
+
     string InputId()
     {
         return $"{UniqueId}-name";
     }
 
-    string BuddyId()
+    //string BuddyId()
+    //{
+    //    return $"{UniqueId}-id";
+    //}
+
+    async void GetCountryInfo()
     {
-        return $"{UniqueId}-id";
+        var filter = SelectedCountry;
+        var countries = await HttpExecutor.GetJsonAsync<IList<Country>>("/country/search/" + filter);
+
+        OnSelectionMade?.Invoke(countries);
     }
 
-    void GetCountryInfo()
-    {
-        JSRuntime.Current.InvokeAsync<Task>("Ybq.alert", Selected);
-        JSRuntime.Current.InvokeAsync<Task>("Ybq.alert", SelectedCountry);
-
-        JSRuntime.Current.InvokeAsync<Task>("Ybq.val", $"#{BuddyId()}");
-    }
 
     protected override void OnInit()
     {
-        JSRuntime.Current.InvokeAsync<Task>("Ybq.typeAhead", $"#{InputId()}", $"#{BuddyId()}", TypeAheadUrl);
+       JSRuntime.Current.InvokeAsync<Task>("Ybq.typeAhead", $"#{InputId()}", "not-used-here", TypeAheadUrl);
     }
-
-    void figa(UIEventArgs eventArgs)
-    {
-        JSRuntime.Current.InvokeAsync<Task>("Ybq.alert", "Porocoddio");
-        StateHasChanged();
-    }
-
 }

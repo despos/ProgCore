@@ -16,20 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CountryFinder05.Server.Controllers
 {
     public class HintController : Controller
-    {
-        //public JsonResult Countries1(string filter = "")
-        //{
-        //    var repository = new CountryRepository();
-        //    var list = (from country in repository.AllBy(filter)
-        //                select new AutoCompleteItem()
-        //                {
-        //                    id = country.CountryCode,
-        //                    value = country.CountryName
-        //                }).ToList();
-
-        //    return Json(list);
-        //}
-        
+    {       
         public JsonResult Countries(string filter = "")
         {
             var all = new CountryRepository().All();
@@ -39,7 +26,7 @@ namespace CountryFinder05.Server.Controllers
                     country.CountryName, 
                     country.ContinentName, 
                     country.CurrencyCode).ToLower()
-                where match.Contains(filter)
+                where match.Contains(filter.ToLower())
                 select new AutoCompleteItem()
                 {
                     id = country.CountryCode,

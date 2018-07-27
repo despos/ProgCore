@@ -9,7 +9,7 @@
 
 using System.ComponentModel;
 
-namespace CountryFinder05.Server.Backend.Model
+namespace CountryFinder05.Shared.Model
 {
     public enum Continent
     {

@@ -39,9 +39,6 @@ var TypeAheadContainer = function (options) {
     $(settings.targetSelector).on('typeahead:selected', function (e, datum) {
         $(settings.targetSelector).attr("data-itemselected", 1);
         $(settings.buddySelector).val(datum.id);
-        $(settings.targetSelector).trigger('selection-made', datum.id);
-        $(settings.targetSelector).trigger('change', datum.id);
-
 
         // Post on selection
         if (settings.postOnSelection) {
@@ -50,7 +47,7 @@ var TypeAheadContainer = function (options) {
     });
     $(settings.targetSelector).on('blur', function () {
         var typeaheadItemSelected = $(settings.targetSelector).attr("data-itemselected");
-        if (typeaheadItemSelected != 1) {
+        if (typeaheadItemSelected !== 1) {
             $(settings.targetSelector).val("");
             $(settings.buddySelector).val("");
         }

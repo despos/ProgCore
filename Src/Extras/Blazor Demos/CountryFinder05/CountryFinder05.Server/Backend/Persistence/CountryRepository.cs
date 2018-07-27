@@ -20,8 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CountryFinder05.Server.Backend.Model;
 using Newtonsoft.Json;
+using CountryFinder05.Shared.Model;
+
+
 
 namespace CountryFinder05.Server.Backend.Persistence
 {
@@ -60,7 +62,7 @@ namespace CountryFinder05.Server.Backend.Persistence
         {
             const string resource = "CountryFinder05.Server.Backend.Persistence.Countries.json";
 
-            var assembly = typeof(Country).Assembly;
+            var assembly = typeof(CountryRepository).Assembly;
             using (var stream = assembly.GetManifestResourceStream(resource))
             {
                 if (stream == null)

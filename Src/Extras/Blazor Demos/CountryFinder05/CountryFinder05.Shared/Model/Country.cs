@@ -7,7 +7,7 @@
 //   Blazor - Country Finder (0.5.0)
 //
 
-namespace CountryFinder05.Server.Backend.Model
+namespace CountryFinder05.Shared.Model
 {
     // Declared STRUCT to avoid memrefs overlapping in LINQ
 

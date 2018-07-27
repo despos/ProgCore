@@ -1,4 +1,5 @@
-﻿@page "/"
+﻿@using CountryFinder05.Shared.Model
+@page "/"
 
 
 <h1>Welcome to COUNTRY-FINDER</h1>
@@ -9,6 +10,50 @@
 <CountrySelector uniqueId="cs"
                  tip="You can also type the continent name"
                  placeholder="Start typing the country name"
-                 typeAheadUrl="/hint/countries" />
+                 typeAheadUrl="/hint/countries"
+                 OnSelectionMade="@DoSomething" />
 
-<div class="mt-5"></div> 
+<span class="badge badge-primary">@Message</span>
+<div class="mt-5"></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Capital</th>
+            <th class="text-right">People</th>
+            <th class="text-right">Area</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var country in Countries)
+        {
+            <tr>
+                <td>
+                    @country.CountryName
+                    <div class="text-info">@country.ContinentName</div>
+                </td>
+                <td>
+                    @country.Capital
+                </td>
+                <td class="text-right">@country.PopulationFormatted()</td>
+                <td class="text-right">@country.AreaFormatted() kmq</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="mt-5"></div>
+
+@functions
+{
+public string Message = "";
+IList<Country> Countries = new List<Country>();
+private void DoSomething(IList<Country> countries)
+{
+    Message = $"{countries.Count} countries found.";
+    Countries = countries;
+    StateHasChanged();
+}
+
+}

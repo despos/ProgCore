@@ -1,0 +1,70 @@
+﻿@using System.Timers
+@page "/digitalclock" 
+
+<div class="clock">
+    <div class="input-group">
+        <span class="@currentCss">@currentTime</span>
+        <div class="input-group-append">
+            <button class="btn btn-primary" 
+                    type="button"
+                    onclick="@startStop">@buttonAction</button>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+@functions {
+
+    string currentTime = "N/A";
+    string buttonAction = "N/A";
+    string currentCss = "clock-notset";
+    Timer timer;
+
+    protected override async Task OnInitAsync()
+    {
+        InitTimer();
+        StartTimer();
+    }
+
+    void startStop()
+    {
+        if (timer.Enabled)
+        {
+            StopTimer();
+        }
+        else
+        {
+            StartTimer();
+        }
+    }
+
+    private Task TimerTick()
+    {
+        currentTime = DateTime.Now.ToLongTimeString();
+        currentCss = "clock-working";
+        this.StateHasChanged();
+
+        return Task.CompletedTask;
+    }
+
+    private void InitTimer()
+    {
+        timer = new Timer(1000);
+        timer.Elapsed += async (sender, e) => await TimerTick();
+        //timer.Enabled = true;
+    }
+
+    private void StartTimer()
+    {
+        buttonAction = "STOP";
+        timer.Start();
+    }
+
+    private void StopTimer()
+    {
+        buttonAction = "START";
+        timer.Stop();
+    }
+}

@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+
+<style>
+    .country-selector label {
+        font-weight: bold;
+    }
+     
+</style>
+
+<div class="country-selector">
+    <div class="form-group">
+        <label for="countryselector-name">@Label</label>
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" id="countryselector-name"
+                   placeholder="@Placeholder">
+            <div class="input-group-prepend">
+                <button class="btn btn-lg btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <small id="countryselector-tip" class="form-text text-muted">
+            @Tip
+        </small>
+    </div>
+</div>
+
+@functions
+{
+    [Parameter]
+    string Label { get; set; } = "Country name";
+
+    [Parameter]
+    string Tip { get; set; } = "";
+
+    [Parameter]
+    string Placeholder { get; set; } = "Country";
+
+
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/js/typeahead.container.min.js",
+    "inputFiles": [
+      "wwwroot/js/typeahead.container.js"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+@inherits Microsoft.AspNetCore.Blazor.Layouts.BlazorLayoutComponent
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+    <a class="navbar-brand" href="#"><b>BLAZOR</b>#04</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <NavLink class="nav-link" href="digitalclock">
+                CLOCK
+            </NavLink>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    @Body
+</div>

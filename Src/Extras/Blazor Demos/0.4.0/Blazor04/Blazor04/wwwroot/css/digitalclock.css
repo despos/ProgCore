@@ -1,0 +1,19 @@
+﻿.clock {
+    
+    text-align: center;
+    padding: 10px;
+}
+.clock-working {
+    font-family: consolas;
+    font-size: 30px;
+    padding: 10px;
+    background: #000;
+    color: lightgreen;
+}
+.clock-notset {
+    color: red;
+    font-family: consolas;
+    font-size: 30px;
+    padding: 10px;
+    background: #000;
+}

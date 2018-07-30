@@ -27,4 +27,10 @@
     <ProjectReference Include="..\CountryFinder05.Shared\CountryFinder05.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

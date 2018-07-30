@@ -7,15 +7,6 @@
 //   Blazor - Country Finder (0.5.0)
 //
 
-//////////////////////////////////////////////////////////////////
-//
-//   PROGRAMMING ASP.NET CORE
-//   Dino Esposito
-//   
-//   EXTRAS 
-//   Blazor - Country Finder (0.5.0)
-//
-
 using System;
 using System.Collections.Generic;
 using System.IO;

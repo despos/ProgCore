@@ -22,5 +22,12 @@ window.Ybq = {
     },
     val: function(selector) {
         return $(selector).val().toString();
+    },
+    ta: function() {
+        $("input .blazor-typeahead").on("input",
+            function () {
+                $(this).change();
+                alert($(this).val());
+            });
     }
 };

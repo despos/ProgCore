@@ -1,0 +1,113 @@
+﻿@using CountryFinder05.Shared
+@using Microsoft.AspNetCore.Blazor
+@using Microsoft.AspNetCore.Blazor.Components
+@inject HttpClient HttpExecutor
+
+<style>
+    .blazor-typeahead-container {
+        cursor: default;
+    }
+    .blazor-typeahead-container .scrollable-menu {
+        height: auto;
+        max-height: 250px;
+        overflow-x: hidden;
+    }
+    .blazor-typeahead-container .dropdown-header {
+        text-align: center;
+        background: #eee;
+        font-weight: 600;
+        margin: 1px;
+        margin-top: -8px;
+    }
+    .blazor-typeahead-container .dropdown-menu, .blazor-typeahead-container input {
+        border: solid 2px #111 !important;
+        border-radius: 0;
+    }
+    .blazor-typeahead-container .dropdown-menu a:hover {
+        background:  #40e0d0;
+    }
+</style>
+
+<div class="blazor-typeahead-container">
+    <div class="input-group">
+        <input type="text" class="@Class" placeholder="@Placeholder" style="@Style" autofocus=""
+               oninput="this.blur(); this.focus();"
+               bind="@SelectedText"
+               onblur="@(ev => TryAutoComplete(ev))" />
+        <input type="hidden" name="@Name" bind="@SelectedValue" />
+
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" style="display: none;">
+                <i class="fa fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right scrollable-menu @(_isOpen ? "show" : "")" style="width: 100%;">
+                <h6 class="dropdown-header">@Items.Count item(s)</h6>
+                @foreach (var item in Items)
+                {
+                    <a class="dropdown-item"
+                       onclick="@(() => TrySelect(item))">
+                        @((MarkupString)item.MenuText)
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@functions {
+    bool _isOpen;
+    IList<TypeAheadItem> Items { get; set; } = new List<TypeAheadItem>();
+
+    [Parameter]
+    string SelectedValue { get; set; } = "";
+
+    [Parameter]
+    string SelectedText { get; set; } = "";
+
+    [Parameter]
+    string Placeholder { get; set; } = "";
+
+    [Parameter]
+    string Url { get; set; } = "";
+
+    [Parameter]
+    string Name { get; set; } = "";
+
+    [Parameter]
+    string Class { get; set; } = "";
+
+    [Parameter]
+    string Style { get; set; } = "";
+
+    [Parameter]
+    Action<TypeAheadItem> OnSelectionMade { get; set; }
+
+
+    async Task TryAutoComplete(UIFocusEventArgs ev)
+    {
+        if (string.IsNullOrWhiteSpace(SelectedText))
+        {
+            Items.Clear();
+            _isOpen = false;
+            return;
+        }
+
+        var actualUrl = string.Concat(Url.TrimEnd('/'), "/", SelectedText);
+        Items = await HttpExecutor.GetJsonAsync<IList<TypeAheadItem>>(actualUrl);
+        _isOpen = Items.Count > 0;
+
+        this.StateHasChanged();
+    }
+
+    void TrySelect(TypeAheadItem item)
+    {
+        _isOpen = false;
+        SelectedText = item.DisplayText;
+        SelectedValue = item.Value;
+        this.StateHasChanged();
+
+        OnSelectionMade?.Invoke(item);
+    }
+}

@@ -2,33 +2,7 @@
 @page "/"
 
 
-<h1>Welcome to COUNTRY-FINDER</h1>
-<div class="text-muted mb-5">Refresh your geography skills</div>
+<h1>TWO WAYS of TYPING AHEAD</h1>
 
-
-<CountrySelector uniqueId="cs"
-                 tip="You can also type the continent name"
-                 placeholder="Start typing the country name"
-                 typeAheadUrl="/hint/countries"
-                 onSelectionMade="@PopulateGrid" />
-
-<span class="badge badge-primary">@Message</span>
-<div class="mt-5"></div>
-
-<CountryGrid dataSet="@Countries" />
-
-<div class="mt-5"></div>
-
-
-@functions
-{
-    public string Message = "";
-    IList<Country> Countries = new List<Country>();
-
-    private void PopulateGrid(IList<Country> countries)
-    {
-        Message = $"{countries.Count} countries found.";
-        Countries = countries;
-        StateHasChanged();
-    }
-}
+<a class="btn btn-primary" href="/jstype">Using Twitter <b>typeahead</b></a>
+<a class="btn btn-primary" href="/fetchdata">Using custom <b>Blazor</b> component</a>

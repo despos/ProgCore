@@ -7,17 +7,17 @@
 //   Blazor - Country Finder (0.5.0)
 //
 
-namespace CountryFinder05.Server.Common
+namespace CountryFinder05.Shared
 {
-    public class AutoCompleteItem
+    public class TypeAheadItem
     {
-        // Display text for the drop-down list (contains HTML styles)
-        public string label { get; set; }
+        // Display text for the drop-down list (may contains HTML styles)
+        public string MenuText { get; set; }
 
         // Unique ID of the returned item
-        public string id { get; set; }
+        public string Value { get; set; }
 
         // Value to copy in the textbox
-        public string value { get; set; }
+        public string DisplayText { get; set; }
     }
 }

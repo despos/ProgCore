@@ -40,7 +40,7 @@ namespace Ch10.MySecuredAPI
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(x =>
                 {
-                    x.Authority = "http://localhost:6000";
+                    x.Authority = "http://localhost:5001";
                     x.ApiName = "weather-API";
                     x.RequireHttpsMetadata = false;
                 });

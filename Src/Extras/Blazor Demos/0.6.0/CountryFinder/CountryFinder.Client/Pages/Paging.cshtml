@@ -1,0 +1,43 @@
+﻿@using CountryFinder.Shared.Model
+@page "/paging"
+@inject HttpClient HttpExecutor
+
+<h1>Paging component</h1>
+
+
+
+<DataGrid 
+          TItem="Country"
+          InitialPage="2"
+          Filter="a">
+    <TableHeader>
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+    </TableHeader>
+    <RowTemplate>
+        <td>@context.CountryName</td>
+        <td>@context.Capital</td>
+        <td>@context.Population</td>
+    </RowTemplate>
+    <TableFooter>@context.Count</TableFooter>
+</DataGrid>
+
+
+@functions
+{
+async void InitialLoadOfData()
+{
+    DataSet = await HttpExecutor.GetJsonAsync<IList<Country>>("/country/search/");
+    this.StateHasChanged();
+}
+
+
+//[Parameter]
+IList<Country> DataSet { get; set; } = new List<Country>();
+
+protected override void OnInit()
+{
+    InitialLoadOfData();
+}
+}

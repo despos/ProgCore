@@ -4,7 +4,6 @@
 // Copyright (c) Youbiquitous srls 2018
 //
 // Author: Dino Esposito (http://youbiquitous.net)
-// LAST UPDATE: July 2018
 //
 
 String.prototype.capitalize = function () {
@@ -39,6 +38,21 @@ Ybq.fromServer = function (relativeUrl) {
 };
 
 /// <summary>
+/// Copy text to the clipboard
+/// </summary>
+Ybq.copyToClipboard = function(text) {
+    var el = document.createElement('textarea');
+    el.value = text;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}
+
+/// <summary>
 /// Root object for any script function used throughout the application
 /// </summary>
 Ybq.configureCommonElements = function () {
@@ -46,75 +60,143 @@ Ybq.configureCommonElements = function () {
     $("a").click(function (e) {
         this.blur();
     });
-    $("select").change(function (e) {
-        this.blur();
-        if ($(this).attr('tabIndex') !== undefined) {
-            var index = parseInt($(this).attr('tabIndex')) + 1;
-            $(':input[tabindex=' + index + ']')[0].focus();
-        }
-    });
+    //$("select").change(function (e) {
+    //    this.blur();
+    //    if ($(this).attr('tabIndex') !== undefined) {
+    //        var index = parseInt($(this).attr('tabIndex')) + 1;
+    //        $(':input[tabindex=' + index + ']')[0].focus();
+    //    }
+    //});
     $(".alert .alert-autoclose").click(function (e) {
         $(this).hide();
     });
-    $("input[data-digits-only]").attr("onkeypress", "return event.charCode >= 48 && event.charCode <= 57");
+    $("input[data-digits-only]")
+        //.attr("onkeypress", "return event.charCode >= 48 && event.charCode <= 57")
+        .on("keypress",
+            function(event) {
+                if (event.charCode < 48 || event.charCode > 57) {
+                    event.preventDefault();
+                    return false;
+                }
+            })
+        .on("keyup", function () {
+            var buffer = $(this).val();
+            var maxLength = parseInt($(this).attr("maxlength"));
+            if (buffer.length > maxLength) {
+                $(this).val("");
+                return false;
+            }
+            var minVal = parseInt($(this).attr("min"));
+            var maxVal = parseInt($(this).attr("max"));
+            var number = parseInt(buffer);
+            if (number < minVal || number > maxVal)
+                $(this).val("");
+                return false;
+            return true;
+        });
+
+    $("input[data-alphanumeric]").attr("onkeypress", "return /[a-zA-Z0-9-_]/.test(event.charCode)");
+
     $("input[data-click-on-enter]").each(function () {
         $(this).attr("onkeyup",
             "Ybq.clickOnEnter(event, '" + $(this).data("click-on-enter") + "')");
     });
-    $("ul.nav-tabs li a").click(function () {
-        var ul = $(this).parents("ul.nav-tabs").attr("id");
-        window.sessionStorage[ul] = $(this).attr("href");
+    $(".table-hover tbody tr td").click(function () {
+        var attr = $(this).attr("data-notselectable");
+        if (typeof attr !== typeof undefined && attr !== false) {
+            return;
+        }
+        var tr = $(this).closest("tr");
+        var url = tr.data("url");
+        if (url.length > 0)
+            Ybq.gotoRelative(url);
     });
-
     // INPUT TYPE=FILE
-    $("div.ybq-file-container").each(function () {
-        var embeddedFile = $(this).find("input[type=file]").first();
-        embeddedFile.hide();
-        var selectedFileSelector = "#" + $(embeddedFile).attr("id") + "-selected";
-        $(selectedFileSelector).text($(this).data("notselected"));
+    $(".image-selector").each(function () {
+        // Hide the INPUT FILE
+        var inputFile = $(this).find("input[type=file]").first();
+        inputFile.hide();
+        var baseId = "#" + $(inputFile).attr("id");
+        var addNew = $(baseId).data("addnew");
 
-        $(embeddedFile).change(function (evt) {
-            var id = $(this).attr("id");
+        // Hide the image placeholder (if needed)
+        var placeholderId = baseId + "-placeholder";
+        if (addNew)
+            $(placeholderId).show();
+        else
+            $(placeholderId).hide();
+        $(placeholderId).click(function () {
+            inputFile.click();
+        });
+
+        // Sets up the image preview
+        var previewId = baseId + "-preview";
+        $(previewId).css("max-width", $(baseId).data("image-max-width"));
+        $(previewId).data("fileid", baseId);
+        if (addNew)
+            $(previewId).hide();
+        else
+            $(previewId).show();
+        $(previewId).click(function () {
+            inputFile.click();
+        });
+
+        // Sets up the remover
+        var removerId = baseId + "-remover";
+        var isDefinedId = baseId + "-isdefined";
+        if (addNew)
+            $(removerId).hide();
+        else
+            $(removerId).show();
+        $(removerId).click(function () {
+            inputFile.val("");
+            $(previewId).removeAttr("src").removeAttr("title");
+            $(previewId).hide();
+            $(placeholderId).show();
+            $(this).hide();
+            $(isDefinedId).val("false");
+            return false;
+        });
+
+        // Display selected image
+        inputFile.change(function (evt) {
             var files = evt.target.files;
             if (files && files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $("#" + id + "-preview").attr("src", e.target.result);
+                    $(previewId).attr("src", e.target.result);
+                    $(previewId).show();
+                    $(placeholderId).hide();
+                    $(removerId).show();
+                    $(isDefinedId).val("true");
                 };
                 reader.readAsDataURL(files[0]);
             }
         });
-        $(embeddedFile).click(function (ev) {
+        inputFile.click(function (ev) {
             return ev.stopPropagation();
         });
     });
-    $("div.ybq-file-container").click(function () {
-        var embeddedFile = $(this).find("input[type=file]").first();
-        $(embeddedFile).click();
 
-        var controlId = $(embeddedFile).attr("id");
-        var previewSelector = "#" + controlId + "-preview";
-        var fileName = $(embeddedFile).val();
-        $(previewSelector).attr("title", fileName);
-        $(previewSelector).show();
-        var emptySelector = "#" + controlId + "-selected";
-        $(emptySelector).hide();
-        $("button.ybq-file-remover").show();
-        return false;
-    });
-    $("button.ybq-file-remover").click(function () {
-        var parent = $(this).parent().closest("div.ybq-file-container");
-        var embeddedFile = parent.find("input[type=file]").first();
-        $(embeddedFile).val("");
-        var controlId = $(embeddedFile).attr("id");
-        var previewSelector = "#" + controlId + "-preview";
-        $(previewSelector).removeAttr("src").removeAttr("title");
-        $(previewSelector).hide();
-        var emptySelector = "#" + controlId + "-selected";
-        $(emptySelector).show();
-        $(this).hide();
+    Ybq.imgLoadError = function(img) {
+        var placeholderId = $(img).data("fileid") + "-placeholder";
+        $(img).hide();
+        $(placeholderId).show();
+        var removerId = $(img).data("fileid") + "-remover";
+        $(removerId).hide();
+    }
+};
 
-        return false;
+Ybq.selectableTable = function() {
+    $(".table-hover tbody tr td").click(function() {
+        var attr = $(this).attr("data-notselectable");
+        if (typeof attr !== typeof undefined && attr !== false) {
+            return;
+        }
+        var tr = $(this).closest("tr");
+        var url = tr.data("url");
+        if (url.length > 0)
+            Ybq.gotoRelative(url);
     });
 };
 
@@ -187,16 +269,16 @@ Ybq.invoke = function (url, success, error) {
 /// <summary>
 /// Jump to the given ABSOLUTE URL (no transformation made on the URL)
 /// </summary>
-Ybq.goto = function (url) {
+Ybq.goto = function(url) {
     window.location = url;
-}
+};
 
 /// <summary>
 /// Jump to the given RELATIVE URL (modified with ROOTSERVER)
 /// </summary>
-Ybq.gotoRelative = function (url) {
+Ybq.gotoRelative = function(url) {
     window.location = Ybq.fromServer(url);
-}
+};
 
 /// <summary>
 /// Helper function to call a remote URL (POST)
@@ -215,38 +297,55 @@ Ybq.post = function (url, data, success, error) {
 /// <summary>
 /// Display a timed alert message
 /// </summary>
-Ybq.toast = function (selector, message, success) {
+Ybq.toast = function(selector, message, success, partial) {
     var ms = 2500;
 
     $(selector).removeClass("alert-success alert-danger alert-info alert-warning");
     $(selector).html(message);
-    $(selector).addClass(success ? "alert-success" : "alert-danger");
+    //$(selector).addClass(success ? "alert-success" : "alert-danger");
+    $(selector).addClass(success
+        ? (partial ? "alert-warning" : "alert-success")
+        : "alert-danger");
     $(selector).show();
     window.setTimeout(function() {
-        $(selector).hide();
-    }, ms);
-}
+            $(selector).hide();
+        },
+        ms);
+};
 
 /// <summary>
 /// Validate an email address
 /// </summary>
-Ybq.validateEmail = function (email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+Ybq.validateEmail = function(email) {
+    var re =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-}
+};
+
+/// <summary>
+/// Format a number with currency and thousands
+/// </summary>
+Ybq.formatNumber = function(num, sep, currency) {
+    if (sep == null)
+        sep = ",";
+    if (currency == null)
+        currency = "";
+    var temp = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+    return temp + " " + currency;
+};
 
 /// <summary>
 /// Supports hidden-mobile style
 /// </summary>
-Ybq.mobilize = function () {
+Ybq.mobilize = function() {
     try {
         var mobi = WURFL.is_mobile;
         if (mobi) {
             $(".hidden-mobile").hide();
         }
-    } catch (e) {
     }
-}
+    catch (e) { }
+};
 
 /// <summary>
 /// Clicks the selected button if Enter is pressed
@@ -276,7 +375,7 @@ Ybq.clearFormAfterTimeout = function (formSelector, ms) {
 }
 
 /// <summary>
-/// Clear error visuals from form written following conventions
+/// Client-side validation
 /// </summary>
 Ybq.canAcceptValueOf = function(formSelector, fieldId, acceptableCondition, errorMessage, labelId) {
     var fieldSelector = "#" + fieldId;
@@ -298,6 +397,18 @@ Ybq.canAcceptValueOf = function(formSelector, fieldId, acceptableCondition, erro
 }
 
 /// <summary>
+/// Show errors on given input fields
+/// </summary>
+Ybq.invalidateInputField = function (formSelector, focusfieldSelector, errorMessage) {
+    $(formSelector + "-message")
+        .removeClass("alert-success alert-danger alert-warning")
+        .addClass("alert-info")
+        .show().html(errorMessage);
+    $(focusfieldSelector).focus();
+    return false;
+}
+
+/// <summary>
 /// Clear error visuals from large (tabbed) form written following conventions
 /// </summary>
 Ybq.canAcceptFormContent = function(formSelector, fieldValidators) {
@@ -310,7 +421,7 @@ Ybq.canAcceptFormContent = function(formSelector, fieldValidators) {
         if (fieldValidators.hasOwnProperty(key)) {
             var fv = fieldValidators[key];
             var fieldSelector = "#" + fv.fieldId;
-            var currentValue = $(fieldSelector).val();
+            var currentValue = $.trim($(fieldSelector).val());
             if (!fv.validator(currentValue)) {
                 $(formSelector + "-group-" + fv.fieldId).addClass("has-error");
                 Ybq.Internal.tabErrorOn(formSelector, fv.tabId, true);
@@ -352,15 +463,6 @@ Ybq.Internal.tabErrorOn = function(formSelector, name, status) {
     }
 }
 
-/// <summary>
-/// Restores last clicked tab once back. Works along with some script in "configureCommonElements"
-/// </summary>
-Ybq.restoreTab = function (tabId) {
-    var href = window.sessionStorage[tabId];
-    if (typeof href === "undefined")
-        return;
-    $("#" + tabId + " a[href='" + href + "']").click();
-};
 
 
 // **************************************************************************************************//
@@ -453,11 +555,8 @@ var TypeAheadContainer = function (options) {
 
 // **************************************************************************************************//
 
-
-
 /// <summary>
 /// Ensures all Bootstrap dropdown match size of the screen
-/// OBSOLETE/UNNECESSARY IN BOOTSTRAP 4
 /// </summary>
 Ybq.fixDropdowns = function () {
     $(document).on("shown.bs.dropdown", ".dropdown", function () {
@@ -504,71 +603,3 @@ Ybq.printPopup = function (url, target, config) {
     window.open(Ybq.fromServer(url), target, config);
 }
 
-
-// **************************************************************************************************//
-
-/// <summary>
-/// WRAPPER for pagination operations
-/// </summary>
-var PaginatorSettings = function () {
-    var that = {};
-    that.pagingUrl = "";
-    that.pageIndex = 1;
-    that.gridSelector = "";
-    that.loaderSelector = "";
-    that.updateHash = false;
-    that.useAjaxCache = false;
-    that.sessionStorageId = "";
-    that.gridInitializer = function () { };
-    return that;
-}
-
-var PaginatorContainer = function (options) {
-    var settings = new PaginatorSettings();
-    jQuery.extend(settings, options);
-    // Initializer
-    this.go = function (index, filter) {
-        if (typeof index === "undefined") {
-            var lastIndexInLocalStorage = window.sessionStorage[settings.sessionStorageId];
-            if (typeof lastIndexInLocalStorage === "undefined") {
-                index = 1;
-            } else {
-                index = parseInt(lastIndexInLocalStorage);
-            }
-        }
-        if (typeof filter === "undefined") {
-            var lastFilterInLocalStorage = window.sessionStorage[settings.sessionStorageId + "-filter"];
-            if (typeof lastFilterInLocalStorage === "undefined") {
-                filter = "";
-            } else {
-                filter = lastFilterInLocalStorage;
-            }
-        }
-
-        // Turn on the loader GIF
-        $(settings.loaderSelector).show();
-
-        // Prepare the URL to get the HTML for the current page
-        // Assumes p=?&q=? 
-        var actualUrl = settings.pagingUrl + "?p=" + index + "&q=" + filter;
-        $.ajax({ url: actualUrl, cache: settings.useAjaxCache })
-            .done(function (response) {
-                // Turn off the loader GIF
-                $(settings.loaderSelector).hide();
-                // Change the current window hash
-                if (settings.updateHash)
-                    window.location.hash = index;
-                // Save current page to local-storage 
-                if (settings.sessionStorageId.length > 0) {
-                    window.sessionStorage[settings.sessionStorageId] = index;
-                    window.sessionStorage[settings.sessionStorageId + "-filter"] = filter;
-                }
-                // Refresh the view
-                $(settings.gridSelector).html(response);
-                // Initialize the grid
-                settings.gridInitializer();
-            });
-    }
-};
-
-// **************************************************************************************************//

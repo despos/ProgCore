@@ -1,0 +1,57 @@
+﻿@using CountryFinder.Shared
+@using CountryFinder.Shared.Model
+
+@page "/fetchdata1"
+@inject HttpClient Http
+
+<h1>Blazor's Typeahead Templated Component</h1>
+
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <Typeahead1 style="margin-top: 40px;"
+                    TItem="Country"
+                    class="form-control"
+                    url="/hint/countries2"
+                    name="country"
+                    placeholder="Type something"
+                    onSelectionMade="@ShowSelection">
+            <ItemTemplate>
+                <span>@context.CountryName</span>&nbsp;
+                <b>(@context.ContinentName)</b>
+                <small class="pull-right text-danger">@context.Capital</small>
+            </ItemTemplate>
+        </Typeahead1>
+    </div>
+    <div class="col-12 col-sm-6">
+        <div class="card" style="border: solid 1px #111; margin-top: 40px;">
+            <img class="card-img-top" src="@_countryMap" style="width: 64px; background: #888;">
+            <div class="card-body">
+                <h5 class="card-title">@_countryName</h5>
+                <p class="card-text">@((MarkupString)_countryDescription)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@functions {
+    string _countryMap = "";
+    string _countryDescription = "";
+    string _countryName = "";
+
+    protected override async Task OnInitAsync()
+    {
+
+    }
+
+    void ShowSelection(Country item)
+    {
+        _countryMap = $"https://www.countryflags.io/{item.CountryCode}/flat/64.png";
+        _countryName = item.CountryName;
+        _countryDescription = item.ContinentName;
+        this.StateHasChanged();
+    }
+}

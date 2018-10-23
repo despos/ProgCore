@@ -32,7 +32,6 @@ namespace SignalR1.Controllers
 
             // NOTIFY START
             _progressHubContext.Clients.Client(connId).SendAsync("initProgressBar");
-            //_progressHubContext.Clients.All.SendAsync("initProgressBar");
             var total = 0;
 
             for (var i = 0; i < steps; i++)
@@ -42,12 +41,10 @@ namespace SignalR1.Controllers
 
                 // PROGRESS
                 _progressHubContext.Clients.Client(connId).SendAsync("updateProgressBar", total);
-                //_progressHubContext.Clients.All.SendAsync("updateProgressBar", total);
             }
 
             // NOTIFY END
             _progressHubContext.Clients.Client(connId).SendAsync("clearProgressBar");
-            //_progressHubContext.Clients.All.SendAsync("clearProgressBar");
         }
 
     }

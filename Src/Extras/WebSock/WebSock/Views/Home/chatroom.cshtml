@@ -1,0 +1,54 @@
+﻿@model WebSock.Models.ViewModelBase
+
+<h1 class="text-center">WS CHAT-UP</h1>
+<h4 class="text-center">@Model.UserName</h4>
+<hr/>
+<div style="">
+    <label>MESSAGE</label>
+    <input type="text" class="form-control" id="messageToSend" placeholder="type message and press enter"/>
+</div>
+
+<hr />
+
+<div class="">
+    <div id="list-of-messages"></div>
+</div>
+
+
+
+    <script>
+    $(function () {
+        var userName = "@Model.UserName";
+
+        var protocol = location.protocol === "https:" ? "wss:" : "ws:";
+        var wsUri = protocol + "//" + window.location.host;
+        var socket = new WebSocket(wsUri);
+
+        socket.onopen = e => {
+            console.log("socket opened", e);
+        };
+        socket.onclose = function (e) {
+            console.log("socket closed", e);
+        };
+        socket.onmessage = function (e) {
+            console.log(e);
+            $('#list-of-messages').append(e.data + '<br />');
+        };
+        socket.onerror = function (e) {
+            console.error(e.data);
+        };
+
+
+        $('#messageToSend').keypress(function (e) {
+            if (e.which !== 13)  
+                return;
+           
+            e.preventDefault();
+
+            var message = "<b>" + userName + "</b>: " + $('#messageToSend').val();
+            socket.send(message);
+            $('#messageToSend').val('');
+        });
+    });
+    </script>
+

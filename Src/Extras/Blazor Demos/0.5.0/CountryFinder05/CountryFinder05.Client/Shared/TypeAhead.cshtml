@@ -85,28 +85,28 @@
     Action<TypeAheadItem> OnSelectionMade { get; set; }
 
 
-    async Task TryAutoComplete(UIFocusEventArgs ev)
+async Task TryAutoComplete(UIFocusEventArgs ev)
+{
+    if (string.IsNullOrWhiteSpace(SelectedText))
     {
-        if (string.IsNullOrWhiteSpace(SelectedText))
-        {
-            Items.Clear();
-            _isOpen = false;
-            return;
-        }
-
-        var actualUrl = string.Concat(Url.TrimEnd('/'), "/", SelectedText);
-        Items = await HttpExecutor.GetJsonAsync<IList<TypeAheadItem>>(actualUrl);
-        _isOpen = Items.Count > 0;
-
-        this.StateHasChanged();
+        Items.Clear();
+        _isOpen = false;
+        return;
     }
+
+    var actualUrl = string.Concat(Url.TrimEnd('/'), "/", SelectedText);
+    Items = await HttpExecutor.GetJsonAsync<IList<TypeAheadItem>>(actualUrl);
+    _isOpen = Items.Count > 0;
+
+    //this.StateHasChanged();
+}
 
     void TrySelect(TypeAheadItem item)
     {
         _isOpen = false;
         SelectedText = item.DisplayText;
         SelectedValue = item.Value;
-        this.StateHasChanged();
+        //this.StateHasChanged();
 
         OnSelectionMade?.Invoke(item);
     }

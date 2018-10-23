@@ -1,0 +1,52 @@
+﻿@using CountryFinder.Shared
+@typeparam TItem
+@inject HttpClient HttpExecutor
+
+<div style="border: solid 4px #111;">    
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                @if (HeaderTemplate != null)
+                {
+                    @HeaderTemplate
+                }</tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Items)
+                {
+                    <tr>@RowTemplate(item)</tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    @if (FooterTemplate != null)
+                    {
+                        @*@FooterTemplate(new FooterSettings(Items.Count))*@
+                        @FooterTemplate(Items)
+                    }
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+@functions {
+
+    [Parameter]
+    RenderFragment HeaderTemplate { get; set; }
+
+    [Parameter]
+    RenderFragment<TItem> RowTemplate { get; set; }
+
+    [Parameter]
+    RenderFragment<IList<TItem>> FooterTemplate { get; set; }
+    //RenderFragment<FooterSettings> FooterTemplate { get; set; }
+
+    [Parameter]
+    IList<TItem> Items { get; set; }
+
+}

@@ -1,0 +1,45 @@
+﻿@using Microsoft.JSInterop
+
+<style>
+    #uxdebug-container {
+        width: 100%;
+        background-color: #333;
+        color: #eee8aa;
+    }
+
+    #uxdebug-container td.logo {
+        max-width: 100px;
+        font-weight: bold;
+        opacity: .7;
+    }
+</style>
+
+
+<table class="table" id="uxdebug-container">
+    <tbody>
+    <tr>
+        <td class="logo">UX-D</td>
+        <td>
+            <span id="uxdebug-bspoint"></span>
+        </td>
+        <td>
+            <span id="uxdebug-wh"></span>
+        </td>
+        <td>
+            <span id="uxdebug-formfactor"></span>
+        </td>
+        <td>
+            <span id="uxdebug-device"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+ 
+@functions
+{
+    protected override void OnInit()
+    {
+        JSRuntime.Current.InvokeAsync<Task>("Ybq.uxDebug");
+    }
+}

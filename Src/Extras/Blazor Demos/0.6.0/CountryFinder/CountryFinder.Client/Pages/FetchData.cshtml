@@ -1,0 +1,49 @@
+﻿@using CountryFinder.Shared
+@using Microsoft.AspNetCore.Blazor
+@page "/fetchdata"
+@inject HttpClient Http
+
+<h1>Blazor's Typeahead Component</h1>
+
+<div class="row">
+    <div class="col-12 col-sm-6">
+        <typeahead style="margin-top: 40px;"
+                   class="form-control"
+                   url="/hint/countries1"
+                   name="country"
+                   placeholder="Type something"
+                   onSelectionMade="@ShowSelection" />
+    </div>
+    <div class="col-12 col-sm-6">
+        <div class="card" style="border: solid 1px #111; margin-top: 40px;">
+            <img class="card-img-top" src="@_countryMap" style="width: 64px; background: #888;">
+            <div class="card-body">
+                <h5 class="card-title">@_countryName</h5>
+                <p class="card-text">@((MarkupString)_countryDescription)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@functions {
+    string _countryMap = "";
+    string _countryDescription = "";
+    string _countryName = "";
+
+    protected override async Task OnInitAsync()
+    {
+
+    }
+
+    void ShowSelection(TypeAheadItem item)
+    {
+        _countryMap = $"https://www.countryflags.io/{item.Value}/flat/64.png";
+        _countryName = item.DisplayText;
+        _countryDescription = item.MenuText;
+        this.StateHasChanged();
+    }
+}

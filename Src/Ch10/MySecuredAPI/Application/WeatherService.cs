@@ -23,33 +23,38 @@ namespace MyAPI.Application
             //if (String.IsNullOrWhiteSpace(woeid))
             //    woeid = "721943";
 
-            var url = string.Format(YahooUrlBase, woeid, tempUnit);
-            var client = new HttpClient();
-            var data = client.GetStringAsync(url).Result;
-            var wfc = JsonConvert.DeserializeObject<WeatherQuery>(data);
+            //var url = string.Format(YahooUrlBase, woeid, tempUnit);
+            //var client = new HttpClient();
+            //var data = client.GetStringAsync(url).Result;
+            //var wfc = JsonConvert.DeserializeObject<WeatherQuery>(data);
             var info = new WeatherInfo();
-            info.Temp = wfc.query.results.channel.item.condition.temp;
-            var index = 0;
-            foreach (var f in wfc.query.results.channel.item.forecast)
-            {
-                if (index == 0)
-                {
-                    index++;
-                    continue;
-                }
-                var t = f.high;
-                info.ForecastMax.Add(t);
-            }
+            //info.Temp = wfc.query.results.channel.item.condition.temp;
+            //var index = 0;
+            //foreach (var f in wfc.query.results.channel.item.forecast)
+            //{
+            //    if (index == 0)
+            //    {
+            //        index++;
+            //        continue;
+            //    }
+            //    var t = f.high;
+            //    info.ForecastMax.Add(t);
+            //}
+            info.Temp = new Random().Next(10, 30).ToString() + "C";
+            info.ForecastMax.Add(new Random().Next(10, 30).ToString() + "C");
+            info.ForecastMax.Add(new Random().Next(10, 30).ToString() + "C");
+            info.ForecastMax.Add(new Random().Next(10, 30).ToString() + "C");
             return info;
         }
 
         public string Now(string woeid = "721943", string tempUnit = "c")
         {
-            var url = string.Format(YahooUrlBase, woeid, tempUnit);
-            var client = new HttpClient();
-            var data = client.GetStringAsync(url).Result;
-            var wfc = JsonConvert.DeserializeObject<WeatherQuery>(data);
-            return wfc.query.results.channel.item.condition.temp;
+            //var url = string.Format(YahooUrlBase, woeid, tempUnit);
+            //var client = new HttpClient();
+            //var data = client.GetStringAsync(url).Result;
+            //var wfc = JsonConvert.DeserializeObject<WeatherQuery>(data);
+            //return wfc.query.results.channel.item.condition.temp;
+            return new Random().Next(10,30).ToString() + "C";
         }
     }
 }

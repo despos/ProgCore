@@ -1,0 +1,38 @@
+﻿@using CountryFinder.Shared.Model
+@using Microsoft.AspNetCore.Blazor.Components
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Capital</th>
+            <th class="text-right">People</th>
+            <th class="text-right">Area</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var country in DataSet)
+        {
+            <tr>
+                <td>
+                    @country.CountryName
+                    <div class="text-info">@country.ContinentName</div>
+                </td>
+                <td>
+                    @country.Capital
+                </td>
+                <td class="text-right">@country.PopulationFormatted()</td>
+                <td class="text-right">@country.AreaFormatted() kmq</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@functions
+{
+    [Parameter]
+    IList<Country> DataSet { get; set; } = new List<Country>();
+}

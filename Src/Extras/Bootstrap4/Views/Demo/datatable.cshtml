@@ -23,7 +23,7 @@
 
 <div style="margin-bottom: 30px"></div>
 
-<script>
+@*<script>
     function setup() {
         $(".table-hover").css("cursor", "pointer");
         $(".table-hover td").click(function () {
@@ -35,7 +35,7 @@
             window.location.href = "http://www.google.com";
         });
     }
-</script>
+</script>*@
 
 <script type="text/javascript">
     function _page(index, filter) {     
@@ -44,7 +44,7 @@
             gridSelector: '#list-of-countries',
             loaderSelector: '#loader',
             sessionStorageId: 'list-of-countries',
-            gridInitializer: setup
+            //gridInitializer: setup
         }).go(index, filter);
     }
 

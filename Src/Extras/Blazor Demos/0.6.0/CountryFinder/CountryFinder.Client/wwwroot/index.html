@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Country Finder (0.6.0)</title>
+    <base href="/" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/typeahead.min.css" rel="stylesheet" />
+    <link href="css/local.css" rel="stylesheet" />
+
+    <link href="images/favicon.png" rel="icon">
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/typeahead.bundle.min.js"></script>
+    <script src="js/typeahead.container.min.js"></script>
+
+    <script src="//wurfl.io/wurfl.js"></script>
+    <script src="js/uxdebug.js"></script>
+</head>
+<body>
+    <!-- Bootstrapper of the page: will be replaced with actual content -->
+    <app>
+        <div class="container">
+            <div class="text-center">
+                <img src="/images/loading.gif" />
+            </div>
+        </div>
+    </app>
+    
+    <!-- Anything beyond <app> will be displayed in ANY page merged with layout -->
+    <div class="text-center">
+        <hr />
+        written by <b>Dino Esposito</b>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    
+    <!-- Interop scripts (must be placed AFTER the blazor-boot) -->
+<script src="js/interop.js"></script>
+</body>
+</html>

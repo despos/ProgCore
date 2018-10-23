@@ -1,0 +1,61 @@
+﻿@using CountryFinder.Shared
+@using CountryFinder.Shared.Model
+@page "/databind"
+@inject HttpClient HttpExecutor
+
+<h1>Data Source component</h1>
+
+
+<DataSource Items="@Countries" TItem="Country">
+    <HeaderTemplate>
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.CountryName</td>
+        <td>@context.Capital</td>
+        <td>@context.Population</td>
+    </RowTemplate>
+    <FooterTemplate>
+        <td colspan="3">
+            <div class="row w-100 justify-content-center">
+                @context.Count
+            </div>
+        </td>
+    </FooterTemplate>
+</DataSource>
+
+<DataSource Items="@Forecasts" TItem="WeatherForecast">
+    <HeaderTemplate>
+        <th>When</th>
+        <th>Temp</th>
+        <th>&nbsp;</th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.Date.ToString("d MMM")</td>
+        <td>@context.TemperatureC <span class="text-danger">(@context.TemperatureF F)</span></td>
+        <td>@context.Summary</td>
+    </RowTemplate>
+</DataSource>
+
+
+@functions
+{
+async void InitialLoadOfData()
+{
+    Countries = await HttpExecutor.GetJsonAsync<IList<Country>>("/country/search/ge");
+    Forecasts = await HttpExecutor.GetJsonAsync<IList<WeatherForecast>>("/weather/forecasts");
+
+    this.StateHasChanged();
+}
+
+IList<Country> Countries { get; set; } = new List<Country>();
+IList<WeatherForecast> Forecasts { get; set; } = new List<WeatherForecast>();
+
+
+protected override void OnInit()
+{
+    InitialLoadOfData();
+}
+}

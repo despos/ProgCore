@@ -1,0 +1,13 @@
+﻿@model WebSock.Models.ViewModelBase
+
+<h1 class="text-center">WS CHAT-UP</h1>
+<h4 class="text-center">@Model.UserName</h4>
+<hr/>
+
+<form method="post" action="@Url.Action("login")">
+    <div style="">
+        <label>LOG IN AS</label>
+        <input type="text" class="form-control" name="username" placeholder="Your display name" />
+    </div>
+</form>
+ 

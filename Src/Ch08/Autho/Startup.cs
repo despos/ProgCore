@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ch08.Autho
@@ -27,8 +26,11 @@ namespace Ch08.Autho
             // Add classic COOKIE scheme
             services.AddAuthentication(options =>
                 {
+                    // Dont know who you are: what to do
                     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    // Giving you the token of identity
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    // How to verify the presented token of identity
                     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 })
                 .AddCookie(options =>

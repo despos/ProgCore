@@ -1,0 +1,55 @@
+﻿@section adhoc_Scripts_Top {
+    @* THIS IS A NEWER VERSION OF SCRIPT (20-9-18) *@
+    <script src="~/content/scripts/signalr.min.js"></script>
+    @*<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@@aspnet/signalr@1.0.0/dist/browser/signalr.min.js"></script>*@
+}
+
+<div class="alert alert-info">
+    <span id="msg"></span>
+    <div id="connId"></div>
+</div>
+
+<h1>WELCOME to SignalR Azure</h1>
+<div style="font-size:2rem">
+    <span class="badge badge-primary" id="count" style="font-size: 2rem;"></span>
+    users connected
+</div>
+
+<script>
+    // SignalR bootstrap
+    var userCountConnectionId = "";
+    var userCountConnection;
+</script>
+
+<script>
+    // Helper functions added for test purposes
+    function openConnection() {
+        //userCountConnection = new signalR.HubConnection("/usercountdemo");   // doesn't work with SignalR Azure
+        userCountConnection = new signalR.HubConnectionBuilder().withUrl('/usercountdemo').build();
+        userCountConnection
+            .start()
+            .then(() => {
+                userCountConnection.invoke("getConnectionId").then(function(connId) {
+                    $("#connId").html(connId);
+                }).catch(() => {
+                    alert("porcoddio");
+                });
+                
+                $("#msg").html("Connection established");
+            })
+            .catch(() => {
+                $("#msg").html("Error while establishing connection");
+            });
+    }
+</script>
+
+<script>
+    // Automatically establish a connection upon loading. You can decide to do
+    // that also on demand. It's up to you, in the end.
+    openConnection();
+
+    userCountConnection.on("updateCount", (num) => {
+        $("#count").html(num);
+    });
+</script>
+

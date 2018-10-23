@@ -1,0 +1,94 @@
+﻿@using CountryFinder.Shared
+@typeparam TItem
+@inject HttpClient HttpExecutor
+
+<div style="border: solid 4px #111;">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Filter</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Query string" value="@Filter">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>@TableHeader</tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Items.Skip(PageSize * (InitialPage - 1)).Take(PageSize))
+                {
+                    <tr>@RowTemplate(item)</tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    @TableFooter(Items)
+                </tr>
+            </tfoot>
+        </table>
+        @if (PageSize > 0)
+        {
+            var pager = new PagingHelper(Items.Count, PageSize, MaxPageLinks).ForPage(InitialPage);
+            <div class="row w-100 justify-content-center">
+                <ul class="pagination">
+                    @for (var index = pager.FirstPageLinkIndex; index <= pager.LastPageLinkIndex; index++)
+                    {
+                        var active = index == InitialPage ? "active" : "";
+                        <li class="page-item @active">
+                            <a class="page-link" href="#">@index</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+
+@functions {
+
+    [Parameter]
+    RenderFragment TableHeader { get; set; }
+
+    [Parameter]
+    RenderFragment<TItem> RowTemplate { get; set; }
+
+    [Parameter]
+    RenderFragment<IList<TItem>> TableFooter { get; set; }
+
+    [Parameter]
+    IList<TItem> Items { get; set; }
+
+    [Parameter]
+    string Filter { get; set; }
+
+    [Parameter]
+    int PageSize { get; set; } = 5;
+
+    [Parameter]
+    int MaxPageLinks { get; set; } = 10;
+
+    [Parameter]
+    int InitialPage { get; set; } = 1;
+
+    //[Parameter] string UrlBase { get; set; }
+
+    protected override void OnInit()
+    {
+        InitialSetup();
+    }
+
+    async void InitialSetup()
+    {
+        Items = await HttpExecutor.GetJsonAsync<IList<TItem>>("/country/search/" + Filter);
+        this.StateHasChanged();
+    }
+
+}

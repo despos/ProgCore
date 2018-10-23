@@ -34,5 +34,10 @@ namespace Bs4.Controllers
         {
             return View(ViewModelBase.Default("TABLE"));
         }
+
+        public IActionResult File()
+        {
+            return View(ViewModelBase.Default("FILE"));
+        }
     }
 }

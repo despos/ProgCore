@@ -8,6 +8,7 @@
 //
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
@@ -18,45 +19,23 @@ namespace SignalR1.Application
         private static int Count = 0;
         public override Task OnConnectedAsync()
         {
-            Count++;
+            //Count++;
+            Interlocked.Increment(ref Count);
+
             base.OnConnectedAsync();
             Clients.All.SendAsync("updateCount", Count);
+            Clients.All.SendAsync("connected", Context.ConnectionId);
             return Task.CompletedTask;
         }
 
         public override Task OnDisconnectedAsync(Exception exception)
         {
-            Count--;
+            //Count--;
+            Interlocked.Decrement(ref Count);
+
             base.OnDisconnectedAsync(exception);
             Clients.All.SendAsync("updateCount", Count);
             return Task.CompletedTask;
         }
-
-        //public void Lengthy()
-        //{
-        //    // logic
-        //    Clients.Client(Context.ConnectionId).SendAsync("initProgressBar");
-        //}
-
-        //public void NotifyStart()
-        //{
-        //    //var hubContext = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();
-        //    //hubContext.Clients.Client(connId).initProgressBar();
-        //    Clients.Client(Context.ConnectionId).InvokeAsync("initProgressBar");
-        //}
-
-        //public void NotifyProgress(int percentage)
-        //{
-        //    //var hubContext = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();
-        //    //Clients.Client(connId).updateProgressBar(percentage, connId);
-        //    Clients.Client(Context.ConnectionId).InvokeAsync("updateProgressBar", percentage);
-        //}
-
-        //public void NotifyEnd()
-        //{
-        //    //var hubContext = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();
-        //    //hubContext.Clients.Client(connId).clearProgressBar();
-        //    Clients.Client(Context.ConnectionId).InvokeAsync("clearProgressBar");
-        //}
     }
 }

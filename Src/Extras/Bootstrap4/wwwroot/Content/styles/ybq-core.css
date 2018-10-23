@@ -191,16 +191,31 @@ div[role=tabpanel] {
 INPUT FILE
 */
 
-.ybq-file-container {
-    border: solid 1px #bbb; 
-    text-align: center; 
+
+.image-selector {
+}
+
+.image-selector img {
+    border: solid 1px #111;
     cursor: pointer;
-    padding: 4px;
 }
-.ybq-file-remover {
-    display: none;
-    margin-top: 3px;
+
+.image-selector img:hover {
+    opacity: .8;
 }
-.ybq-file-preview {
-    display: none;
+
+.image-selector-toolbar {
+    margin-left: 10px;
+}
+
+.image-selector-placeholder {
+    border: dashed 2px #444;
+    padding: 20px;
+    font-size: 130%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.image-selector-placeholder:hover {
+    opacity: .8;
 }

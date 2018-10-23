@@ -25,6 +25,9 @@
     <Content Update="Views\Demo\card.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Demo\file.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\pv_defaultFilter.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

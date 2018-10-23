@@ -13,9 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SignalR1.Application;
 using SignalR1.Backend;
 
-// Microsoft.AspNetCore.SignalR
-// Microsoft.AspNetCore.SignalR.Client
-
 namespace SignalR1
 {
     public class Startup

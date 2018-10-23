@@ -63,5 +63,12 @@ namespace SignalR1.Controllers
             var model = new CustomersViewModel(customers);
             return PartialView("pv_ListOfCustomers", model);
         }
+
+        [HttpGet]
+        public IActionResult Socket()
+        {
+            var model = ViewModelBase.Default("Web Socket");
+            return View(model);
+        }
     }
 }

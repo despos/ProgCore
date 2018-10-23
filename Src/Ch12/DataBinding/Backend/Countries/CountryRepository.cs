@@ -18,7 +18,7 @@ namespace Ch12.DataBinding.Backend.Countries
         // http://www.geognos.com/api/en/countries/info/FR.json 
         public IList<string> All()
         {
-            return new[] {"FR", "IT", "CA", "US", "ES", "RU"};
+            return new[] {"FR", "IT", "CA", "US", "ES", "RU", "UA"};
         }
 
         public string Info(string id)

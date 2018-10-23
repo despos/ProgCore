@@ -1,0 +1,34 @@
+﻿@using CountryFinder.Shared.Model
+@page "/jstype"
+
+
+<h1>Welcome to COUNTRY-FINDER</h1>
+<div class="text-muted mb-5">Refresh your geography skills</div>
+
+
+<CountrySelector uniqueId="cs"
+                 tip="You can also type the continent name"
+                 placeholder="Start typing the country name"
+                 typeAheadUrl="/hint/countries"
+                 onSelectionMade="@PopulateGrid" />
+
+<span class="badge badge-primary">@Message</span>
+<div class="mt-5"></div>
+
+<CountryGrid dataSet="@Countries" />
+
+<div class="mt-5"></div>
+
+
+@functions
+{
+    public string Message = "";
+    IList<Country> Countries = new List<Country>();
+
+    private void PopulateGrid(IList<Country> countries)
+    {
+        Message = $"{countries.Count} countries found.";
+        Countries = countries;
+        StateHasChanged();
+    }
+}

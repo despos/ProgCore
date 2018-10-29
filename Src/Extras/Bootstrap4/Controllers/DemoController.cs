@@ -39,5 +39,10 @@ namespace Bs4.Controllers
         {
             return View(ViewModelBase.Default("FILE"));
         }
+
+        public IActionResult Form()
+        {
+            return View(ViewModelBase.Default("FORM"));
+        }
     }
 }

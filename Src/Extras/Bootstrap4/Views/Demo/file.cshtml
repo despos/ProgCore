@@ -1,28 +1,26 @@
 ﻿
-<script src="/Content/scripts/dropzone.js"></script>
-
 <h1 class="mt-5 text-center" id="title">
     <p style="margin-top: 100px">FILE upload</p>
 </h1>
 
 <div>
-    <div class="image-selector">
-        <input type="file" class="form-control" data-image-max-width="200px"
+    <div class="ybq-inputfile">
+        <input type="file" class="form-control" 
                accept="image/png, image/jpeg"
-               id="contactphoto" name="contactphoto">
+               id="photo" name="photo">
         <input type="hidden" 
-               id="contactphoto-isdefined" name="contactphotoisdefined" 
+               id="photo-isdefined" name="photoisdefined" 
                value="false" />
         <div class="pull-left">
-            <img id="contactphoto-preview"
+            <img id="photo-preview"
                  style="max-height: 100px"
                  onerror="Ybq.imgLoadError(this)" />
-            <div class="image-selector-placeholder" id="contactphoto-placeholder">
+            <div class="ybq-inputfile-placeholder" id="photo-placeholder">
                 PHOTO
             </div>
         </div>
-        <div class="pull-left image-selector-toolbar">
-            <button class="btn btn-danger" id="contactphoto-remover">
+        <div class="pull-left ybq-inputfile-toolbar">
+            <button class="btn btn-danger" id="photo-remover">
                 <i class="fa fa-close"></i>
             </button>
         </div>
@@ -31,4 +29,3 @@
 </div>
 
 <hr/>
-

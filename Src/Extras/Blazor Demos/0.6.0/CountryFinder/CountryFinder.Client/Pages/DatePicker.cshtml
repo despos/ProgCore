@@ -1,0 +1,15 @@
+﻿@using Microsoft.JSInterop
+@page "/date"
+
+<h1>When is your birthday?</h1>
+<input type="text" id="birthday" />
+
+
+@functions
+{
+    protected override void OnInit()
+    {
+        JSRuntime.Current.InvokeAsync<Task>("Ybq.datePicker", "#birthday");
+    }
+
+}

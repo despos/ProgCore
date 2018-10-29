@@ -58,7 +58,10 @@ namespace Ch08.Autho
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseExceptionHandler("/error");
 
             // Enable security
             app.UseAuthentication();

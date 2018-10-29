@@ -32,7 +32,6 @@
                oninput="this.blur(); this.focus();"
                bind="@SelectedText"
                onblur="@(ev => TryAutoComplete(ev))" />
-        @*<input type="hidden" name="@Name" bind="@SelectedValue" />*@
 
         <div class="input-group-append">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" style="display: none;">
@@ -106,3 +105,4 @@
         OnSelectionMade?.Invoke(item);
     }
 }
+// http://github.com/despos/progcore/extras

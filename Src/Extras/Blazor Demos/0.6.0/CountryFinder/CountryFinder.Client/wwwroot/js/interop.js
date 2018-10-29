@@ -29,5 +29,10 @@ window.Ybq = {
                 $(this).change();
                 alert($(this).val());
             });
+    },
+    datePicker: function (selector) {
+        $(document).ready(function () {
+            $(selector).datepicker();
+        });
     }
 };

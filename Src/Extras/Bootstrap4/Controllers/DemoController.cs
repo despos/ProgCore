@@ -7,6 +7,7 @@
 //   BS4
 //
 
+using System;
 using Bs4.Backend;
 using Bs4.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -40,9 +41,22 @@ namespace Bs4.Controllers
             return View(ViewModelBase.Default("FILE"));
         }
 
-        public IActionResult Form()
+        public IActionResult Form1()
         {
-            return View(ViewModelBase.Default("FORM"));
+            return View(ViewModelBase.Default("FORM1"));
+        }
+
+        [HttpGet]
+        public IActionResult Form2()
+        {
+            return View(ViewModelBase.Default("FORM2"));
+        }
+
+        [HttpPost]
+        public IActionResult Form2(string username, string password)
+        {
+            var success = DateTime.Now.Second % 2 >0;
+            return Content(success ? "OK" : "Fail");
         }
     }
 }

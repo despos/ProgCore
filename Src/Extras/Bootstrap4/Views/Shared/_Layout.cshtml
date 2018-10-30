@@ -9,49 +9,49 @@
     <link href="~/content/styles/font-awesome.min.css" rel="stylesheet" />
     <link href="~/content/styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/content/styles/ybq-core.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/styles/sticky-footer.css" rel="stylesheet" type="text/css" />
 
     @RenderSection("adhoc_Css", required: false)
 
     <script src="~/content/scripts/jquery-3.1.1.min.js"></script>
     <script src="~/content/scripts/bootstrap.bundle.min.js"></script>
     <script src="//wurfl.io/wurfl.js"></script>
-    <script src="~/content/scripts/site/ybq-core.min.js?v=1"></script>
+    <script src="~/content/scripts/site/ybq-core-bs4.min.js?v=1"></script>
     @RenderSection("adhoc_Scripts_Top", required: false)
 </head>
 <body>
-    @Html.Partial("pv_UxDebug")
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dropdownNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="dropdownNavbar">
-            <div class="media">
-                <img class="align-self-center mr-3 img-fluid rounded-circle"
-                     style="width: 80px"
-                     src="~/content/images/dino-ps-sm.jpg" alt="Me">
-                <div class="media-body align-self-center">
-                    <div style="line-height: 12px" class="navbar-text text-center">
-                        MY BRAND<br />my face
-                    </div>
+@Html.Partial("pv_UxDebug")
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dropdownNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="dropdownNavbar">
+        <div class="media">
+            <img class="align-self-center mr-3 img-fluid rounded-circle"
+                 style="width: 80px"
+                 src="~/content/images/dino-ps-sm.jpg" alt="Me">
+            <div class="media-body align-self-center">
+                <div style="line-height: 12px" class="navbar-text text-center">
+                    MY BRAND<br />my face
                 </div>
             </div>
-
         </div>
-    </nav>
 
-    <div class="container-fluid">
-        @RenderBody()
-        <nav class=navbar-dark bg-dark">
-            <footer class="p-1 w-100 navbar-text text-right">
-                <div class="mr-4">
-                    Youbiquitous<br />Dino Esposito<i class="ml-2 mr-2 fa fa-tag text-light"></i>2018
-                </div>
-            </footer>
-        </nav>
     </div>
+</nav>
 
-    <script type="text/javascript" src="~/content/scripts/site/ybq-coreinit.min.js"></script>
-    @RenderSection("adhoc_Scripts_Bottom", required: false)
+<div>
+    @RenderBody()
+</div>
+
+<footer class="footer">
+    <div class="bg-dark text-center">
+        <span class="text-muted">Dino Esposito - <b>Youbiquitous 2019</b></span>
+    </div>
+</footer>
+
+<script type="text/javascript" src="~/content/scripts/site/ybq-init-bs4.min.js"></script>
+@RenderSection("adhoc_Scripts_Bottom", required: false)
 </body>
 </html>
 

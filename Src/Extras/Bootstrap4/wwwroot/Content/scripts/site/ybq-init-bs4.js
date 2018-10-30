@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////
 //
 // Youbiquitous YBQ : app starter 
-// Copyright (c) Youbiquitous srls 2017
+// Copyright (c) Youbiquitous srls 2019
 //
 // Author: Dino Esposito (http://youbiquitous.net)
 //

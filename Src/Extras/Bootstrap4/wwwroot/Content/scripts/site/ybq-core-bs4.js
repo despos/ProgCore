@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////////////////////////
 //
 // Youbiquitous YBQ : app starter 
-// Copyright (c) Youbiquitous srls 2018
+// Copyright (c) Youbiquitous srls 2019
 //
 // Author: Dino Esposito (http://youbiquitous.net)
 //
@@ -56,48 +56,42 @@ Ybq.configureCommonElements = function () {
     $("a").click(function (e) {
         this.blur();
     });
-    //$("select").change(function (e) {
-    //    this.blur();
-    //    if ($(this).attr('tabIndex') !== undefined) {
-    //        var index = parseInt($(this).attr('tabIndex')) + 1;
-    //        $(':input[tabindex=' + index + ']')[0].focus();
-    //    }
-    //});
+
     $(".alert .alert-autoclose").click(function (e) {
         $(this).hide();
     });
-    $("input[data-digits-only]")
-        //.attr("onkeypress", "return event.charCode >= 48 && event.charCode <= 57")
-        .on("keypress",
-            function(event) {
-                if (event.charCode < 48 || event.charCode > 57) {
-                    event.preventDefault();
-                    return false;
-                }
-            })
-        .on("keyup", function () {
-            var buffer = $(this).val();
-            var maxLength = parseInt($(this).attr("maxlength"));
-            if (buffer.length > maxLength) {
-                $(this).val("");
-                return false;
-            }
-            var minVal = parseInt($(this).attr("min"));
-            var maxVal = parseInt($(this).attr("max"));
-            var number = parseInt(buffer);
-            if (number < minVal || number > maxVal) {
-                $(this).val("");
-                return false;
-            }
-            return true;
-        });
+    //$("input[data-digits-only]")
+    //    //.attr("onkeypress", "return event.charCode >= 48 && event.charCode <= 57")
+    //    .on("keypress",
+    //        function(event) {
+    //            if (event.charCode < 48 || event.charCode > 57) {
+    //                event.preventDefault();
+    //                return false;
+    //            }
+    //        })
+    //    .on("keyup", function () {
+    //        var buffer = $(this).val();
+    //        var maxLength = parseInt($(this).attr("maxlength"));
+    //        if (buffer.length > maxLength) {
+    //            $(this).val("");
+    //            return false;
+    //        }
+    //        var minVal = parseInt($(this).attr("min"));
+    //        var maxVal = parseInt($(this).attr("max"));
+    //        var number = parseInt(buffer);
+    //        if (number < minVal || number > maxVal) {
+    //            $(this).val("");
+    //            return false;
+    //        }
+    //        return true;
+    //    });
 
-    $("input[data-alphanumeric]").attr("onkeypress", "return /[a-zA-Z0-9-_]/.test(event.charCode)");
+    //$("input[data-alphanumeric]").attr("onkeypress", "return /[a-zA-Z0-9-_]/.test(event.charCode)");
 
-    $("input[data-click-on-enter]").each(function () {
-        $(this).attr("onkeyup",
-            "Ybq.clickOnEnter(event, '" + $(this).data("click-on-enter") + "')");
-    });
+    //$("input[data-click-on-enter]").each(function () {
+    //    $(this).attr("onkeyup",
+    //        "Ybq.clickOnEnter(event, '" + $(this).data("click-on-enter") + "')");
+    //});
     $(".table-hover tbody tr td").click(function () {
         var attr = $(this).attr("data-notselectable");
         if (typeof attr !== typeof undefined && attr !== false) {
@@ -110,106 +104,106 @@ Ybq.configureCommonElements = function () {
     });
 
     // INPUT TYPE=FILE
-    $(".ybq-inputfile").each(function () {
-        // Hide the INPUT FILE
-        var inputFile = $(this).find("input[type=file]").first();
-        inputFile.hide();
+//    $(".ybq-inputfile").each(function () {
+//        // Hide the INPUT FILE
+//        var inputFile = $(this).find("input[type=file]").first();
+//        inputFile.hide();
 
-        // Sets references to internal components
-        var baseId = "#" + $(inputFile).attr("id");
-        var isDefinedId = baseId + "-isdefined";
-        var previewId = baseId + "-preview";
-        var removerId = baseId + "-remover";
-        var placeholderId = baseId + "-placeholder";
-        var isAnyImageLinked = ($(isDefinedId).val() === "true");
+//        // Sets references to internal components
+//        var baseId = "#" + $(inputFile).attr("id");
+//        var isDefinedId = baseId + "-isdefined";
+//        var previewId = baseId + "-preview";
+//        var removerId = baseId + "-remover";
+//        var placeholderId = baseId + "-placeholder";
+//        var isAnyImageLinked = ($(isDefinedId).val() === "true");
 
-        // Sets up the image placeholder  
-        if (isAnyImageLinked) {
-            $(placeholderId).hide();
-        } else {
-            $(placeholderId).show();
-        }
+//        // Sets up the image placeholder  
+//        if (isAnyImageLinked) {
+//            $(placeholderId).hide();
+//        } else {
+//            $(placeholderId).show();
+//        }
 
-        $(placeholderId).click(function () {
-            inputFile.click();
-        });
+//        $(placeholderId).click(function () {
+//            inputFile.click();
+//        });
 
-        // Sets up the image preview
-        $(previewId).data("fileid", baseId);
-        if (isAnyImageLinked)
-            $(previewId).show();
-        else
-            $(previewId).hide();
-        $(previewId).click(function () {
-            inputFile.click();
-        });
+//        // Sets up the image preview
+//        $(previewId).data("fileid", baseId);
+//        if (isAnyImageLinked)
+//            $(previewId).show();
+//        else
+//            $(previewId).hide();
+//        $(previewId).click(function () {
+//            inputFile.click();
+//        });
 
-        // Sets up the remover
-        if (isAnyImageLinked)
-            $(removerId).show();
-        else
-            $(removerId).hide();
-        $(removerId).click(function () {
-            inputFile.val("");
-            $(previewId).removeAttr("src").removeAttr("title");
-            $(previewId).hide();
-            $(placeholderId).show();
-            $(this).hide();
-            $(isDefinedId).val("false");
-            return false;
-        });
+//        // Sets up the remover
+//        if (isAnyImageLinked)
+//            $(removerId).show();
+//        else
+//            $(removerId).hide();
+//        $(removerId).click(function () {
+//            inputFile.val("");
+//            $(previewId).removeAttr("src").removeAttr("title");
+//            $(previewId).hide();
+//            $(placeholderId).show();
+//            $(this).hide();
+//            $(isDefinedId).val("false");
+//            return false;
+//        });
 
-        // Display selected image
-        inputFile.change(function (evt) {
-            var files = evt.target.files;
-            if (files && files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $(previewId).attr("src", e.target.result);
-                    $(previewId).show();
-                    $(placeholderId).hide();
-                    $(removerId).show();
-                    $(isDefinedId).val("true");
-                };
-                reader.readAsDataURL(files[0]);
-            }
-        });
-        inputFile.click(function (ev) {
-            return ev.stopPropagation();
-        });
-    });
+//        // Display selected image
+//        inputFile.change(function (evt) {
+//            var files = evt.target.files;
+//            if (files && files[0]) {
+//                var reader = new FileReader();
+//                reader.onload = function (e) {
+//                    $(previewId).attr("src", e.target.result);
+//                    $(previewId).show();
+//                    $(placeholderId).hide();
+//                    $(removerId).show();
+//                    $(isDefinedId).val("true");
+//                };
+//                reader.readAsDataURL(files[0]);
+//            }
+//        });
+//        inputFile.click(function (ev) {
+//            return ev.stopPropagation();
+//        });
+//    });
 
-    Ybq.imgLoadError = function (img) {
-        var placeholderId = $(img).data("fileid") + "-placeholder";
-        $(img).hide();
-        $(placeholderId).append("not found");
-        $(placeholderId).show();
-        var removerId = $(img).data("fileid") + "-remover";
-        $(removerId).hide();
-    };
+//    Ybq.imgLoadError = function (img) {
+//        var placeholderId = $(img).data("fileid") + "-placeholder";
+//        $(img).hide();
+//        $(placeholderId).append("not found");
+//        $(placeholderId).show();
+//        var removerId = $(img).data("fileid") + "-remover";
+//        $(removerId).hide();
+//    };
 
-};
+//};
 
-Ybq.selectableTable = function() {
-    $(".table-hover tbody tr td").click(function() {
-        var attr = $(this).attr("data-notselectable");
-        if (typeof attr !== typeof undefined && attr !== false) {
-            return;
-        }
-        var tr = $(this).closest("tr");
-        var url = tr.data("url");
-        if (url.length > 0)
-            Ybq.gotoRelative(url);
-    });
-};
+//Ybq.selectableTable = function() {
+//    $(".table-hover tbody tr td").click(function() {
+//        var attr = $(this).attr("data-notselectable");
+//        if (typeof attr !== typeof undefined && attr !== false) {
+//            return;
+//        }
+//        var tr = $(this).closest("tr");
+//        var url = tr.data("url");
+//        if (url.length > 0)
+//            Ybq.gotoRelative(url);
+//    });
+//};
 
 // <summary>
 // Set SRC in case of missing images
 // </summary>
-Ybq.defaultImage = function(img, defaultImg) {
-    img.onerror = "";
-    img.src = defaultImg;
-};
+//Ybq.defaultImage = function(img, defaultImg) {
+//    img.onerror = "";
+//    img.src = defaultImg;
+//};
 
 // <summary>
 // Helper function to post the content of a HTML form
@@ -355,11 +349,11 @@ Ybq.alert = function (message, success, partial) {
 // <summary>
 // Validate an email address
 // </summary>
-Ybq.validateEmail = function(email) {
-    var re =
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-};
+//Ybq.validateEmail = function(email) {
+//    var re =
+//        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//    return re.test(email);
+//};
 
 // <summary>
 // Format a number with currency and thousands
@@ -390,11 +384,11 @@ Ybq.mobilize = function() {
 // <summary>
 // Clicks the selected button if Enter is pressed
 // </summary>
-Ybq.clickOnEnter = function(event, selector) {
-    if (event.keyCode === 13) {
-        $(selector).click();
-    }
-};
+//Ybq.clickOnEnter = function(event, selector) {
+//    if (event.keyCode === 13) {
+//        $(selector).click();
+//    }
+//};
 
 // <summary>
 // Clear error visuals from form written following conventions
@@ -601,33 +595,33 @@ var TypeAheadContainer = function(options) {
 // <summary>
 // Ensures all Bootstrap dropdown match size of the screen
 // </summary>
-Ybq.fixDropdowns = function() {
-    $(document).on("shown.bs.dropdown",
-        ".dropdown",
-        function() {
-            // calculate the required sizes, spaces
-            var $ul = $(this).children(".dropdown-menu");
-            var $button = $(this).children(".dropdown-toggle");
-            var ulOffset = $ul.offset();
-            // how much space would be left on the top if the dropdown opened that direction
-            var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
-            // how much space is left at the bottom
-            var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
-            // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
-            if (spaceDown < 0 && (spaceUp >= 0 || spaceUp > spaceDown))
-                $(this).addClass("dropup");
-            // how much space is left rightside
-            var spaceRight = $(window).width() - (ulOffset.left + $ul.width());
-            //alert(spaceRight);
-            if (spaceRight < 10)
-                $ul.addClass("dropdown-menu-right");
-        }).on("hidden.bs.dropdown",
-        ".dropdown",
-        function() {
-            // always reset after close
-            $(this).removeClass("dropup");
-        });
-};
+//Ybq.fixDropdowns = function() {
+//    $(document).on("shown.bs.dropdown",
+//        ".dropdown",
+//        function() {
+//            // calculate the required sizes, spaces
+//            var $ul = $(this).children(".dropdown-menu");
+//            var $button = $(this).children(".dropdown-toggle");
+//            var ulOffset = $ul.offset();
+//            // how much space would be left on the top if the dropdown opened that direction
+//            var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
+//            // how much space is left at the bottom
+//            var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
+//            // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
+//            if (spaceDown < 0 && (spaceUp >= 0 || spaceUp > spaceDown))
+//                $(this).addClass("dropup");
+//            // how much space is left rightside
+//            var spaceRight = $(window).width() - (ulOffset.left + $ul.width());
+//            //alert(spaceRight);
+//            if (spaceRight < 10)
+//                $ul.addClass("dropdown-menu-right");
+//        }).on("hidden.bs.dropdown",
+//        ".dropdown",
+//        function() {
+//            // always reset after close
+//            $(this).removeClass("dropup");
+//        });
+//};
 
 // <summary>
 // Handles MultipleViewResult responses
@@ -641,12 +635,12 @@ Ybq.processMultipleAjaxResponse = function (response) {
 // <summary>
 // Displays a popup window with printer-friendly content
 // </summary>
-Ybq.printPopup = function (url, target, config) {
+Ybq.printPopup = function(url, target, config) {
     if (target == null || target.length === 0)
         target = "_blank"; // or an app-specific window name of your choice
     if (config == null || config.length === 0) {
         config = "toolbar=no,scrollbars=yes,resizable=yes,top=100,left=100,width=580,height=720;";
     }
     window.open(Ybq.fromServer(url), target, config);
-}
+};
 

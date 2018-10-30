@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <style>
+        html, body, .container {
+            height:100%;
+        }
+        .container {
+            display:table;
+            width: 100%;
+            margin-top: -50px;
+            padding: 50px 0 0 0; /*set left/right padding according to needs*/
+            box-sizing: border-box;
+        }
+
+        .row {
+            height: 100%;
+            display: table-row;
+        }
+
+        .row .no-float {
+            display: table-cell;
+            float: none;
+        }
+        .sidebar {
+            background: cyan;
+        }
+        .content {
+            background: yellowgreen;
+        }
+    </style>
+
+</head>
+<body>
+    <header>Header</header>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 sidebar no-float">Navigation</div>
+        <div class="col-sm-9 content no-float">Content</div>
+    </div>
+</div>
+<footer>Footer</footer>
+</body>
+</html>

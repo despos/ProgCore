@@ -1,0 +1,88 @@
+﻿
+@section adhoc_Scripts_Bottom {
+    <script src="~/content/scripts/site/ybq-forms-bs4.js?v=1"></script>
+}
+@section adhoc_Css {
+    <link href="~/content/styles/ybq-forms.css" rel="stylesheet" />
+}
+
+
+
+
+<div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+
+    <form action="/demo/form2" method="post" 
+          class="ybq-form" data-title="SMART FORM" data-size="400px" data-timer="false"
+          data-successcallback="__successForm" data-errorcallback="__errorForm">
+        <div class="ybq-form-header"></div>
+        <div class="ybq-form-controlbar"></div>
+            
+        <div class="col-12"
+             style="height: 400px; padding: 0; overflow-y: auto;">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username"
+                       data-rule="{val}.length > 0"
+                       placeholder="User name" value="Dino">
+                <div class="invalid-feedback">
+                    Name is a required field
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" 
+                       placeholder="Password">
+                <div class="invalid-feedback">
+                    Password is a required field
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email address" value="user@server.com">
+                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div class="invalid-feedback">
+                    Doesn't seem to be a valid email address
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="website">Web site</label>
+                <input type="url" class="form-control" id="website" placeholder="Web site" value="http://www.server.com">
+                <div class="invalid-feedback">
+                    Doesn't seem to be a valid URL
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="number">Family members</label>
+                <input type="number" class="form-control" id="number" maxlength="1" min="1" max="10"
+                       placeholder="Family members" value="1">
+                <small class="form-text text-muted">1 to 10</small>
+            </div>                
+        </div>
+    </form>
+</div>
+
+<script>
+    $("form").submit(function (e) {
+        if ($("#password").val().length < 5) {
+            $("#password").addClass("is-invalid");
+            return false;
+        }
+    });
+</script>
+
+<script>
+    function __successForm(data) {
+        alert("RESULT IS: " + data);
+    }
+</script>
+
+<script>
+    function __errorForm(data) {
+        alert("DIDN'T WORK");
+    }
+</script>

@@ -1,0 +1,28 @@
+﻿@page "/loggeduser"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor _httpContextAccessor
+
+
+
+@if (CurrentUser.Identity.Name != null)
+{
+    <b>@CurrentUser.Identity.Name</b>
+    <a class="ml-md-auto btn btn-primary" href="/logout" target="_top">Log Out</a>
+}
+else
+{
+    <a class="ml-md-auto btn btn-primary" href="/login" target="_top">Log in</a>
+}
+
+
+@functions {
+    private ClaimsPrincipal CurrentUser;
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        CurrentUser = _httpContextAccessor.HttpContext.User;
+    }
+}

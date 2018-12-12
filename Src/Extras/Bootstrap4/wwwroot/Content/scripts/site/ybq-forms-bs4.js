@@ -195,6 +195,12 @@ $("input[type=number]")
         }
         var minVal = parseInt($(this).attr("min"));
         var maxVal = parseInt($(this).attr("max"));
+        if (isNaN(minVal)) {
+            minVal = 0;
+        }
+        if (isNaN(maxVal)) {
+            maxVal = 1000000;
+        }
         var number = parseInt(buffer);
         if (number < minVal || number > maxVal) {
             $(this).val("");
@@ -210,10 +216,46 @@ $("input[type=number]")
 //
 $("input[type=email]").on("blur",
     function () {
-        var email = $(this).val();
+        var email = $.trim($(this).val());
+        var required = $(this).attr("required") != null;
+        if (email.length === 0 && !required)
+            return;
+
+        // If email is required or non-blank content provided, use RE to check
         var re =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var pattern = $(this).attr("pattern");
+        if (pattern != null) {
+            re = new RegExp($(this).attr("pattern"));
+        }
         var success = re.test(email);
+        if (success)
+            $(this).removeClass("is-invalid");
+        else
+            $(this).addClass("is-invalid");
+    });
+
+//////////////////////////////////////////////////////////////////
+//
+// YBQ FORMS
+// URL 
+//
+$("input[type=url]").on("blur",
+    function () {
+        var url = $(this).val();
+        var required = $(this).attr("required") != null;
+        if (url.length === 0 && !required)
+            return;
+
+        // If URL is required or non-blank content provided, use RE to check
+        var re =
+            /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+        var pattern = $(this).attr("pattern");
+        if (pattern != null) {
+            re = new RegExp($(this).attr("pattern"));
+        }
+
+        var success = re.test(url);
         if (success)
             $(this).removeClass("is-invalid");
         else
@@ -225,7 +267,22 @@ $("input[type=email]").on("blur",
 // YBQ FORMS
 // Text - alphanumeric only 
 //
-$("input[data-alphanumeric]").attr("onkeypress", "return /[a-zA-Z0-9-_]/.test(event.charCode)");
+$("input[type=text][data-alphanumeric]").on("keypress",
+    function (event) {
+        var re = /[a-zA-Z0-9-_]/;
+        var code = event.charCode || event.keyCode;    
+        var chr = String.fromCharCode(code);          
+        var success = re.test(chr);
+        if (success) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }
+    });
+
+
+    //attr("onkeypress", "return /[a-zA-Z0-9-_]/.test(event.charCode)");
 
 //////////////////////////////////////////////////////////////////
 //
@@ -328,3 +385,81 @@ Ybq.imgLoadError = function (img) {
     $(removerId).hide();
 };
 
+//////////////////////////////////////////////////////////////////
+//
+// YBQ FORMS
+// Password 
+//
+$("input[type=password]").each(function() {
+    $(this)
+        .add(
+            "<span class='input-group-btn'>" +
+            "<button type='button' class='btn btn-primary btn-square' onclick='__togglePswdView(this)'>" +
+            "<i class='fa fa-eye'></i></button></span>")
+        .wrapAll("<div class='input-group' />");
+}).on("blur",
+    function() {
+        var pswd = $.trim($(this).val());
+        var minLength = parseInt($(this).attr("minlength"));
+        var maxLength = parseInt($(this).attr("maxlength"));
+        if (isNaN(minLength)) {
+            minLength = 0;
+        }
+        if (isNaN(maxLength)) {
+            maxLength = 100;
+        }
+        if (pswd.length < minLength || pswd.length > maxLength)
+            $(this).addClass("is-invalid");
+        else
+            $(this).removeClass("is-invalid");
+    });
+function __togglePswdView(elem) {
+    var pswd = $(elem).closest("div").find("input");
+    var type = $(pswd).attr("type");
+    if (type === "password")
+        pswd.attr("type", "text");
+    else
+        pswd.attr("type", "password");
+}
+
+//////////////////////////////////////////////////////////////////
+//
+// YBQ FORMS
+// Tel 
+//
+$("input[type=tel]").on("blur",
+    function () {
+        var tel = $(this).val();
+        var required = $(this).attr("required") != null;
+        if (tel.length === 0 && !required)
+            return;
+
+        var re = new RegExp($(this).attr("pattern"));
+        var success = re.test(tel);
+        if (success)
+            $(this).removeClass("is-invalid");
+        else
+            $(this).addClass("is-invalid");
+    });
+
+//////////////////////////////////////////////////////////////////
+//
+// YBQ FORMS
+// Text 
+//
+$("input[type=text]").on("blur",
+    function () {
+        var text = $(this).val();
+        var re = /(?:)/;
+        var pattern = $(this).attr("pattern");
+        if (pattern != null) {
+            re = new RegExp($(this).attr("pattern"));
+        }
+
+        var success = re.test(text);
+        if (success)
+            $(this).removeClass("is-invalid");
+        else
+            $(this).addClass("is-invalid");
+
+    });

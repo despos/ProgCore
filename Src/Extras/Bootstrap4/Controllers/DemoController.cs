@@ -58,5 +58,18 @@ namespace Bs4.Controllers
             var success = DateTime.Now.Second % 2 >0;
             return Content(success ? "OK" : "Fail");
         }
+
+        [HttpGet]
+        public IActionResult Form3()
+        {
+            return View(ViewModelBase.Default("FORM3"));
+        }
+
+        [HttpPost]
+        public IActionResult Form3(string username, string password)
+        {
+            var success = DateTime.Now.Second % 2 > 0;
+            return Content(success ? "OK" : "Fail");
+        }
     }
 }

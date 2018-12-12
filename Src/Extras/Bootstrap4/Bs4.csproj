@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Demo\form2 - Copy.cshtml">
+    <Content Update="Views\Demo\form3.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Demo\sidebar.cshtml">

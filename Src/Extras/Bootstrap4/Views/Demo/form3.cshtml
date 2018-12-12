@@ -1,0 +1,97 @@
+﻿
+@section adhoc_Scripts_Bottom {
+    <script src="~/content/scripts/site/ybq-forms-bs4.js?v=1"></script>
+}
+@section adhoc_Css {
+    <link href="~/content/styles/ybq-forms.css" rel="stylesheet" />
+}
+
+
+
+
+<div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+
+    <form action="/demo/form3" method="post" 
+          class="ybq-form" 
+          data-title="SMART FORM"
+          data-size="400px" 
+          data-timer="false"
+          data-successcallback="__successForm" 
+          data-errorcallback="__errorForm">
+        <div class="ybq-form-header"></div>
+        <div class="ybq-form-controlbar"></div>
+            
+        <div class="col-12"
+             style="height: 400px; padding: 0; overflow-y: auto;">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username"
+                       pattern="[a-zA-Z0-9]"
+                       data-rule="{val}.length > 0"
+                       data-alphanumeric="true"
+                       placeholder="User name" value="Dino">
+                <div class="invalid-feedback">
+                    Name is a required field
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" 
+                       minlength="3"
+                       placeholder="Password">
+                <div class="invalid-feedback">
+                    Password is a required field
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" 
+                       placeholder="Email address" value="user@server.com">
+                <div class="form-text text-muted w-100 bg-dark">We'll never share your email with anyone else.</div>
+                <div class="invalid-feedback">
+                    Doesn't seem to be a valid email address
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" 
+                       pattern="[+][0-9]{1,3} [0-9]{3}[\s-][0-9]{4}[\s-][0-9]{3}"
+                       placeholder="Phone number">
+                <div class="invalid-feedback">
+                    Phone number must be +x xxx xxxx-xxx
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="website">Web site</label>
+                <input type="url" class="form-control" id="website" placeholder="Web site" value="http://www.server.com">
+                <div class="invalid-feedback">
+                    Doesn't seem to be a valid URL
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" 
+                       min="2018-11-01" max="2018-12-31" value="2018-12-01">
+            </div> 
+
+            <div class="form-group">
+                <label for="time">Time</label>
+                <input type="time" class="form-control" id="time" 
+                       min="06:00" max="21:00" value="14:20">
+            </div> 
+
+            <div class="form-group">
+                <label for="number">Family members</label>
+                <input type="number" class="form-control" id="number" maxlength="1" min="1" max="10"
+                       placeholder="Family members" value="1">
+                <small class="form-text text-muted">1 to 10</small>
+            </div>                
+        </div>
+    </form>
+</div>

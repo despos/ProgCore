@@ -1,0 +1,46 @@
+﻿@using Forms.Shared
+@page  "/registeruser"
+@inject HttpClient _http
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-md-4">
+            <h3 class="text-center login-title">I Want To Be a New User</h3>
+            <div class="account-wall">
+                <div class="form-signin">
+                    <input type="text" class="form-control" placeholder="Email address" name="email" bind="@Email" autocomplete="off"/>
+                    <input type="password" class="form-control" placeholder="Password" name="password" bind="@Password" />
+                    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="@TryRegister">
+                        Sign me in
+                    </button>
+                </div>
+                
+                <div class="text-center">@Message</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions
+{
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public string Message = "?";
+
+    public async Task TryRegister()
+    {
+        var input = new RegisterUserViewModel(Email, Password);
+        try
+        {
+            var response = await _http.PostJsonAsync<CommandResponse>("http://localhost:61543/account/register", input);
+            if (response.Success)
+                Message = response.Message;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+}

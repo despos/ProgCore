@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Pages\Login.cshtml" />
+    <None Include="Pages\Logout.cshtml" />
     <None Include="Pages\_ViewImports.cshtml" />
   </ItemGroup>
 

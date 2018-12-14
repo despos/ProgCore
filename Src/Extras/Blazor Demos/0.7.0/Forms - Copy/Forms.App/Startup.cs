@@ -1,4 +1,3 @@
-using System.Net.Http;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +7,6 @@ namespace Forms.App
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<HttpClient>();
         }
 
         public void Configure(IBlazorApplicationBuilder app)

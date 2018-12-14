@@ -20,11 +20,4 @@
     <ProjectReference Include="..\Forms.Shared\Forms.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Pages\RegisterUser.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-  </ItemGroup>
-
 </Project>

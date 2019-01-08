@@ -1,0 +1,25 @@
+﻿@using Forms.App.Common
+
+<CascadingValue Value="@Context">
+    <div style="border: solid 1px #111; padding: 20px;">
+        @ChildContent
+    </div>
+</CascadingValue>
+
+@functions
+{
+    protected override void OnInit()
+    {
+        Context = new ModalContext
+        {
+            Id = Id,
+            AutoClose = AutoClose
+        };
+    }
+
+    [Parameter] ModalContext Context { get; set; }
+    [Parameter] private string Id { get; set; }
+    [Parameter] private bool AutoClose { get; set; }
+
+    [Parameter] RenderFragment ChildContent { get; set; }
+}

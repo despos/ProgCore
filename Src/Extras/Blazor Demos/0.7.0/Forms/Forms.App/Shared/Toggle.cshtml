@@ -1,0 +1,14 @@
+﻿@using Forms.App.Common
+
+<button class="@Class" data-toggle="modal" data-target="#@OutermostEnv.Id">
+    @ChildContent
+    @*<hr />
+    @OutermostEnv.Id - @OutermostEnv.AutoClose*@
+</button>
+
+@functions
+{
+    [CascadingParameter] protected ModalContext OutermostEnv { get; set; }
+    [Parameter] string Class { get; set; }
+    [Parameter] RenderFragment ChildContent { get; set; }
+}

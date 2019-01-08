@@ -1,0 +1,22 @@
+﻿
+@page "/cascade"
+
+<h1>Cascade</h1>
+<modal id="myModal" autoclose="true">
+    <toggle class="btn btn-primary btn-lg">
+        Open
+    </toggle>
+    <content>
+        <HeaderTemplate>  <!-- Case-sensitive names!!! -->
+            Hello!
+        </HeaderTemplate>
+        <BodyTemplate>
+            <h1>Blazor 0.7.0 rocks!!!</h1>
+        </BodyTemplate>
+        <FooterTemplate>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </FooterTemplate>
+    </content>
+</modal>
+
+
